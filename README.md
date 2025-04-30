@@ -1,7 +1,9 @@
+Here is the final, clean version of your `README.md` **without the credits or promotional lines at the bottom**:
+
 ```markdown
 # 🧠 Tuah App – Multi-Swarm Negotiation Platform
 
-Tuah App is a **web-based intelligent negotiation platform** built using the **MERN stack** (MongoDB, Express.js, React.js, Node.js) integrated with a **Python-based Multi-Swarm Particle Swarm Optimization (MPSO)** engine.
+**Tuah App** is a **web-based intelligent negotiation platform** built using the **MERN stack** (MongoDB, Express.js, React.js, Node.js) and integrated with a **Python-based Multi-Swarm Particle Swarm Optimization (MPSO)** engine.
 
 It enables users to negotiate with manufacturers based on **price, quality, and delivery time**. The MPSO agent dynamically adjusts offers over multiple rounds to achieve optimal agreements.
 
@@ -10,32 +12,31 @@ It enables users to negotiate with manufacturers based on **price, quality, and 
 ## 📌 Features
 
 ### 🧑‍💼 User Interface
-- Submit offer: fabric type, quantity, price range, quality preference, delivery deadline
-- Receive optimized manufacturer offers
-- Finalize or repeat negotiation
+- Submit offers including fabric type, quantity, price range, quality preference, and delivery deadline.
+- View optimized manufacturer offers powered by MPSO.
+- Finalize the best offer or request further negotiation.
 
 ### 🏭 Manufacturer Interface
-- Input: minimum acceptable price, quality standards, delivery capabilities
-- Automatic participation in negotiations
+- Define minimum acceptable price, supported quality levels, and feasible delivery times.
+- Automatically respond to incoming negotiations based on internal constraints.
 
 ### 🤖 Intelligent MPSO Agent
-- Uses Multi-Swarm PSO to optimize offers based on:
-  - User priorities
-  - Manufacturer constraints
-- Supports multi-round negotiation
-- Evaluates trade-offs in real-time
+- Multi-Swarm PSO-based optimization.
+- Adapts to both user preferences and manufacturer constraints.
+- Supports multi-round negotiations with adaptive offer adjustments.
+- Uses weighted fitness scoring to evaluate trade-offs between price, quality, and delivery.
 
 ---
 
 ## 🧱 Tech Stack
 
-| Layer | Technology |
-|-------|------------|
-| Frontend | React.js, Axios, Tailwind (optional) |
-| Backend | Node.js, Express.js, MongoDB |
-| Optimization Engine | Python Flask + MPSO |
-| Auth & Security | JWT (JSON Web Tokens) |
-| Deployment | Vercel (client), Render/Railway (server & Python) |
+| Layer              | Technology                         |
+|-------------------|-------------------------------------|
+| Frontend           | React.js, Axios, Tailwind (optional) |
+| Backend            | Node.js, Express.js, MongoDB       |
+| Optimization Engine| Python Flask + MPSO                |
+| Auth & Security    | JWT (JSON Web Tokens)              |
+| Deployment         | Vercel (client), Render (server + MPSO) |
 
 ---
 
@@ -61,24 +62,21 @@ cd Swarm_Negotiation
 
 ### 2. Install dependencies
 
-**Frontend (React)**
-
+**Frontend (React):**
 ```bash
 cd client
 npm install
 npm start
 ```
 
-**Backend (Node.js)**
-
+**Backend (Node.js):**
 ```bash
 cd ../server
 npm install
 node server.js
 ```
 
-**Python MPSO Service**
-
+**Python MPSO Service:**
 ```bash
 cd ../services
 pip install -r requirements.txt
@@ -89,15 +87,15 @@ python app.py
 
 ## 🌐 API Overview
 
-### POST `/api/negotiation/start`
-Starts a negotiation session using user offer and manufacturer constraints.
+### POST `/api/negotiation/start` (Node.js)
+Starts a new negotiation session by receiving the user’s offer and manufacturer constraints.
 
-### POST `/optimize` (Python Service)
-Returns optimized manufacturer offers sorted by fitness score.
+### POST `/optimize` (Python MPSO Service)
+Processes negotiation data and returns optimized offers sorted by fitness score.
 
 ---
 
-## 📊 Example User Input
+## 📊 Example User Input (to `/optimize`)
 
 ```json
 {
@@ -105,15 +103,12 @@ Returns optimized manufacturer offers sorted by fitness score.
   "qualityPreference": "Premium",
   "deliveryTime": 6
 }
+```
 
+---
 
 ## 📘 License
 
 MIT License © 2024 Mohamed Boghdady
-
-
-Stack ✖️ Python AI ✖️ Real-Time Multi-Agent Optimization
-
-
-
+```
 
