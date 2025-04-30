@@ -1,42 +1,53 @@
-Here is the final, clean version of your `README.md` **without the credits or promotional lines at the bottom**:
-
 ```markdown
-# 🧠 Tuah App – Multi-Swarm Negotiation Platform
+# Tuah App 🤝🧠
 
-**Tuah App** is a **web-based intelligent negotiation platform** built using the **MERN stack** (MongoDB, Express.js, React.js, Node.js) and integrated with a **Python-based Multi-Swarm Particle Swarm Optimization (MPSO)** engine.
+![Build](https://img.shields.io/github/actions/workflow/status/MohamedBoghdaddy/Swarm_Negotiation/ci.yml)
+![License](https://img.shields.io/github/license/MohamedBoghdaddy/Swarm_Negotiation)
 
-It enables users to negotiate with manufacturers based on **price, quality, and delivery time**. The MPSO agent dynamically adjusts offers over multiple rounds to achieve optimal agreements.
+**Tuah App** is an AI-powered negotiation platform that leverages **Multi-Swarm Particle Swarm Optimization (MPSO)** to mediate dynamic trade negotiations between users and manufacturers based on **price, quality, and delivery time**.
 
----
-
-## 📌 Features
-
-### 🧑‍💼 User Interface
-- Submit offers including fabric type, quantity, price range, quality preference, and delivery deadline.
-- View optimized manufacturer offers powered by MPSO.
-- Finalize the best offer or request further negotiation.
-
-### 🏭 Manufacturer Interface
-- Define minimum acceptable price, supported quality levels, and feasible delivery times.
-- Automatically respond to incoming negotiations based on internal constraints.
-
-### 🤖 Intelligent MPSO Agent
-- Multi-Swarm PSO-based optimization.
-- Adapts to both user preferences and manufacturer constraints.
-- Supports multi-round negotiations with adaptive offer adjustments.
-- Uses weighted fitness scoring to evaluate trade-offs between price, quality, and delivery.
+The platform features dual interfaces—one for users and one for manufacturers—allowing for fair, adaptive, and real-time multi-round negotiation via an intelligent MPSO agent.
 
 ---
 
-## 🧱 Tech Stack
+## ⚙️ Tech Stack
 
-| Layer              | Technology                         |
-|-------------------|-------------------------------------|
-| Frontend           | React.js, Axios, Tailwind (optional) |
-| Backend            | Node.js, Express.js, MongoDB       |
-| Optimization Engine| Python Flask + MPSO                |
-| Auth & Security    | JWT (JSON Web Tokens)              |
-| Deployment         | Vercel (client), Render (server + MPSO) |
+- **Stack**: MERN + Python
+- **Frontend**: React.js, Axios, Tailwind CSS (optional)
+- **Backend**: Node.js, Express.js
+- **Database**: MongoDB
+- **AI Engine**: Python (Flask) – MPSO algorithm
+- **Authentication**: JWT
+- **Deployment**: Vercel (frontend), Render (backend & Python service)
+
+---
+
+## 🚀 Features
+
+- **Multi-Agent Negotiation via MPSO** 🤖  
+  Dynamically balances user preferences and manufacturer constraints using swarms of optimization particles.
+
+- **Dual Interfaces** 🧑‍💼🏭  
+  - **User Dashboard**: Submit offers and accept optimized deals  
+  - **Manufacturer Portal**: Set constraints and auto-respond with feasible counter-offers
+
+- **Multi-Round Optimization** 🔄  
+  Adaptive negotiation cycles allow re-offers and finalization based on real-time adjustments.
+
+- **Fitness-Based Decision Making** 📊  
+  Negotiation decisions are scored based on weighted fitness of price, quality, and delivery.
+
+---
+
+## 📊 Negotiation Workflow
+
+> This outlines the real-time interaction loop between user offers, manufacturer responses, and MPSO optimization:
+
+1. **User submits offer** (fabric type, quantity, price range, quality, delivery time).
+2. **Manufacturers input constraints** (minimum price, quality levels, delivery).
+3. **MPSO agent runs optimization** over multiple rounds.
+4. **System recommends best deal** based on calculated fitness.
+5. **User confirms** or requests further negotiation.
 
 ---
 
@@ -45,38 +56,40 @@ It enables users to negotiate with manufacturers based on **price, quality, and 
 ```
 TuahApp/
 ├── client/              # React frontend
-├── server/              # Node.js backend (API, controllers, routes)
-├── services/            # Python MPSO microservice (Flask app)
+├── server/              # Node.js backend (controllers, routes, models)
+├── services/            # Python MPSO microservice (Flask API)
 ```
 
 ---
 
-## 🚀 Installation
+## 🛠️ Installation
 
-### 1. Clone the repository
+To run Tuah App locally:
+
+### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/your-username/Swarm_Negotiation.git
+git clone https://github.com/MohamedBoghdaddy/Swarm_Negotiation.git
 cd Swarm_Negotiation
 ```
 
-### 2. Install dependencies
+### 2. Install Dependencies
 
-**Frontend (React):**
+#### Frontend:
 ```bash
 cd client
 npm install
 npm start
 ```
 
-**Backend (Node.js):**
+#### Backend:
 ```bash
 cd ../server
 npm install
 node server.js
 ```
 
-**Python MPSO Service:**
+#### Python MPSO Service:
 ```bash
 cd ../services
 pip install -r requirements.txt
@@ -87,15 +100,15 @@ python app.py
 
 ## 🌐 API Overview
 
-### POST `/api/negotiation/start` (Node.js)
-Starts a new negotiation session by receiving the user’s offer and manufacturer constraints.
+### POST `/api/negotiation/start` (Node.js Backend)  
+Triggers a negotiation round by collecting user and manufacturer inputs.
 
-### POST `/optimize` (Python MPSO Service)
-Processes negotiation data and returns optimized offers sorted by fitness score.
+### POST `/optimize` (Python MPSO Microservice)  
+Processes negotiation inputs and returns optimized offers sorted by fitness.
 
 ---
 
-## 📊 Example User Input (to `/optimize`)
+## 📥 Example Input (to `/optimize`)
 
 ```json
 {
@@ -107,7 +120,7 @@ Processes negotiation data and returns optimized offers sorted by fitness score.
 
 ```
 
-## 📘 License
+## 📜 License
 
-MIT License © 2024 Mohamed Boghdady
+This project is licensed under the MIT License. See the [`LICENSE`](LICENSE) file for details.
 ```
