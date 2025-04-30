@@ -59,7 +59,7 @@ TuahApp/
 
 ---
 
-#### 🛠️ Installation
+## 🛠️ Installation
 
 To run Tuah App locally:
 
