@@ -1,3 +1,4 @@
+```markdown
 # 🧠 Tuah App – Multi-Swarm Negotiation Platform
 
 Tuah App is a **web-based intelligent negotiation platform** built using the **MERN stack** (MongoDB, Express.js, React.js, Node.js) integrated with a **Python-based Multi-Swarm Particle Swarm Optimization (MPSO)** engine.
@@ -40,11 +41,12 @@ It enables users to negotiate with manufacturers based on **price, quality, and 
 
 ## 🗂 Project Structure
 
-TuahApp/ ├── client/ # React frontend ├── server/ # Node.js backend (API, controllers, routes) ├── services/ # Python MPSO microservice (Flask app)
-
-yaml
-Copy
-Edit
+```
+TuahApp/
+├── client/              # React frontend
+├── server/              # Node.js backend (API, controllers, routes)
+├── services/            # Python MPSO microservice (Flask app)
+```
 
 ---
 
@@ -55,50 +57,76 @@ Edit
 ```bash
 git clone https://github.com/your-username/Swarm_Negotiation.git
 cd Swarm_Negotiation
-2. Install dependencies
-Frontend (React)
+```
 
-bash
-Copy
-Edit
+### 2. Install dependencies
+
+**Frontend (React)**
+
+```bash
 cd client
 npm install
 npm start
-Backend (Node.js)
+```
 
-bash
-Copy
-Edit
+**Backend (Node.js)**
+
+```bash
 cd ../server
 npm install
 node server.js
-Python MPSO Service
+```
 
-bash
-Copy
-Edit
+**Python MPSO Service**
+
+```bash
 cd ../services
 pip install -r requirements.txt
 python app.py
-🌐 API Overview
-POST /api/negotiation/start
+```
+
+---
+
+## 🌐 API Overview
+
+### POST `/api/negotiation/start`
 Starts a negotiation session using user offer and manufacturer constraints.
 
-POST /optimize (Python Service)
+### POST `/optimize` (Python Service)
 Returns optimized manufacturer offers sorted by fitness score.
 
-📊 Example User Input
-json
-Copy
-Edit
+---
+
+## 📊 Example User Input
+
+```json
 {
   "priceRange": [5, 15],
   "qualityPreference": "Premium",
   "deliveryTime": 6
 }
-📘 License
+```
+
+---
+
+## 📘 License
+
 MIT License © 2024 Mohamed Boghdady
 
-✨ Credits
-Built with ❤️ by Mohamed Boghdady
+---
+
+## ✨ Credits
+
+Built with ❤️ by Mohamed Boghdady  
 MERN Stack ✖️ Python AI ✖️ Real-Time Multi-Agent Optimization
+```
+
+---
+
+Would you like me to:
+
+✅ Save this into a `README.md` file and zip it?  
+✅ Add badges (e.g., Node version, license, deployment status)?  
+✅ Provide a visual architecture diagram or GIF demo section?
+
+Let me know how you'd like to extend it!
