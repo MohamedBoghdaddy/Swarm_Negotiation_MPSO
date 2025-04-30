@@ -5,7 +5,7 @@
 
 The platform features dual interfaces—one for users and one for manufacturers—allowing for fair, adaptive, and real-time multi-round negotiation via an intelligent MPSO agent.
 
----
+```
 
 ## ⚙️ Tech Stack
 
@@ -17,7 +17,7 @@ The platform features dual interfaces—one for users and one for manufacturers�
 - *Authentication*: JWT
 - *Deployment*: Vercel (frontend), Render (backend & Python service)
 
----
+```
 
 ## 🚀 Features
 
@@ -34,7 +34,7 @@ The platform features dual interfaces—one for users and one for manufacturers�
 - *Fitness-Based Decision Making* 📊  
   Negotiation decisions are scored based on weighted fitness of price, quality, and delivery.
 
----
+```
 
 ## 📊 Negotiation Workflow
 
@@ -46,7 +46,7 @@ The platform features dual interfaces—one for users and one for manufacturers�
 4. *System recommends best deal* based on calculated fitness.
 5. *User confirms* or requests further negotiation.
 
----
+```
 
 ## 🗂 Project Structure
 
@@ -57,7 +57,7 @@ TuahApp/
 ├── services/            # Python MPSO microservice (Flask API)
 ```
 
----
+```
 
 ## 🛠️ Installation
 
