@@ -114,19 +114,8 @@ Returns optimized manufacturer offers sorted by fitness score.
 MIT License © 2024 Mohamed Boghdady
 
 ---
-
-## ✨ Credits
-
-Built with ❤️ by Mohamed Boghdady  
-MERN Stack ✖️ Python AI ✖️ Real-Time Multi-Agent Optimization
+Stack ✖️ Python AI ✖️ Real-Time Multi-Agent Optimization
 ```
 
 ---
 
-Would you like me to:
-
-✅ Save this into a `README.md` file and zip it?  
-✅ Add badges (e.g., Node version, license, deployment status)?  
-✅ Provide a visual architecture diagram or GIF demo section?
-
-Let me know how you'd like to extend it!
