@@ -105,7 +105,7 @@ Processes negotiation data and returns optimized offers sorted by fitness score.
 }
 ```
 
----
+
 
 ## 📘 License
 
