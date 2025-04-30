@@ -1,9 +1,6 @@
 ```markdown
 # Tuah App 🤝🧠
 
-![Build](https://img.shields.io/github/actions/workflow/status/MohamedBoghdaddy/Swarm_Negotiation/ci.yml)
-![License](https://img.shields.io/github/license/MohamedBoghdaddy/Swarm_Negotiation)
-
 **Tuah App** is an AI-powered negotiation platform that leverages **Multi-Swarm Particle Swarm Optimization (MPSO)** to mediate dynamic trade negotiations between users and manufacturers based on **price, quality, and delivery time**.
 
 The platform features dual interfaces—one for users and one for manufacturers—allowing for fair, adaptive, and real-time multi-round negotiation via an intelligent MPSO agent.
