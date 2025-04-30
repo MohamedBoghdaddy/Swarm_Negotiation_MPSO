@@ -105,10 +105,9 @@ Processes negotiation data and returns optimized offers sorted by fitness score.
 }
 ```
 
-
+```
 
 ## 📘 License
 
 MIT License © 2024 Mohamed Boghdady
 ```
-
