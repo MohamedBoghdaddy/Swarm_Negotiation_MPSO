@@ -6,29 +6,46 @@ def run_mpso(user, manufacturers, weights, max_iters=3):
 
     for m in manufacturers:
         current_offer = m['initialOffer']
-        swarm = [current_offer.copy() for _ in range(5)]  # Multi-swarm (5 particles per manufacturer)
+        swarm = [current_offer.copy() for _ in range(5)]  # 5 particles per manufacturer
         best_offer = current_offer
         best_fitness = negotiation_fitness(current_offer, user, weights)
+        rounds = []
 
-        for _ in range(max_iters):
+        for iter_num in range(max_iters):
+            round_particles = []
+
             for particle in swarm:
-                # Adjust based on local (particle) and global best
+                # Adjust price (never below manufacturer's minPrice)
                 particle['price'] = max(m['minPrice'], particle['price'] - random.uniform(0.1, 0.5))
-                particle['delivery'] = max(m['minDelivery'], particle['delivery'] - random.randint(0, 1))
-                # Quality remains fixed to allowed qualities
-                particle['quality'] = m['qualities'][0]
 
+                # Adjust delivery (not below minDelivery)
+                particle['delivery'] = max(m['minDelivery'], particle['delivery'] - random.randint(0, 1))
+
+                # Choose from available quality levels (random exploration)
+                particle['quality'] = random.choice(m['qualities'])
+
+                # Evaluate fitness
                 fitness = negotiation_fitness(particle, user, weights)
+
+                round_particles.append({
+                    "iteration": iter_num + 1,
+                    "offer": particle.copy(),
+                    "fitness": round(fitness, 4)
+                })
+
                 if fitness > best_fitness:
                     best_offer = particle.copy()
                     best_fitness = fitness
 
+            rounds.append(round_particles)
+
         best_offers.append({
             'manufacturerID': m['id'],
             'optimizedOffer': best_offer,
-            'fitness': round(best_fitness, 4)
+            'fitness': round(best_fitness, 4),
+            'roundHistory': rounds
         })
 
-    # Sort by fitness
+    # Sort and return best first
     best_offers.sort(key=lambda x: x['fitness'], reverse=True)
     return best_offers
