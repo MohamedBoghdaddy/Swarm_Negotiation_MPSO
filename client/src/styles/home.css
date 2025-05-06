@@ -1,0 +1,157 @@
+/* Main styles */
+.mps-landing {
+  font-family: 'Inter', sans-serif;
+  scroll-behavior: smooth;
+}
+
+
+
+/* Hero Section */
+.hero-section {
+  padding: 5rem 0;
+  background: linear-gradient(135deg, #F9FAFB 0%, #EFF6FF 100%);
+}
+
+/* Features Section */
+.features-section {
+  padding: 5rem 0;
+}
+
+.feature-card {
+  background: white;
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.feature-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+}
+
+.feature-card h3 {
+  color: #1F2937;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.feature-card p {
+  color: #6B7280;
+}
+
+/* Process Section */
+.process-section {
+  padding: 5rem 0;
+}
+
+.process-step {
+  display: flex;
+  margin-bottom: 2rem;
+}
+
+.step-number {
+  width: 2.5rem;
+  height: 2.5rem;
+  background-color: #4F46E5;
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  margin-right: 1rem;
+  flex-shrink: 0;
+}
+
+.step-content h4 {
+  color: #1F2937;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.step-content p {
+  color: #6B7280;
+}
+
+/* Scenario Section */
+.scenario-section {
+  padding: 5rem 0;
+}
+
+.scenario-timeline {
+  position: relative;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.timeline-item {
+  position: relative;
+  padding-left: 3rem;
+  margin-bottom: 3rem;
+}
+
+.timeline-item:before {
+  content: '';
+  position: absolute;
+  left: 1.25rem;
+  top: 0;
+  height: 100%;
+  width: 2px;
+  background: #E5E7EB;
+}
+
+.timeline-item:last-child:before {
+  display: none;
+}
+
+.timeline-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.timeline-header h4 {
+  margin-right: 1rem;
+  margin-bottom: 0;
+}
+
+.timeline-content {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+
+.manufacturer-response {
+  margin-bottom: 1.5rem;
+}
+
+.manufacturer-response h5 {
+  color: #4F46E5;
+  margin-bottom: 0.5rem;
+}
+
+.manufacturer-response ul {
+  padding-left: 1.5rem;
+}
+
+
+
+
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .hero-section {
+    padding: 3rem 0;
+    text-align: center;
+  }
+  
+  .process-step {
+    flex-direction: column;
+  }
+  
+  .step-number {
+    margin-bottom: 1rem;
+    margin-right: 0;
+  }
+}

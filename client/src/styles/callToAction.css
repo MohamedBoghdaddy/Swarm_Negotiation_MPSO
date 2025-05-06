@@ -1,0 +1,49 @@
+.cta-section {
+  padding: 5rem 0;
+  background: linear-gradient(135deg, #1e3a8a, #10b981);
+  color: white;
+}
+
+.cta-badge {
+  background-color: rgba(255, 255, 255, 0.1);
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  font-weight: 500;
+  border-radius: 30px;
+  font-size: 0.95rem;
+  letter-spacing: 0.5px;
+}
+
+.cta-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+}
+
+.cta-text {
+  font-size: 1.2rem;
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.cta-buttons button {
+  min-width: 230px;
+}
+
+.trust-badges {
+  margin-top: 3rem;
+  gap: 2rem;
+}
+
+.trust-item {
+  text-align: center;
+}
+
+.trust-number {
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+.trust-label {
+  color: #d1d5db;
+  font-size: 1rem;
+}

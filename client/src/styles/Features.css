@@ -1,0 +1,47 @@
+/* Features Section */
+.features-section {
+  padding: 5rem 0;
+  background-color: #f8fafc;
+}
+
+.features-section h2 {
+  font-size: 2.75rem;
+  font-weight: bold;
+  color: #1e293b;
+  margin-bottom: 3rem;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.feature-card {
+  background: #ffffff;
+  border-radius: 0.75rem;
+  padding: 2rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  text-align: center;
+}
+
+.feature-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
+}
+
+.feature-card .icon {
+  font-size: 2.5rem;
+  color: #10B981;
+  margin-bottom: 1rem;
+}
+
+.feature-card h3 {
+  color: #1f2937;
+  font-weight: 700;
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.feature-card p {
+  color: #4b5563;
+  font-size: 1rem;
+  font-family: 'Segoe UI', sans-serif;
+  line-height: 1.5;
+}

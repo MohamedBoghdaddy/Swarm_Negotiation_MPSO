@@ -1,0 +1,149 @@
+/* === Footer Section Styling === */
+.footer {
+  background-color: #111827; /* Deep navy */
+  color: #ffffff;
+  padding: 60px 0 30px;
+  font-family: 'Segoe UI', 'Aeonik-Thin', sans-serif;
+}
+
+/* Container for layout */
+.footer-container {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+  gap: 2rem;
+}
+
+/* Footer columns */
+.footer-col {
+  flex: 1;
+  min-width: 250px;
+  margin: 20px 0;
+}
+
+/* Headings */
+.footer-col h4 {
+  font-size: 18px;
+  margin-bottom: 1.5rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: #ffffff;
+  font-family: 'Beverly', 'Segoe UI', sans-serif;
+}
+
+/* Paragraphs and lists */
+.footer-col p,
+.footer-col ul,
+.footer-col form {
+  margin: 0;
+  padding: 0;
+  font-family: 'Aeonik-Thin', 'Segoe UI', sans-serif;
+  color: #9CA3AF;
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+.footer-col ul {
+  list-style: none;
+}
+
+.footer-col ul li {
+  margin-bottom: 10px;
+}
+
+.footer-col ul li a,
+.footer-link {
+  color: #9CA3AF;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.footer-col ul li a:hover,
+.footer-link:hover {
+  color: #ffffff;
+}
+
+/* Social Icons */
+.icons {
+  display: flex;
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.icons a {
+  color: #ffffff;
+  font-size: 1.3rem;
+  transition: color 0.3s ease;
+}
+
+.icons a:hover {
+  color: #f3f4f6;
+}
+
+/* Newsletter Form */
+.newsletter-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.newsletter-form input {
+  padding: 10px;
+  border: none;
+  border-radius: 6px;
+  font-family: inherit;
+  outline: none;
+  background-color: #1f2937;
+  color: #f3f4f6;
+}
+
+.newsletter-form input::placeholder {
+  color: #9CA3AF;
+}
+
+.newsletter-form button {
+  padding: 10px;
+  background-color: #f9fafb;
+  color: #1f2937;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.newsletter-form button:hover {
+  background-color: #e5e7eb;
+}
+
+/* Bottom Copyright */
+.footer-bottom {
+  text-align: center;
+  margin-top: 30px;
+  border-top: 1px solid #374151;
+  padding-top: 20px;
+}
+
+.footer-text {
+  color: #9CA3AF;
+  font-size: 14px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .footer-container {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .footer-col {
+    margin-bottom: 40px;
+  }
+
+  .icons {
+    justify-content: center;
+  }
+}

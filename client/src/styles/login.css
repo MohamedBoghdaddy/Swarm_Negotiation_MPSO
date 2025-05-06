@@ -1,0 +1,123 @@
+/* Main container for the login page */
+.main-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.login-container {
+  display: flex;
+  flex-direction: row;
+  max-width: 1200px;
+  width: 100%;
+}
+
+.left-login {
+  flex: 1;
+  padding: 2rem;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+}
+
+.left-login h2 {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+.field {
+  margin-bottom: 1rem;
+}
+
+.field-wrapper {
+  margin-bottom: 0.5rem;
+}
+
+.field-wrapper label {
+  font-weight: bold;
+  display: block;
+}
+
+.field-wrapper input {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #dcdcdc;
+  border-radius: 4px;
+  font-size: 16px;
+  transition: border-color 0.3s;
+}
+
+.field-wrapper input:focus {
+  border-color: #5a67d8;
+  outline: none;
+}
+
+.password-wrapper {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.password-wrapper input {
+  width: 100%;
+}
+
+.toggle-visibility {
+  position: absolute;
+  right: 10px;
+  cursor: pointer;
+}
+
+.error,
+.success {
+  color: red;
+  margin-top: 1rem;
+}
+
+button.left_btn {
+  width: 100%;
+  padding: 1rem;
+  background-color: #5a67d8;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+button.left_btn:hover {
+  background-color: #4c51bf;
+}
+
+.right-login {
+  flex: 1;
+  padding: 2rem;
+  background-color: #f1f1f1;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.right-login h1 {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.right_btn {
+  width: 100%;
+  padding: 1rem;
+  background-color: #edf2f7;
+  border: 1px solid #cbd5e0;
+  color: #2d3748;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background-color 0.3s;
+}
+
+.right_btn:hover {
+  background-color: #e2e8f0;
+}

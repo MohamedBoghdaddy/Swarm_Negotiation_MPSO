@@ -1,0 +1,103 @@
+/* === NAVBAR STYLES FOR TUAH MPSO APP === */
+html {
+  scroll-behavior: smooth;
+}
+
+.navbar-custom {
+  background-color: #1f2937;
+  font-family: 'Segoe UI', sans-serif;
+  padding: 0.75rem 1.5rem;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
+}
+
+.navbar-brand {
+  font-size: 1.25rem;
+  font-weight: bold;
+  color: #ffffff !important;
+  display: flex;
+  align-items: center;
+}
+
+.navbar-brand img {
+  width: 50px;
+  height: 50px;
+  object-fit: contain;
+  margin-right: 10px;
+}
+
+.navbar-brand span {
+  font-size: 1.25rem;
+  font-weight: 600;
+  background: linear-gradient(90deg, #6366f1 0%, #10b981 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.navbar-nav {
+  align-items: center;
+  gap: 1.2rem;
+}
+
+.nav-link {
+  color: #d1d5db !important;
+  font-weight: 500;
+  transition: color 0.3s;
+  padding: 0.5rem 1rem;
+}
+
+.nav-link:hover {
+  color: #ffffff !important;
+}
+
+.form-control {
+  border-radius: 0.25rem;
+  min-width: 180px;
+}
+
+.navbar-toggler {
+  background-color: #374151;
+  border: none;
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+.input-group .form-control {
+  border-right: none;
+}
+
+.input-group .btn {
+  border-left: none;
+}
+
+/* Responsive Behavior */
+@media (max-width: 992px) {
+  .navbar-brand span {
+    font-size: 1rem;
+  }
+
+  .navbar-nav {
+    align-items: flex-start;
+    gap: 0.5rem;
+    margin-top: 1rem;
+  }
+
+  .input-group {
+    width: 100%;
+    flex-direction: row;
+    gap: 0;
+  }
+
+  .input-group .form-control {
+    flex: 1;
+  }
+
+  .input-group .btn {
+    flex-shrink: 0;
+  }
+
+  .nav-link {
+    padding: 0.75rem 0;
+  }
+}
