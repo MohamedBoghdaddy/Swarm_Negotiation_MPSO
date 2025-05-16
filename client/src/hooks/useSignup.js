@@ -3,10 +3,8 @@ import axios from "axios";
 import { useAuthContext } from "../context/AuthContext";
 
 const API_URL =
-  process.env.REACT_APP_API_URL ??
-  (window.location.hostname === "localhost"
-    ? "http://localhost:4000"
-    : "https://atos-task-document-management-system.onrender.com");
+  process.env.REACT_APP_API_URL ||
+  (window.location.hostname === "localhost" ? "http://localhost:4000" : "");
 
 export const useSignup = () => {
   const [username, setUsername] = useState("");
@@ -20,24 +18,23 @@ export const useSignup = () => {
   const [firstName, setFirstName] = useState("");
   const [middleName, setMiddleName] = useState("");
   const [lastName, setLastName] = useState("");
+  const [role, setRole] = useState("user"); // Default role
   const [errorMessage, setErrorMessage] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+
   const { dispatch } = useAuthContext();
 
   const handleSignup = async (e) => {
-    if (e && e.preventDefault) {
-      e.preventDefault();
-    } else {
-      console.warn("handleSignup was called without an event object");
-      return;
-    }
-    setIsLoading(true);
+    if (e?.preventDefault) e.preventDefault();
+    else return;
+
     setErrorMessage("");
     setSuccessMessage("");
+    setIsLoading(true);
 
     if (password !== confirmPassword) {
-      setErrorMessage("Passwords do not match");
+      setErrorMessage("❌ Passwords do not match");
       setIsLoading(false);
       return;
     }
@@ -49,23 +46,26 @@ export const useSignup = () => {
           username,
           email,
           password,
-          gender,
-          nid,
+          confirmPassword,
           firstName,
           middleName,
           lastName,
+          gender,
+          nid,
+          role,
         },
         { withCredentials: true }
       );
 
       const { user } = response.data;
-      localStorage.setItem("user", JSON.stringify({ user }));
+      localStorage.setItem("user", JSON.stringify(user));
       dispatch({ type: "REGISTRATION_SUCCESS", payload: user });
-      setSuccessMessage("Registration successful");
+
+      setSuccessMessage("✅ Registration successful!");
     } catch (error) {
       console.error("Signup error:", error);
       setErrorMessage(
-        error.response?.data?.message || "Signup failed. Please try again."
+        error?.response?.data?.message || "Signup failed. Please try again."
       );
     } finally {
       setIsLoading(false);
@@ -95,6 +95,8 @@ export const useSignup = () => {
     setMiddleName,
     lastName,
     setLastName,
+    role,
+    setRole,
     errorMessage,
     successMessage,
     isLoading,

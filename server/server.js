@@ -1,4 +1,4 @@
-// ✅ Existing imports...
+// ✅ Core Imports
 import express from "express";
 import dotenv from "dotenv";
 dotenv.config();
@@ -10,132 +10,131 @@ import multer from "multer";
 import connectMongoDBSession from "connect-mongodb-session";
 import session from "express-session";
 import path from "path";
-
 import { fileURLToPath } from "url";
 import axios from "axios";
+import cron from "node-cron";
+import nodemailer from "nodemailer";
 
-// ✅ New: Import LifeManagement routes
-import lifeManagementRoutes from "./routes/lifemanagement.js";
+// ✅ Models
+import Negotiation from "./models/NegotiationModel.js";
 
-
-// ✅ Other route imports
+// ✅ Route Imports
 import userRoutes from "./routes/userroutes.js";
-import chatRoutes from "./routes/chatRoutes.js";
-import questionnaireRoutes from "./routes/questionnaireRoutes.js";
 import analyticsRoutes from "./routes/analyticRoutes.js";
+import manufacturerRoutes from "./routes/manufacturerRoutes.js";
+import newsletterRoutes from "./routes/newsletterRoutes.js";
 
-
-
-// ✅ Resolve __dirname
+// ✅ Constants & Configs
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-
-
 const app = express();
 const upload = multer({ dest: "uploads/" });
 const MongoDBStore = connectMongoDBSession(session);
 
 const PORT = process.env.PORT || 4000;
-const MONGO_URL = "mongodb+srv://mohamedhammad3142:boghdaddy1234@cluster0.keg5o.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
-const FLASK_API_BASE_URL = "http://127.0.0.1:5000";
+const MONGO_URL = process.env.MONGO_URL;
+const FLASK_API_BASE_URL =
+  process.env.FLASK_API_BASE_URL || "http://127.0.0.1:8000";
 const CLIENT_URL = process.env.CLIENT_URL || "http://localhost:3000";
-const JWT_SECRET ='6dsb&c~HYAx3K787,5.K2lK*EA*h|9C-6Y,$.jiKS1s9lTE5^bPN$>+~';
+const JWT_SECRET = process.env.JWT_SECRET;
+const ADMIN_EMAIL = process.env.ADMIN_EMAIL;
 
+// ✅ MongoDB Connection
 if (!MONGO_URL) {
-  console.error("❌ MongoDB connection string (MONGO_URL) is missing.");
+  console.error("❌ MongoDB connection string missing.");
   process.exit(1);
 }
+mongoose
+  .connect(MONGO_URL, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
+  .then(() => console.log("✅ MongoDB connected"))
+  .catch((err) => {
+    console.error("❌ MongoDB failed:", err);
+    setTimeout(() => mongoose.connect(MONGO_URL), 5000);
+  });
 
-// ✅ Connect MongoDB
-const connectDB = async () => {
-  try {
-    await mongoose.connect(MONGO_URL, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    });
-    console.log("✅ MongoDB connected successfully");
-  } catch (error) {
-    console.error("❌ Database connection error:", error);
-    setTimeout(connectDB, 5000);
-  }
-};
-connectDB();
-
-const store = new MongoDBStore({
-  uri: MONGO_URL,
-  collection: "sessions",
-});
-
-store.on("error", (error) =>
-  console.error("❌ MongoDB session store error:", error)
-);
+// ✅ MongoDB Session Store
+const store = new MongoDBStore({ uri: MONGO_URL, collection: "sessions" });
+store.on("error", (error) => console.error("❌ Session store error:", error));
 
 // ✅ Middleware
 app.use(
   cors({
-    origin: [CLIENT_URL, FLASK_API_BASE_URL],
-    methods: ["GET", "POST", "OPTIONS", "PUT", "DELETE"],
+    origin: true,
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     allowedHeaders: ["Content-Type", "Authorization"],
     credentials: true,
   })
 );
-
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
+// ✅ Test Route to Confirm /api/manufacturer is reachable
+app.get("/api/manufacturer/test", (req, res) => {
+  console.log("✅ /api/manufacturer/test reached");
+  res.status(200).json({ message: "Manufacturer route working!" });
+});
+
 // ✅ Routes
 app.use("/api/users", userRoutes);
-app.use("/api/chat", chatRoutes);
-app.use("/api/questionnaire", questionnaireRoutes);
 app.use("/api/analytics", analyticsRoutes);
-app.use("/api/lifemanagement", lifeManagementRoutes); // ✅ ADDED this line
+app.use("/api/manufacturer", manufacturerRoutes);
+app.use("/api/newsletter", newsletterRoutes);
 
-// ✅ Proxy Routes for Flask
-app.post("/api/chat", async (req, res) => {
-  try {
-    const response = await axios.post(`${FLASK_API_BASE_URL}/api/chat`, req.body, {
-      headers: { "Content-Type": "application/json" },
-      withCredentials: true,
-    });
-    res.json(response.data);
-  } catch (error) {
-    console.error("❌ Error communicating with Flask API:", error.message);
-    res.status(500).json({ error: "Failed to communicate with AI agent. Please try again." });
-  }
-});
-
-app.post("/api/analyze_survey", async (req, res) => {
-  try {
-    const response = await axios.post(`${FLASK_API_BASE_URL}/api/user`, req.body, {
-      headers: { "Content-Type": "application/json" },
-      withCredentials: true,
-    });
-    res.json(response.data);
-  } catch (error) {
-    console.error("❌ Error analyzing survey:", error.message);
-    res.status(500).json({ error: "Failed to analyze survey data. Please try again." });
-  }
-});
-
-app.post("/api/generate_plan", async (req, res) => {
-  try {
-    const response = await axios.post(`${FLASK_API_BASE_URL}/api/generate_plan`, req.body, {
-      headers: { "Content-Type": "application/json" },
-      withCredentials: true,
-    });
-    res.json(response.data);
-  } catch (error) {
-    console.error("❌ Error generating plan:", error.message);
-    res.status(500).json({ error: "Failed to generate financial plan. Please try again." });
-  }
-});
-
-// ✅ Serve Frontend
+// ✅ Serve frontend — must come AFTER API routes
 app.use(express.static(path.join(__dirname, "../client/build")));
 app.get("*", (req, res) =>
   res.sendFile(path.join(__dirname, "../client/build/index.html"))
 );
+
+// ✅ Cron Job: Daily Summary + Email to Admin
+cron.schedule("59 23 * * *", async () => {
+  try {
+    const today = new Date();
+    const start = new Date(today.setHours(0, 0, 0, 0));
+    const end = new Date(today.setHours(23, 59, 59, 999));
+
+    const negotiations = await Negotiation.find({
+      date: { $gte: start, $lte: end },
+    });
+
+    const count = negotiations.length;
+    const avgFitness = (
+      negotiations.reduce((sum, n) => sum + n?.recommended?.fitness || 0, 0) /
+      (count || 1)
+    ).toFixed(2);
+
+    const summary = `
+      📅 Date: ${new Date().toLocaleDateString()}
+      📦 Negotiations Today: ${count}
+      📊 Average Fitness: ${avgFitness}
+    `;
+
+    console.log(`[DAILY SUMMARY] ${summary}`);
+
+    const transporter = nodemailer.createTransport({
+      service: process.env.EMAIL_SERVICE || "gmail",
+      auth: {
+        user: process.env.EMAIL_USER,
+        pass: process.env.EMAIL_PASS,
+      },
+    });
+
+    await transporter.sendMail({
+      from: `"Swarm Negotiation" <${process.env.EMAIL_USER}>`,
+      to: ADMIN_EMAIL,
+      subject: "📈 Daily Negotiation Summary",
+      text: summary,
+    });
+
+    console.log("✅ Summary email sent to admin.");
+  } catch (err) {
+    console.error("❌ Cron job/email failed:", err.message);
+  }
+});
 
 // ✅ Start Server
 app.listen(PORT, () =>

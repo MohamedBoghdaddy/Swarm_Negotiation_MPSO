@@ -6,65 +6,81 @@ import "../../styles/storytelling.css";
 
 const StorytellingSection = () => {
   return (
-    <section className="storytelling-section" id="about">
+    <section className="storytelling-section py-5 bg-white" id="about">
       <Container>
         <Row className="align-items-center">
+          {/* Image Section */}
           <Col lg={6} className="mb-4 mb-lg-0">
-            <div className="storytelling-image">
+            <div className="storytelling-image text-center">
               <img
                 src={logo}
-                alt="MPSO Negotiation Logo"
-                className="img-fluid rounded shadow"
+                alt="Tuah MPSO Negotiation Logo"
+                className="img-fluid rounded shadow-lg"
               />
             </div>
           </Col>
+
+          {/* Content Section */}
           <Col lg={6}>
             <div className="storytelling-content">
-              <h2 className="section-title mb-4">
-                Empowering Negotiation with MPSO
+              <h2 className="section-title fw-bold mb-4">
+                Empowering Fabric Deals with Swarm Intelligence
               </h2>
-              <p className="highlight">
-                From ideation to innovation, we set out to redefine negotiation
-                through AI. The Tuah App brings together intelligent agents and
-                MPSO algorithms to ensure efficient, fair, and optimal
-                deal-making for buyers and manufacturers.
+
+              <p className="lead highlight text-muted">
+                Tuah combines real-world supply chain needs with powerful
+                Multi-Swarm Particle Swarm Optimization (MPSO) to automate
+                textile negotiation like never before.
               </p>
+
               <p>
-                With a deep understanding of industrial constraints and
-                real-world complexities, our system empowers decision-makers to
-                negotiate multi-dimensional offers—price, quality, delivery—at
-                scale and in real-time.
+                Our system intelligently balances cost, quality, and timeline
+                across multiple parties—helping buyers and manufacturers find
+                optimized outcomes with full transparency.
               </p>
+
               <p>
-                Trusted by forward-thinking manufacturers and buyers alike, we
-                are committed to transparency, adaptive intelligence, and
-                delivering real business outcomes.
+                From R&D breakthroughs to industry-wide rollout, Tuah is
+                transforming negotiation from a manual bottleneck into a smart,
+                real-time collaboration channel.
               </p>
+
               <div className="milestones mt-4">
-                <h5>Our Milestones:</h5>
-                <ul className="timeline-list">
+                <h5 className="mb-3">🚀 Key Milestones</h5>
+                <ul className="timeline-list ps-3">
                   <li>
-                    <strong>2019:</strong> Research on PSO for industrial
-                    negotiation
+                    <strong>2019:</strong> PSO research in industrial
+                    procurement
                   </li>
                   <li>
-                    <strong>2020:</strong> MPSO-based prototype completed
+                    <strong>2020:</strong> Multi-Swarm AI prototype deployed
                   </li>
                   <li>
-                    <strong>2021:</strong> Pilot run with textile manufacturers
+                    <strong>2021:</strong> Textile pilot with measurable ROI
                   </li>
                   <li>
-                    <strong>2022:</strong> Full platform launch across
-                    industries
+                    <strong>2022–Now:</strong> Cross-industry SaaS rollout
                   </li>
                 </ul>
               </div>
+
               <div className="cta-buttons mt-4">
-                <Button as={Link} to="/user" variant="primary" className="me-3">
-                  Try Our System
+                <Button
+                  as={Link}
+                  to="/user"
+                  variant="primary"
+                  size="lg"
+                  className="me-3"
+                >
+                  🎯 Try Tuah Now
                 </Button>
-                <Button as={Link} to="/manufacturer" variant="outline-primary">
-                  Learn More
+                <Button
+                  as={Link}
+                  to="/manufacturer"
+                  variant="outline-primary"
+                  size="lg"
+                >
+                  🏭 I’m a Manufacturer
                 </Button>
               </div>
             </div>

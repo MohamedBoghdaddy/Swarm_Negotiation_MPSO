@@ -76,7 +76,7 @@ const Login = () => {
 
         <div className="right-login">
           <h1>Don't have an account?</h1>
-          <Link to="/signup">
+          <Link to="/Signup">
             <button className="right_btn" type="button" disabled={isLoading}>
               Signup
             </button>

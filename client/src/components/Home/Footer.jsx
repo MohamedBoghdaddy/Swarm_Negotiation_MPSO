@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -6,11 +6,41 @@ import {
   faLinkedin,
   faInstagram,
 } from "@fortawesome/free-brands-svg-icons";
-
 import "../../styles/footer.css";
 import "../../App.css";
+import { useAuthContext } from "../../context/AuthContext";
 
 const Footer = () => {
+  const { state } = useAuthContext();
+  const role = state?.user?.role;
+
+  const [email, setEmail] = useState("");
+  const [message, setMessage] = useState("");
+
+  const handleSubscribe = async (e) => {
+    e.preventDefault();
+    if (!email.includes("@")) {
+      setMessage("❌ Please enter a valid email.");
+      return;
+    }
+
+    try {
+      const res = await fetch("/api/newsletter/subscribe", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email }),
+      });
+
+      const data = await res.json();
+      setMessage(data.message);
+      setEmail("");
+    } catch (error) {
+      console.error("Newsletter subscription error:", error);
+      setMessage("❌ Subscription failed. Try again later.");
+    }
+  };
+
+
   return (
     <footer className="footer">
       <div className="footer-container">
@@ -28,6 +58,7 @@ const Footer = () => {
               href="https://www.facebook.com/tuah.app"
               target="_blank"
               rel="noreferrer"
+              aria-label="Facebook"
             >
               <FontAwesomeIcon icon={faFacebookF} />
             </a>
@@ -35,6 +66,7 @@ const Footer = () => {
               href="https://www.instagram.com/tuah.app"
               target="_blank"
               rel="noreferrer"
+              aria-label="Instagram"
             >
               <FontAwesomeIcon icon={faInstagram} />
             </a>
@@ -42,6 +74,7 @@ const Footer = () => {
               href="https://www.linkedin.com/company/tuah-ai"
               target="_blank"
               rel="noreferrer"
+              aria-label="LinkedIn"
             >
               <FontAwesomeIcon icon={faLinkedin} />
             </a>
@@ -61,16 +94,35 @@ const Footer = () => {
             <Link to="/manufacturer" className="footer-link">
               Manufacturer Form
             </Link>
+            {role === "admin" && (
+              <Link to="/dashboard" className="footer-link">
+                Admin Dashboard
+              </Link>
+            )}
           </div>
         </div>
 
         {/* Newsletter */}
         <div className="footer-col">
           <h4>Subscribe to Negotiation Insights</h4>
-          <form className="newsletter-form">
-            <input type="email" placeholder="Enter your email" required />
+          <form className="newsletter-form" onSubmit={handleSubscribe}>
+            <input
+              type="email"
+              placeholder="Enter your email"
+              required
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
             <button type="submit">Subscribe</button>
           </form>
+          {message && (
+            <p
+              className="text-warning fw-bold mt-2"
+              style={{ fontSize: "0.9em" }}
+            >
+              {message}
+            </p>
+          )}
         </div>
       </div>
 

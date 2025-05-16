@@ -69,3 +69,14 @@ exports.startNegotiation = async (req, res) => {
     res.status(500).json({ error: "Negotiation failed" });
   }
 };
+export const optimize = async (req, res) => {
+  try {
+    const response = await axios.post(
+      "http://localhost:8000/optimize",
+      req.body
+    );
+    res.json(response.data);
+  } catch (err) {
+    res.status(400).json({ error: err.message });
+  }
+};

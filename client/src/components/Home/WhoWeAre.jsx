@@ -7,95 +7,99 @@ import {
   faShieldAlt,
   faChartLine,
 } from "@fortawesome/free-solid-svg-icons";
-// import teamPhoto from "../assets/images/team.jpg";
-import "../../styles/home.css";
+import "../../styles/home.css"; // you may separate a whoWeAre.css if needed
 
 const WhoWeAre = () => {
   return (
-    <section id="who-we-are" className="who-we-are-section py-5">
+    <section id="who-we-are" className="who-we-are-section py-5 bg-white">
       <Container>
-        <Row className="justify-content-center">
-          <Col lg={8} className="text-center mb-5">
-            <h2 className="section-title">Who We Are</h2>
-            <p className="section-subtitle">
-              Pioneers in Intelligent Negotiation Technology
+        <Row className="justify-content-center text-center mb-5">
+          <Col lg={8}>
+            <h2 className="section-title fw-bold">Who We Are</h2>
+            <p className="section-subtitle text-muted fs-5">
+              Pioneers in AI-Powered Negotiation Using Swarm Intelligence
             </p>
           </Col>
         </Row>
 
         <Row className="align-items-center">
+          {/* Optional Team Photo Block */}
           <Col lg={6} className="mb-4 mb-lg-0">
-            <div className="team-photo-container">
-              {/* <img
-                src={teamPhoto}
-                alt="MPSO Team"
-                className="img-fluid rounded shadow"
-              /> */}
-              <div className="experience-badge">
-                <span>5+ Years</span>
-                <small>of AI Research</small>
+            <div className="team-photo-container text-center">
+              <div className="team-photo-placeholder rounded shadow p-5 bg-light">
+                {/* Placeholder - Replace with image if needed */}
+                <h5 className="text-muted">Team Photo Coming Soon</h5>
+              </div>
+              <div className="experience-badge mt-3">
+                <span className="fs-4 fw-bold">5+ Years</span>
+                <div className="text-muted">in AI Research & Optimization</div>
               </div>
             </div>
           </Col>
 
+          {/* Content Area */}
           <Col lg={6}>
             <div className="about-content">
-              <p className="lead-text">
-                We are an interdisciplinary team of AI researchers, negotiation
-                experts, and software engineers committed to transforming how
-                businesses negotiate through Multi-Swarm Particle Swarm
-                Optimization technology.
+              <p className="lead-text text-dark fs-5">
+                We’re a collaborative team of AI researchers, economists, and
+                software engineers reshaping the future of negotiation. Our
+                mission is to enable real-time, multi-objective deal-making with
+                fairness and efficiency at its core.
               </p>
 
               <div className="key-points mt-4">
-                <div className="key-point">
-                  <div className="key-point-icon">
-                    <FontAwesomeIcon icon={faUsers} />
+                {/* Point 1 */}
+                <div className="key-point d-flex mb-4">
+                  <div className="key-point-icon me-3">
+                    <FontAwesomeIcon icon={faUsers} size="lg" />
                   </div>
                   <div>
-                    <h4>Diverse Expertise</h4>
-                    <p>
-                      Combining AI specialists, economists, and industry
-                      veterans to create balanced negotiation solutions.
+                    <h5 className="fw-bold">Diverse Expertise</h5>
+                    <p className="mb-0">
+                      We merge backgrounds in swarm AI, supply chain, and
+                      negotiation psychology.
                     </p>
                   </div>
                 </div>
 
-                <div className="key-point">
-                  <div className="key-point-icon">
-                    <FontAwesomeIcon icon={faLightbulb} />
+                {/* Point 2 */}
+                <div className="key-point d-flex mb-4">
+                  <div className="key-point-icon me-3">
+                    <FontAwesomeIcon icon={faLightbulb} size="lg" />
                   </div>
                   <div>
-                    <h4>Innovation Driven</h4>
-                    <p>
-                      Continuously improving our algorithms based on the latest
-                      research in swarm intelligence and game theory.
+                    <h5 className="fw-bold">Innovation Driven</h5>
+                    <p className="mb-0">
+                      Our MPSO engine is built on the latest in swarm
+                      intelligence and adaptive optimization.
                     </p>
                   </div>
                 </div>
 
-                <div className="key-point">
-                  <div className="key-point-icon">
-                    <FontAwesomeIcon icon={faShieldAlt} />
+                {/* Point 3 */}
+                <div className="key-point d-flex mb-4">
+                  <div className="key-point-icon me-3">
+                    <FontAwesomeIcon icon={faShieldAlt} size="lg" />
                   </div>
                   <div>
-                    <h4>Ethical Foundation</h4>
-                    <p>
-                      Committed to fair, transparent negotiations that benefit
-                      all parties in the long term.
+                    <h5 className="fw-bold">Ethical Negotiation</h5>
+                    <p className="mb-0">
+                      We ensure transparency and fairness are hardcoded into
+                      every deal.
                     </p>
                   </div>
                 </div>
 
-                <div className="key-point">
-                  <div className="key-point-icon">
-                    <FontAwesomeIcon icon={faChartLine} />
+                {/* Point 4 */}
+                <div className="key-point d-flex">
+                  <div className="key-point-icon me-3">
+                    <FontAwesomeIcon icon={faChartLine} size="lg" />
                   </div>
                   <div>
-                    <h4>Proven Results</h4>
-                    <p>
-                      Our technology has facilitated over 10,000 successful
-                      negotiations with an average satisfaction rate of 94%.
+                    <h5 className="fw-bold">Proven Impact</h5>
+                    <p className="mb-0">
+                      Over 10,000 successful negotiations with 94%+ satisfaction
+                      rate.
                     </p>
                   </div>
                 </div>

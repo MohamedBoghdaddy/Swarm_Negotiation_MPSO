@@ -1,93 +1,95 @@
 import jwt from "jsonwebtoken";
-import User from "../models/UserModel.js";
 import dotenv from "dotenv";
+import User from "../models/UserModel.js";
 
 dotenv.config();
-const JWT_SECRET ='6dsb&c~HYAx3K787,5.K2lK*EA*h|9C-6Y,$.jiKS1s9lTE5^bPN$>+~';
+
+const JWT_SECRET = process.env.JWT_SECRET;
+
+if (!JWT_SECRET) {
+  console.error("❌ JWT_SECRET is missing in .env");
+  process.exit(1);
+}
 
 /**
- * ✅ Middleware: Ensure User is Authenticated
- * - Checks for a valid JWT token in headers or cookies.
- * - If valid, attaches the user object to `req.user`.
+ * ✅ Middleware: Authenticate user using token (from header or cookie)
  */
 export const auth = async (req, res, next) => {
   try {
-    let token = req.headers.authorization;
+    let token = null;
 
-    // ✅ Extract token from Authorization Header
-    if (token?.startsWith("Bearer ")) {
-      token = token.split(" ")[1];
-    } else if (req.cookies?.token) {
-      // ✅ Ensure the cookie-based token is used
+    // 🔐 Check for Bearer token in headers
+    if (req.headers.authorization?.startsWith("Bearer ")) {
+      token = req.headers.authorization.split(" ")[1];
+    }
+
+    // 🔐 Fallback to cookie token
+    if (!token && req.cookies?.token) {
       token = req.cookies.token;
     }
 
+    // ❌ No token found
     if (!token) {
       return res
         .status(401)
         .json({ message: "Access denied. No token provided." });
     }
 
-    // ✅ Verify Token
+    // ✅ Verify token and attach user to request
     const decoded = jwt.verify(token, JWT_SECRET);
-    console.log("✅ Decoded Token:", decoded);
+    const user = await User.findById(decoded.id).select("-password");
 
-    // ✅ Fetch User from DB
-    req.user = await User.findById(decoded.id).select("-password");
-
-    if (!req.user) {
-      return res.status(401).json({ message: "Invalid authentication." });
+    if (!user) {
+      return res.status(401).json({ message: "Invalid user token." });
     }
 
-    console.log("✅ Authenticated User:", req.user);
+    req.user = user;
+
+    console.log(`✅ Authenticated: ${user.username} (${user.role})`);
     next();
   } catch (error) {
-    console.error("❌ Authentication Error:", error);
+    console.error("❌ Auth Error:", error);
 
-    let errorMessage = "Unauthorized access.";
-    if (error.name === "TokenExpiredError") {
-      errorMessage = "Session expired, please log in again.";
-    }
+    const message =
+      error.name === "TokenExpiredError"
+        ? "Session expired. Please log in again."
+        : "Unauthorized access. Invalid token.";
 
-    res.status(401).json({ message: errorMessage });
+    return res.status(401).json({ message });
   }
 };
 
-
 /**
- * ✅ Middleware: Ensure User has Required Roles
- * - Only allows users with specified roles.
- * - Example usage: `authorizeRoles("admin", "employee")`
+ * ✅ Middleware: Role-based access control
+ * @param  {...string} roles - Allowed roles (e.g., "admin", "user")
  */
 export const authorizeRoles = (...roles) => {
   return (req, res, next) => {
     if (!req.user) {
-      return res.status(401).json({ message: "Unauthorized access." });
+      return res
+        .status(401)
+        .json({ message: "Access denied. User not authenticated." });
     }
 
     if (!roles.includes(req.user.role)) {
       return res.status(403).json({
-        message: `Access denied: Role '${req.user.role}' is not authorized.`,
+        message: `Access denied. Requires role: [${roles.join(
+          ", "
+        )}], but your role is '${req.user.role}'.`,
       });
     }
 
-    console.log(`✅ Authorized Role: ${req.user.role}`);
+    console.log(`✅ Role Authorized: ${req.user.username} → ${req.user.role}`);
     next();
   };
 };
 
-/**
- * ✅ Middleware: Ensure User is Admin
- * - Allows only users with the role "admin".
- */
-export const verifyAdmin = (req, res, next) => {
-  return authorizeRoles("admin")(req, res, next);
-};
-
-/**
- * ✅ Middleware: Ensure User is Admin or Employee
- * - Allows only users with roles "admin" or "employee".
- */
-export const verifyAdminOrEmployee = (req, res, next) => {
-  return authorizeRoles("admin", "employee")(req, res, next);
-};
+// ✅ Shorthand middlewares for specific roles
+export const verifyAdmin = authorizeRoles("admin");
+export const verifyManufacturer = authorizeRoles("manufacturer");
+export const verifyUser = authorizeRoles("user");
+export const verifyAdminOrUser = authorizeRoles("admin", "user");
+export const verifyAdminOrManufacturer = authorizeRoles(
+  "admin",
+  "manufacturer"
+);

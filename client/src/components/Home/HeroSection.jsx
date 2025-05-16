@@ -5,20 +5,22 @@ import "../../styles/home.css";
 
 const HeroSection = () => {
   return (
-    <section className="hero-section py-5">
+    <section className="hero-section py-5 bg-light text-dark">
       <div className="container">
         <div className="row align-items-center">
-          <div className="col-md-6">
-            <h1 className="display-4 font-weight-bold mb-4">
-              Intelligent Negotiation with MPSO Technology
+          {/* Text Block */}
+          <div className="col-md-6 mb-4 mb-md-0 fade-in-left">
+            <h1 className="display-5 fw-bold mb-3">
+              AI-Powered Fabric Deal Optimization with MPSO
             </h1>
             <p className="lead mb-4">
-              Revolutionizing automated negotiations between buyers and
-              manufacturers using Multi-Swarm Particle Swarm Optimization.
+              Tuah transforms textile negotiations by matching buyers and
+              manufacturers using our intelligent Multi-Swarm Particle Swarm
+              Optimization (MPSO) agent.
             </p>
-            <div className="d-flex gap-3">
+            <div className="d-flex flex-wrap gap-3">
               <Button as={Link} to="/user" variant="primary" size="lg">
-                Start Negotiating Now
+                Start as Buyer
               </Button>
               <Button
                 as={Link}
@@ -26,15 +28,18 @@ const HeroSection = () => {
                 variant="outline-primary"
                 size="lg"
               >
-                I'm a Manufacturer
+                Join as Manufacturer
               </Button>
             </div>
           </div>
-          <div className="col-md-6">
+
+          {/* Image */}
+          <div className="col-md-6 text-center fade-in-right">
             <img
               src="/images/negotiation-hero.png"
-              alt="Negotiation process illustration"
-              className="img-fluid rounded shadow"
+              alt="AI-driven negotiation system"
+              className="img-fluid rounded shadow-sm"
+              loading="lazy"
             />
           </div>
         </div>

@@ -3,35 +3,38 @@ import {
   registerUser,
   loginUser,
   logoutUser,
+  checkAuth,
   getAllUsers,
   getUserById,
-  checkAuth,
   updateUserProfile,
   deleteUser,
-  upload,
-  toggleBlockStatus,
   updateLoginMeta,
+  upload,
   updateUserRoleOrPassword,
+  updateUserRole,
 } from "../controller/usercontroller.js";
 
 import { auth, authorizeRoles } from "../Middleware/authMiddleware.js";
 import User from "../models/UserModel.js";
-import { updateUserRole } from "../controller/usercontroller.js";
 
 const router = express.Router();
 
-/**
- * ✅ PUBLIC ROUTES (No authentication required)
- */
+// =====================================================
+// ✅ PUBLIC ROUTES (No authentication required)
+// =====================================================
+
 router.post("/signup", registerUser);
 router.post("/login", loginUser);
 router.post("/logout", logoutUser);
 
-/**
- * ✅ PROTECTED ROUTES (Require user authentication)
- */
-router.get("/checkAuth", checkAuth);
-router.get("/users", auth, getAllUsers); // Only admin can use this typically
+// Called from frontend after login success to record metadata
+router.put("/meta/login", updateLoginMeta);
+
+// =====================================================
+// ✅ AUTHENTICATED USER ROUTES
+// =====================================================
+
+router.get("/checkAuth", auth, checkAuth);
 router.get("/users/:userId", auth, getUserById);
 
 router.put(
@@ -41,23 +44,58 @@ router.put(
   updateUserProfile
 );
 
+// =====================================================
+// ✅ ADMIN-ONLY ROUTES
+// =====================================================
+
+// View all users (for dashboard)
+router.get("/users", auth, authorizeRoles("admin"), getAllUsers);
+
+// Delete user by ID
 router.delete("/users/:userId", auth, authorizeRoles("admin"), deleteUser);
 
-/**
- * ✅ ROLE-BASED ACCESS ROUTES
- */
+// Update user role or password (admin panel)
+router.put(
+  "/admin/update-user/:id",
+  auth,
+  authorizeRoles("admin"),
+  updateUserRoleOrPassword
+);
+
+// Update only role (simpler endpoint)
+router.put(
+  "/admin/update-role/:id",
+  auth,
+  authorizeRoles("admin"),
+  updateUserRole
+);
+
+// =====================================================
+// ✅ ADMIN DASHBOARD ROUTES (Protected properly)
+// =====================================================
+
+// Admin welcome route
 router.get("/admin", auth, authorizeRoles("admin"), (req, res) => {
   res.status(200).json({ message: "Welcome, Admin!" });
 });
 
-router.get("/dashboard", auth, authorizeRoles("admin", "user"), (req, res) => {
-  res.status(200).json({ message: "Welcome to the Dashboard" });
-});
+// Shared dashboard view for users and admins
+router.get(
+  "/dashboard",
+  auth,
+  authorizeRoles("admin", "user", "manufacturer"),
+  (req, res) => {
+    res
+      .status(200)
+      .json({ message: `Welcome to the Dashboard, ${req.user.role}!` });
+  }
+);
 
-/**
- * ✅ ADMIN DASHBOARD ROUTES (No auth middleware for testing; add it later)
- */
-router.get("/all", async (req, res) => {
+// =====================================================
+// ✅ ENHANCED ADMIN BULK ACTIONS (now protected)
+// =====================================================
+
+router.get("/all", auth, authorizeRoles("admin"), async (req, res) => {
   try {
     const users = await User.find().sort({ createdAt: -1 });
     res.json(users);
@@ -66,39 +104,38 @@ router.get("/all", async (req, res) => {
   }
 });
 
-router.delete("/delete/:id", async (req, res) => {
-  try {
-    const user = await User.findByIdAndDelete(req.params.id);
-    if (!user) return res.status(404).json({ message: "User not found" });
-    res.json({ success: true });
-  } catch (err) {
-    res.status(500).json({ message: "Error deleting user" });
+router.delete(
+  "/delete/:id",
+  auth,
+  authorizeRoles("admin"),
+  async (req, res) => {
+    try {
+      const user = await User.findByIdAndDelete(req.params.id);
+      if (!user) return res.status(404).json({ message: "User not found" });
+      res.json({ success: true });
+    } catch (err) {
+      res.status(500).json({ message: "Error deleting user" });
+    }
   }
-});
+);
 
-router.put("/toggle-block/:id", async (req, res) => {
-  try {
-    const user = await User.findById(req.params.id);
-    if (!user) return res.status(404).json({ message: "User not found" });
+router.put(
+  "/toggle-block/:id",
+  auth,
+  authorizeRoles("admin"),
+  async (req, res) => {
+    try {
+      const user = await User.findById(req.params.id);
+      if (!user) return res.status(404).json({ message: "User not found" });
 
-    user.blocked = !user.blocked;
-    await user.save();
+      user.blocked = !user.blocked;
+      await user.save();
 
-    res.json({ success: true, blocked: user.blocked });
-  } catch (err) {
-    res.status(500).json({ message: "Error toggling block status" });
+      res.json({ success: true, blocked: user.blocked });
+    } catch (err) {
+      res.status(500).json({ message: "Error toggling block status" });
+    }
   }
-});
-
-router.put("/meta/login", updateLoginMeta); // Called on login
-
-router.put("/admin/update-user/:id", updateUserRoleOrPassword);
-
-router.put("/admin/update-role/:id", auth, authorizeRoles("admin"), updateUserRole);
-
-/**
- * ⚠️ OPTIONAL (if you're using a controller function)
- */
-// router.patch("/users/:id/toggle-block", toggleBlockStatus);
+);
 
 export default router;

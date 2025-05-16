@@ -8,20 +8,24 @@ import React, {
 } from "react";
 import axios from "axios";
 
+// ✅ Base URL: fallback to localhost if .env not defined
 const API_URL =
   process.env.REACT_APP_API_URL ??
   (window.location.hostname === "localhost"
     ? "http://localhost:4000"
-    : "https://atos-task-document-management-system.onrender.com");
+    : window.location.origin);
 
+// ✅ Create context
 const AuthContext = createContext();
 
+// ✅ Initial state
 const initialState = {
   user: null,
   isAuthenticated: false,
   loading: true,
 };
 
+// ✅ Reducer
 const authReducer = (state, action) => {
   switch (action.type) {
     case "LOGIN_SUCCESS":
@@ -40,6 +44,7 @@ const authReducer = (state, action) => {
   }
 };
 
+// ✅ Provider component
 export const AuthProvider = ({ children }) => {
   const [state, dispatch] = useReducer(authReducer, initialState);
 
@@ -51,8 +56,9 @@ export const AuthProvider = ({ children }) => {
     delete axios.defaults.headers.common["Authorization"];
   };
 
+  // ✅ Load from cookie/localStorage on mount
   const checkAuth = useCallback(async () => {
-    if (state.isAuthenticated || !state.loading) return; // ✅ Prevent unnecessary calls
+    if (state.isAuthenticated || !state.loading) return;
 
     try {
       const token =
@@ -66,11 +72,12 @@ export const AuthProvider = ({ children }) => {
         return;
       }
 
-      const response = await axios.get(`${API_URL}/api/users/checkAuth`, {
+      const res = await axios.get(`${API_URL}/api/users/checkAuth`, {
         withCredentials: true,
       });
 
-      const { user } = response.data;
+      const { user } = res.data;
+
       if (user) {
         dispatch({ type: "USER_LOADED", payload: user });
         setAuthorizationHeader(token);
@@ -78,12 +85,13 @@ export const AuthProvider = ({ children }) => {
       } else {
         dispatch({ type: "AUTH_ERROR" });
       }
-    } catch (error) {
-      console.error("❌ Auth check failed:", error);
+    } catch (err) {
+      console.error("❌ Auth check failed:", err);
       dispatch({ type: "AUTH_ERROR" });
     }
   }, [state.isAuthenticated, state.loading]);
 
+  // ✅ Run checkAuth on load
   useEffect(() => {
     const storedUser = localStorage.getItem("user");
 
@@ -96,8 +104,8 @@ export const AuthProvider = ({ children }) => {
         } else {
           checkAuth();
         }
-      } catch (error) {
-        console.error("❌ Failed to parse user from localStorage:", error);
+      } catch (err) {
+        console.error("❌ Failed to parse local user:", err);
         dispatch({ type: "AUTH_ERROR" });
       }
     } else {
@@ -105,20 +113,35 @@ export const AuthProvider = ({ children }) => {
     }
   }, [checkAuth]);
 
+  // ✅ Logout
   const logout = useCallback(() => {
     localStorage.removeItem("user");
     removeAuthorizationHeader();
     dispatch({ type: "LOGOUT_SUCCESS" });
   }, []);
 
+  // ✅ Memoized context
   const contextValue = useMemo(
-    () => ({ state, dispatch, logout }),
+    () => ({
+      state,
+      dispatch,
+      logout,
+      isAuthenticated: state.isAuthenticated,
+      user: state.user,
+      role: state.user?.role,
+      token:
+        document.cookie
+          .split("; ")
+          .find((row) => row.startsWith("token="))
+          ?.split("=")[1] || localStorage.getItem("token"),
+    }),
     [state, logout]
   );
 
+  // ✅ Optional debug
   useEffect(() => {
     if (!state.loading) {
-      console.log("🔄 AuthProvider state updated:", state);
+      console.log("🔁 Auth State:", state);
     }
   }, [state]);
 
@@ -127,6 +150,7 @@ export const AuthProvider = ({ children }) => {
   );
 };
 
+// ✅ Custom hook
 export const useAuthContext = () => {
   const context = useContext(AuthContext);
   if (!context) {

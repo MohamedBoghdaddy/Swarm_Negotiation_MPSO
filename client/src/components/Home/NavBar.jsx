@@ -13,6 +13,7 @@ import {
   faUser,
   faSignOutAlt,
   faSearch,
+  faGaugeHigh,
 } from "@fortawesome/free-solid-svg-icons";
 import { Link, useNavigate } from "react-router-dom";
 import { Link as ScrollLink } from "react-scroll";
@@ -28,7 +29,7 @@ const NavBar = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const navigate = useNavigate();
   const { state } = useAuthContext();
-  const { isAuthenticated } = state;
+  const { user, isAuthenticated } = state;
   const { logout } = useLogout();
 
   const handleLoginModalOpen = () => setShowLoginModal(true);
@@ -48,6 +49,8 @@ const NavBar = () => {
       setExpanded(false);
     }
   };
+
+  const role = user?.role;
 
   return (
     <>
@@ -103,16 +106,37 @@ const NavBar = () => {
               >
                 How It Works
               </ScrollLink>
-              <Link to="/user" className="nav-link" onClick={handleNavCollapse}>
-                User Form
-              </Link>
-              <Link
-                to="/manufacturer"
-                className="nav-link"
-                onClick={handleNavCollapse}
-              >
-                Manufacturer
-              </Link>
+
+              {isAuthenticated && role === "user" && (
+                <Link
+                  to="/user"
+                  className="nav-link"
+                  onClick={handleNavCollapse}
+                >
+                  User Form
+                </Link>
+              )}
+
+              {isAuthenticated && role === "manufacturer" && (
+                <Link
+                  to="/manufacturer"
+                  className="nav-link"
+                  onClick={handleNavCollapse}
+                >
+                  Manufacturer Form
+                </Link>
+              )}
+
+              {isAuthenticated && role === "admin" && (
+                <Link
+                  to="/dashboard"
+                  className="nav-link"
+                  onClick={handleNavCollapse}
+                >
+                  <FontAwesomeIcon icon={faGaugeHigh} className="me-1" />
+                  Admin Dashboard
+                </Link>
+              )}
             </Nav>
 
             <Form className="d-flex me-3" onSubmit={handleSearchSubmit}>
@@ -130,16 +154,13 @@ const NavBar = () => {
 
             {isAuthenticated ? (
               <Nav className="align-items-center">
-                <Link to="/dashboard" className="nav-link">
-                  Dashboard
-                </Link>
                 <div
                   className="nav-link cursor-pointer"
                   role="button"
-                  tabIndex="0"
+                  tabIndex={0}
                   onClick={handleLogout}
                 >
-                  <FontAwesomeIcon icon={faSignOutAlt} className="me-1" />{" "}
+                  <FontAwesomeIcon icon={faSignOutAlt} className="me-1" />
                   Logout
                 </div>
               </Nav>
@@ -147,7 +168,7 @@ const NavBar = () => {
               <div
                 className="nav-link cursor-pointer"
                 role="button"
-                tabIndex="0"
+                tabIndex={0}
                 onClick={handleLoginModalOpen}
               >
                 <FontAwesomeIcon icon={faUser} className="me-1" /> Login

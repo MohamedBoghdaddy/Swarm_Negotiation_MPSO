@@ -1,80 +1,78 @@
 import User from "../models/UserModel.js";
-import Questionnaire from "../models/questionnaireModel.js";
+import Negotiation from "../models/NegotiationModel.js";
+import Manufacturer from "../models/Manufacturer.js";
 
-// Analytics for user's financial and lifestyle questionnaires
-export const getUserAnalytics = async (req, res) => {
-  const userId = req.user.id;
-
+// ✅ Negotiation History Analytics per Manufacturer
+export const getManufacturerStats = async (req, res) => {
   try {
-    const user = await User.findById(userId);
-    if (!user) return res.status(404).json({ message: "User not found" });
+    const negotiations = await Negotiation.find();
 
-    const totalQuestionnaires = await Questionnaire.countDocuments({ userId });
+    const countMap = {};
+    negotiations.forEach((n) => {
+      const id = n.recommended?.manufacturerID;
+      if (id) countMap[id] = (countMap[id] || 0) + 1;
+    });
 
-    const questionnairesByRiskTolerance = await Questionnaire.aggregate([
-      { $match: { userId } },
-      { $group: { _id: "$riskTolerance", count: { $sum: 1 } } },
-    ]);
+    const allManufacturers = await Manufacturer.find({});
+    const stats = allManufacturers.flatMap((m) =>
+      m.products.map((p, i) => ({
+        manufacturerName: p.manufacturerName,
+        fabricType: p.fabricType,
+        count: countMap[i + 1] || 0,
+      }))
+    );
 
-    const analytics = {
-      totalQuestionnaires,
-      questionnairesByRiskTolerance,
-    };
-
-    res.status(200).json(analytics);
-  } catch (error) {
-    res.status(500).json({ message: error.message });
+    res.status(200).json(stats);
+  } catch (err) {
+    console.error("❌ getManufacturerStats error:", err);
+    res.status(500).json({ message: "Failed to load manufacturer stats" });
   }
 };
 
-// Analytics for lifestyle and financial preferences across all users
-export const getLifestyleAnalytics = async (req, res) => {
-  try {
-    const analyticsData = await Questionnaire.aggregate([
-      { $group: { _id: "$lifestyle", totalUsers: { $sum: 1 } } },
-      { $sort: { totalUsers: -1 } },
-    ]);
-
-    res.status(200).json(analyticsData);
-  } catch (error) {
-    console.error("Failed to fetch lifestyle analytics:", error);
-    res
-      .status(500)
-      .json({ message: "Failed to fetch lifestyle analytics", error });
-  }
-};
-
-// Analytics for risk tolerance distribution
-export const getRiskToleranceAnalytics = async (req, res) => {
-  try {
-    const analyticsData = await Questionnaire.aggregate([
-      { $group: { _id: "$riskTolerance", totalUsers: { $sum: 1 } } },
-      { $sort: { totalUsers: -1 } },
-    ]);
-
-    res.status(200).json(analyticsData);
-  } catch (error) {
-    console.error("Failed to fetch risk tolerance analytics:", error);
-    res
-      .status(500)
-      .json({ message: "Failed to fetch risk tolerance analytics", error });
-  }
-};
-
-//Statistics
+// ✅ General System Statistics (User Roles)
 export const getUserStatistics = async (req, res) => {
   try {
     const totalUsers = await User.countDocuments();
     const totalAdmins = await User.countDocuments({ role: "admin" });
+    const totalManufacturers = await User.countDocuments({
+      role: "manufacturer",
+    });
     const totalRegularUsers = await User.countDocuments({ role: "user" });
 
     res.json({
       totalUsers,
       totalAdmins,
+      totalManufacturers,
       totalRegularUsers,
     });
   } catch (err) {
     console.error("Error in getUserStatistics:", err.message);
     res.status(500).json({ error: "Failed to load statistics" });
+  }
+};
+
+// ✅ Recent Logins
+export const getRecentLogins = async (req, res) => {
+  try {
+    const recent = await User.find({ lastLogin: { $exists: true } })
+      .sort({ lastLogin: -1 })
+      .limit(5)
+      .select("username email role lastLogin profilePhoto");
+
+    res.status(200).json(recent);
+  } catch (err) {
+    console.error("❌ getRecentLogins error:", err.message);
+    res.status(500).json({ error: "Failed to load recent logins" });
+  }
+};
+
+// ✅ Negotiation History for Admin Dashboard
+export const getNegotiationHistory = async (req, res) => {
+  try {
+    const negotiations = await Negotiation.find().sort({ date: -1 });
+    res.status(200).json(negotiations);
+  } catch (err) {
+    console.error("❌ getNegotiationHistory error:", err.message);
+    res.status(500).json({ message: "Failed to load negotiation history" });
   }
 };

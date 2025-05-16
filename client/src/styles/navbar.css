@@ -1,4 +1,3 @@
-/* === NAVBAR STYLES FOR TUAH MPSO APP === */
 html {
   scroll-behavior: smooth;
 }
@@ -71,7 +70,7 @@ html {
   border-left: none;
 }
 
-/* Responsive Behavior */
+/* Responsive */
 @media (max-width: 992px) {
   .navbar-brand span {
     font-size: 1rem;
