@@ -1,52 +1,105 @@
 from fastapi import FastAPI, HTTPException
 from fastapi.responses import JSONResponse
-from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
-from typing import List, Optional
-from mpso_engine import run_mpso
+from typing import List, Dict, Any
+from algorithm_runner import run_all_algorithms
+from evaluation_metrics import compute_confusion_metrics
+from pareto_metrics import calculate_pareto_metrics
 
 app = FastAPI()
 
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=["*"], allow_credentials=True,
-    allow_methods=["*"], allow_headers=["*"],
-)
-
-class User(BaseModel):
-    fabricType: str
-    quantity: int
-    priceRange: int
-    qualityPreference: str
-    deliveryTimeline: int
-
-class Manufacturer(BaseModel):
+# --- Input Models ---
+class ManufacturerData(BaseModel):
     id: int
-    initialOffer: dict
-    minPrice: int
+    initialOffer: Dict[str, Any]
+    minPrice: float
     minDelivery: int
     qualities: List[str]
     maxQualityCost: float
     deliveryCapacity: int
 
-class RequestData(BaseModel):
-    user: User
-    manufacturers: List[Manufacturer]
-    weights: Optional[dict] = {
-        "user": 0.5, "manufacturer": 0.5
-    }
+class UserData(BaseModel):
+    fabricType: str
+    quantity: int
+    priceRange: float
+    qualityPreference: str
+    deliveryTimeline: int
 
-@app.post("/optimize")
-async def optimize(request_data: RequestData):
+class RequestData(BaseModel):
+    user: UserData
+    manufacturers: List[ManufacturerData]
+    weights: Dict[str, float]
+
+class AlgorithmComparisonResult(BaseModel):
+    manufacturer_id: int
+    algorithms: Dict[str, Dict[str, Any]]
+    winner: str
+    winning_offer: Dict[str, Any]
+    comparison_metrics: Dict[str, Any]
+
+
+# --- Routes ---
+@app.post("/compare-algorithms")
+async def compare_algorithms(request_data: RequestData):
     try:
         user = request_data.user.dict()
         manufacturers = [m.dict() for m in request_data.manufacturers]
         weights = request_data.weights
-        results = run_mpso(user, manufacturers, weights)
+
+        all_results = []
+
+        for manufacturer in manufacturers:
+            algo_results = run_all_algorithms(user, manufacturer, weights)
+            winner = max(algo_results.keys(), key=lambda k: algo_results[k]['fitness'])
+
+            comparison = {
+                'fitness_comparison': {k: v['fitness'] for k, v in algo_results.items()},
+                'time_comparison': {k: v['execution_time'] for k, v in algo_results.items()}
+            }
+
+            all_results.append({
+                "manufacturer_id": manufacturer['id'],
+                "algorithms": algo_results,
+                "winner": winner,
+                "winning_offer": algo_results[winner],
+                "comparison_metrics": comparison
+            })
+
+        return JSONResponse(all_results)
+
+    except Exception as e:
+        raise HTTPException(status_code=400, detail=str(e))
+
+
+@app.post("/full-evaluation")
+async def full_evaluation(algorithm_results: List[AlgorithmComparisonResult]):
+    try:
+        true_winners = [res.winner for res in algorithm_results]
+        predicted_winners = true_winners  # Placeholder
+
+        class_metrics = compute_confusion_metrics(true_winners, predicted_winners)
+
+        # Build Pareto input
+        pareto_data = {}
+        for res in algorithm_results:
+            pareto_data[res.manufacturer_id] = {
+                'MPSO': [res.algorithms['MPSO']['fitness'], res.algorithms['MPSO']['execution_time']],
+                'ABC-MNG': [res.algorithms['ABC-MNG']['fitness'], res.algorithms['ABC-MNG']['execution_time']],
+                'GA-HV': [res.algorithms['GA-HV']['fitness'], res.algorithms['GA-HV']['execution_time']]
+            }
+
+        # Calculate reference point based on worst-case (max time, max fitness buffer)
+        all_times = [algo['execution_time'] for res in algorithm_results for algo in res.algorithms.values()]
+        reference_point = [1.0, max(all_times) * 1.1]
+
+        pareto_metrics = {}
+        for mid, algo_points in pareto_data.items():
+            pareto_metrics[mid] = calculate_pareto_metrics({k: [v] for k, v in algo_points.items()}, reference_point)
+
         return JSONResponse({
-            "recommended": results[0],
-            "rejected": results[1:],
-            "allResults": results
+            "classification_metrics": class_metrics,
+            "pareto_metrics": pareto_metrics
         })
+
     except Exception as e:
         raise HTTPException(status_code=400, detail=str(e))
