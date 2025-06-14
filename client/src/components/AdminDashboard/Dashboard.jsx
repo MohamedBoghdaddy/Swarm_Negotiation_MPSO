@@ -14,6 +14,7 @@ const Dashboard = () => {
   const [users, setUsers] = useState([]);
   const [manufacturers, setManufacturers] = useState([]);
   const [negotiations, setNegotiations] = useState([]);
+  const [algorithmMetrics, setAlgorithmMetrics] = useState([]);
   const [quickFilter, setQuickFilter] = useState("");
   const [dateFilter, setDateFilter] = useState({ from: "", to: "" });
   const [loading, setLoading] = useState(false);
@@ -21,19 +22,18 @@ const Dashboard = () => {
 
   useEffect(() => {
     fetchAll();
+    fetchAlgorithmMetrics();
   }, []);
 
   const fetchAll = async () => {
     setLoading(true);
     setErrorMsg("");
-
     try {
       const [userRes, manuRes, negoRes] = await Promise.all([
         axios.get("http://localhost:4000/api/users/users"),
         axios.get("http://localhost:4000/api/manufacturer/products"),
         axios.get("http://localhost:4000/api/analytics/negotiations"),
       ]);
-
       setUsers(userRes.data);
       setManufacturers(manuRes.data.products);
       setNegotiations(negoRes.data);
@@ -45,6 +45,17 @@ const Dashboard = () => {
       );
     } finally {
       setLoading(false);
+    }
+  };
+
+  const fetchAlgorithmMetrics = async () => {
+    try {
+      const res = await axios.get(
+        "http://localhost:4000/api/analytics/algorithms"
+      );
+      setAlgorithmMetrics(res.data || []);
+    } catch (err) {
+      console.error("❌ Failed to fetch algorithm metrics:", err);
     }
   };
 
@@ -71,7 +82,9 @@ const Dashboard = () => {
     try {
       await axios.put(
         `http://localhost:4000/api/users/admin/update-user/${id}`,
-        { [field]: value }
+        {
+          [field]: value,
+        }
       );
       fetchAll();
     } catch (err) {
@@ -102,9 +115,7 @@ const Dashboard = () => {
         field: "role",
         editable: true,
         cellEditor: "agRichSelectCellEditor",
-        cellEditorParams: {
-          values: ["user", "admin", "manufacturer"],
-        },
+        cellEditorParams: { values: ["user", "admin", "manufacturer"] },
       },
       {
         headerName: "Blocked",
@@ -155,7 +166,6 @@ const Dashboard = () => {
   const filteredNegotiations = useMemo(() => {
     const from = dateFilter.from ? new Date(dateFilter.from) : null;
     const to = dateFilter.to ? new Date(dateFilter.to) : null;
-
     return negotiations.filter((n) => {
       const date = new Date(n.date);
       return (!from || date >= from) && (!to || date <= to);
@@ -180,6 +190,43 @@ const Dashboard = () => {
           color: p.value < 0.5 ? "#ff5252" : "#43a047",
           fontWeight: "bold",
         }),
+      },
+    ],
+    []
+  );
+
+  const algoMetricsCols = useMemo(
+    () => [
+      { headerName: "Algorithm", field: "algorithm" },
+      {
+        headerName: "Avg Precision",
+        field: "avgPrecision",
+        valueFormatter: (p) => p.value.toFixed(4),
+      },
+      {
+        headerName: "Avg Recall",
+        field: "avgRecall",
+        valueFormatter: (p) => p.value.toFixed(4),
+      },
+      {
+        headerName: "Avg F1-Score",
+        field: "avgF1",
+        valueFormatter: (p) => p.value.toFixed(4),
+      },
+      {
+        headerName: "Avg GD",
+        field: "avgGD",
+        valueFormatter: (p) => p.value.toFixed(4),
+      },
+      {
+        headerName: "Avg HV",
+        field: "avgHV",
+        valueFormatter: (p) => p.value.toFixed(4),
+      },
+      {
+        headerName: "Win Rate",
+        field: "winRate",
+        valueFormatter: (p) => `${(p.value * 100).toFixed(2)}%`,
       },
     ],
     []
@@ -211,21 +258,28 @@ const Dashboard = () => {
       <h1>📊 Admin Dashboard</h1>
 
       <div className="tabs">
-        {["users", "manufacturers", "negotiations", "top", "logins"].map(
-          (tab) => (
-            <button
-              key={tab}
-              onClick={() => setActiveTab(tab)}
-              className={activeTab === tab ? "active-tab" : ""}
-            >
-              {tab === "top"
-                ? "🏅 Top Manufacturers"
-                : tab === "logins"
-                ? "🕓 Recent Logins"
-                : tab.charAt(0).toUpperCase() + tab.slice(1)}
-            </button>
-          )
-        )}
+        {[
+          "users",
+          "manufacturers",
+          "negotiations",
+          "top",
+          "logins",
+          "algorithms",
+        ].map((tab) => (
+          <button
+            key={tab}
+            onClick={() => setActiveTab(tab)}
+            className={activeTab === tab ? "active-tab" : ""}
+          >
+            {tab === "top"
+              ? "🏅 Top Manufacturers"
+              : tab === "logins"
+              ? "🕓 Recent Logins"
+              : tab === "algorithms"
+              ? "📊 Algorithm Metrics"
+              : tab.charAt(0).toUpperCase() + tab.slice(1)}
+          </button>
+        ))}
       </div>
 
       <input
@@ -238,7 +292,6 @@ const Dashboard = () => {
       {errorMsg && <p className="text-danger">{errorMsg}</p>}
       {loading && <p>Loading dashboard data...</p>}
 
-      {/* USERS TAB */}
       {activeTab === "users" && (
         <>
           <CSVLink
@@ -252,7 +305,7 @@ const Dashboard = () => {
             <AgGridReact
               rowData={users}
               columnDefs={userCols}
-              pagination={true}
+              pagination
               paginationPageSize={10}
               quickFilterText={quickFilter}
               onCellValueChanged={onUserEdit}
@@ -262,7 +315,6 @@ const Dashboard = () => {
         </>
       )}
 
-      {/* MANUFACTURERS TAB */}
       {activeTab === "manufacturers" && (
         <>
           <CSVLink
@@ -292,7 +344,7 @@ const Dashboard = () => {
                   ],
                 },
               ]}
-              pagination={true}
+              pagination
               paginationPageSize={10}
               quickFilterText={quickFilter}
               domLayout="autoHeight"
@@ -301,7 +353,6 @@ const Dashboard = () => {
         </>
       )}
 
-      {/* NEGOTIATIONS TAB */}
       {activeTab === "negotiations" && (
         <>
           <div className="date-filters mb-3">
@@ -333,7 +384,7 @@ const Dashboard = () => {
             <AgGridReact
               rowData={filteredNegotiations}
               columnDefs={negoCols}
-              pagination={true}
+              pagination
               paginationPageSize={10}
               quickFilterText={quickFilter}
               domLayout="autoHeight"
@@ -342,7 +393,6 @@ const Dashboard = () => {
         </>
       )}
 
-      {/* TOP MANUFACTURERS */}
       {activeTab === "top" && (
         <div className="result-box">
           <h3>🏆 Top Manufacturers by Optimization Count</h3>
@@ -376,7 +426,6 @@ const Dashboard = () => {
         </div>
       )}
 
-      {/* RECENT LOGINS */}
       {activeTab === "logins" && (
         <div className="result-box">
           <h3>🕓 Recent User Logins</h3>
@@ -401,6 +450,36 @@ const Dashboard = () => {
             </tbody>
           </table>
         </div>
+      )}
+
+      {activeTab === "algorithms" && (
+        <>
+          <CSVLink
+            data={algorithmMetrics}
+            filename="algorithm_metrics.csv"
+            className="btn btn-sm btn-success mb-2"
+          >
+            Export Metrics
+          </CSVLink>
+          <div className="ag-theme-alpine" style={{ height: 500 }}>
+            <AgGridReact
+              rowData={algorithmMetrics}
+              columnDefs={algoMetricsCols}
+              pagination
+              paginationPageSize={10}
+              quickFilterText={quickFilter}
+              domLayout="autoHeight"
+            />
+          </div>
+
+          <div className="charts-section">
+            <h4>Algorithm Performance Comparison</h4>
+            <div className="performance-chart">[F1-Score Comparison Chart]</div>
+            <div className="performance-chart">
+              [Hypervolume (HV) Comparison Chart]
+            </div>
+          </div>
+        </>
       )}
     </div>
   );
