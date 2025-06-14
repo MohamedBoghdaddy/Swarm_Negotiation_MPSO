@@ -2,6 +2,17 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "../../styles/ManufacturerForm.css";
 import { useAuthContext } from "../../context/AuthContext";
+import { Bar } from "react-chartjs-2";
+import {
+  Chart,
+  BarElement,
+  CategoryScale,
+  LinearScale,
+  Tooltip,
+  Legend,
+} from "chart.js";
+
+Chart.register(BarElement, CategoryScale, LinearScale, Tooltip, Legend);
 
 const ManufacturerProductForm = () => {
   const { state } = useAuthContext();
@@ -20,11 +31,11 @@ const ManufacturerProductForm = () => {
     },
   });
 
+  const [selectedAlgorithm, setSelectedAlgorithm] = useState("PSO");
   const [products, setProducts] = useState([]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-
     if (name.startsWith("initialOffer.")) {
       const key = name.split(".")[1];
       setForm((prev) => ({
@@ -54,6 +65,7 @@ const ManufacturerProductForm = () => {
         delivery: "",
       },
     });
+    setSelectedAlgorithm("PSO");
   };
 
   const fetchProducts = async () => {
@@ -91,6 +103,7 @@ const ManufacturerProductForm = () => {
         delivery: Number(form.initialOffer.delivery),
         quality: form.initialOffer.quality,
       },
+      preferredAlgorithm: selectedAlgorithm,
     };
 
     try {
@@ -110,6 +123,41 @@ const ManufacturerProductForm = () => {
         error.response?.data || error.message
       );
       alert("Submission failed. Check your data and try again.");
+    }
+  };
+
+  // Grouped count for chart
+  const algorithmCount = products.reduce((acc, p) => {
+    const alg = p.preferredAlgorithm || "Unknown";
+    acc[alg] = (acc[alg] || 0) + 1;
+    return acc;
+  }, {});
+
+  const chartData = {
+    labels: Object.keys(algorithmCount),
+    datasets: [
+      {
+        label: "Submissions per Algorithm",
+        data: Object.values(algorithmCount),
+        backgroundColor: ["#4B77BE", "#F4D03F", "#58D68D", "#B2BABB"],
+      },
+    ],
+  };
+
+  const sortedProducts = [...products].sort((a, b) =>
+    (a.preferredAlgorithm || "").localeCompare(b.preferredAlgorithm || "")
+  );
+
+  const getRowStyle = (algorithm) => {
+    switch (algorithm) {
+      case "PSO":
+        return { backgroundColor: "#e8f4ff" };
+      case "GA":
+        return { backgroundColor: "#fffbe8" };
+      case "ABC":
+        return { backgroundColor: "#eaffea" };
+      default:
+        return {};
     }
   };
 
@@ -229,13 +277,30 @@ const ManufacturerProductForm = () => {
           />
         </div>
 
+        <div className="form-field">
+          <label>Preferred Algorithm:</label>
+          <select
+            value={selectedAlgorithm}
+            onChange={(e) => setSelectedAlgorithm(e.target.value)}
+            className="input-field"
+          >
+            <option value="PSO">Particle Swarm Optimization (PSO)</option>
+            <option value="GA">Genetic Algorithm (GA)</option>
+            <option value="ABC">Artificial Bee Colony (ABC)</option>
+          </select>
+        </div>
+
         <button type="submit" className="submit-btn">
           Submit
         </button>
       </form>
 
-      {/* ✅ Table of Submitted Products */}
-      <h3>Submitted Products</h3>
+      <h3>Algorithm Usage Overview</h3>
+      <div style={{ maxWidth: "500px", margin: "20px auto" }}>
+        <Bar data={chartData} />
+      </div>
+
+      <h3>Submitted Products (Sorted by Algorithm)</h3>
       {products.length > 0 ? (
         <table className="product-table">
           <thead>
@@ -247,11 +312,12 @@ const ManufacturerProductForm = () => {
               <th>Initial Price</th>
               <th>Initial Quality</th>
               <th>Initial Delivery</th>
+              <th>Algorithm</th>
             </tr>
           </thead>
           <tbody>
-            {products.map((p, i) => (
-              <tr key={i}>
+            {sortedProducts.map((p, i) => (
+              <tr key={i} style={getRowStyle(p.preferredAlgorithm)}>
                 <td>{p.fabricType}</td>
                 <td>{p.qualities.join(", ")}</td>
                 <td>${p.minPrice}</td>
@@ -259,6 +325,7 @@ const ManufacturerProductForm = () => {
                 <td>${p.initialOffer.price}</td>
                 <td>{p.initialOffer.quality}</td>
                 <td>{p.initialOffer.delivery} days</td>
+                <td>{p.preferredAlgorithm}</td>
               </tr>
             ))}
           </tbody>
