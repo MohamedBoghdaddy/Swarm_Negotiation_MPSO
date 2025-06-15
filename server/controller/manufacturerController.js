@@ -58,6 +58,7 @@ export const addProduct = async (req, res) => {
       });
     }
 
+    console.log("✅ Product added for:", userId);
     return res.status(200).json({
       message: "✅ Product saved.",
       product: productData,
@@ -71,19 +72,58 @@ export const addProduct = async (req, res) => {
 
 /**
  * @route   GET /api/manufacturer/products
- * @desc    Get all products for logged-in manufacturer
+ * @desc    Get all manufacturers with their products (for public / customer users)
  */
-export const getManufacturerProducts = async (req, res) => {
+export const getAllManufacturerProducts = async (req, res) => {
+  try {
+    console.log("🔍 Fetching all manufacturers with their products...");
+
+    const manufacturers = await Manufacturer.find(
+      {},
+      "manufacturerName products"
+    );
+
+    console.log(`📦 Found ${manufacturers.length} manufacturers.`); // Add this
+
+    if (!manufacturers || manufacturers.length === 0) {
+      return res
+        .status(200)
+        .json({ products: [], message: "No manufacturers found." });
+    }
+
+    const productList = manufacturers.flatMap((m) =>
+      m.products.map((p) => ({
+        manufacturerName: m.manufacturerName,
+        ...p,
+      }))
+    );
+
+    console.log(`✅ Returning ${productList.length} products.`); // Add this
+    return res.status(200).json({ products: productList });
+  } catch (err) {
+    console.error("❌ getAllManufacturerProducts error:", err.message);
+    return res.status(500).json({ error: "Failed to fetch products." });
+  }
+};
+
+
+/**
+ * @route   GET /api/manufacturer/my-products
+ * @desc    Get products for logged-in manufacturer only
+ */
+export const getMyManufacturerProducts = async (req, res) => {
   try {
     const userId = req.user._id;
+    console.log("🔍 Fetching products for:", userId);
 
     const manufacturer = await Manufacturer.findOne({ userId });
+
     if (!manufacturer)
       return res.status(404).json({ error: "Manufacturer not found." });
 
-    res.status(200).json({ products: manufacturer.products });
+    return res.status(200).json({ products: manufacturer.products });
   } catch (err) {
-    console.error("❌ getManufacturerProducts error:", err.message);
-    res.status(500).json({ error: "Failed to fetch products." });
+    console.error("❌ getMyManufacturerProducts error:", err.message);
+    return res.status(500).json({ error: "Failed to fetch products." });
   }
 };
