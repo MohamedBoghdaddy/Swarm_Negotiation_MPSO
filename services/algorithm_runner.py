@@ -1,7 +1,7 @@
 import time
-from abc_mng_engine import ABCNegotiation
-from ga_engine_mixed_issue import GA_Negotiation
-from mpso_contribution_engine import run_mpso_one_manufacturer
+from abc_engine import ABCNegotiation
+from genetic_engine import GA_Negotiation
+from pso_engine import run_mpso_one_manufacturer
 
 
 def run_all_algorithms(user, manufacturer, weights):
