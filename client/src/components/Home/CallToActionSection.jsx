@@ -15,7 +15,7 @@ import "../../styles/callToAction.css";
 const CallToActionSection = () => {
   const navigate = useNavigate();
   const { state } = useAuthContext();
-  const { user, isAuthenticated } = state;
+  const { user, isAuthenticated } = state || {};
 
   const handleUserClick = () => navigate("/user");
   const handleManufacturerClick = () => navigate("/manufacturer");

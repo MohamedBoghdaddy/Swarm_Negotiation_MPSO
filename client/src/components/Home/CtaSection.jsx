@@ -7,7 +7,7 @@ import { useAuthContext } from "../../context/AuthContext";
 const CtaSection = () => {
   const navigate = useNavigate();
   const { state } = useAuthContext();
-  const { isAuthenticated, user } = state;
+  const { user, isAuthenticated } = state || {};
 
   const handleClick = () => {
     if (!isAuthenticated) return navigate("/signup");

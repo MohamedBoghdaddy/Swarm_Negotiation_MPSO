@@ -29,7 +29,7 @@ const NavBar = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const navigate = useNavigate();
   const { state } = useAuthContext();
-  const { user, isAuthenticated } = state;
+  const { user, isAuthenticated } = useAuthContext();
   const { logout } = useLogout();
 
   const handleLoginModalOpen = () => setShowLoginModal(true);
