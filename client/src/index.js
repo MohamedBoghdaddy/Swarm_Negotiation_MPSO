@@ -5,12 +5,15 @@ import App from './App';
 import { AuthProvider } from "./context/AuthContext";
 
 import reportWebVitals from './reportWebVitals';
+import DashboardProvider from './context/DashboardContext';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <AuthProvider>
-      <App />
+      <DashboardProvider>
+        <App />
+      </DashboardProvider>
     </AuthProvider>
   </React.StrictMode>
 );
