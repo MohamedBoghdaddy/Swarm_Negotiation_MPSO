@@ -4,15 +4,17 @@ import React, {
   useEffect,
   useMemo,
   useCallback,
+  useContext,
 } from "react";
 import PropTypes from "prop-types";
 import axios from "axios";
 import toast from "react-hot-toast";
-import { useAuthContext } from "../context/AuthContext";
+import { useAuthContext } from "./AuthContext"; // Adjust path if needed
 
 export const DashboardContext = createContext();
 
-const API_URL = "http://localhost:8000"; // Update with actual backend URL
+const NODE_API_URL = "http://localhost:4000"; // NodeJS server
+const PYTHON_API_URL = "http://localhost:8000"; // Python server
 
 const DashboardProvider = ({ children }) => {
   const { currentUser } = useAuthContext();
@@ -35,11 +37,14 @@ const DashboardProvider = ({ children }) => {
   const runNegotiation = useCallback(async (userOffer, manufacturerOffers) => {
     try {
       setLoading(true);
-      const response = await axios.post(`${API_URL}/api/negotiation/run`, {
-        userOffer,
-        manufacturerOffers,
-        algorithms: ["PSO", "GA", "ABC"],
-      });
+      const response = await axios.post(
+        `${PYTHON_API_URL}/api/negotiation/run`,
+        {
+          userOffer,
+          manufacturerOffers,
+          algorithms: ["PSO", "GA", "ABC"],
+        }
+      );
 
       setAlgorithms(response.data.algorithms);
       setWinnerAlgorithm(response.data.winner);
@@ -55,12 +60,32 @@ const DashboardProvider = ({ children }) => {
 
   const getEvaluationMetrics = useCallback(async () => {
     try {
-      const response = await axios.get(`${API_URL}/api/negotiation/metrics`);
+      const response = await axios.get(
+        `${PYTHON_API_URL}/api/negotiation/metrics`
+      );
       setEvaluationResults(response.data);
       return response.data;
     } catch (error) {
       handleError(error, "Failed to get evaluation metrics");
       return null;
+    }
+  }, []);
+
+  const fetchManufacturers = useCallback(async (token) => {
+    try {
+      const res = await axios.get(`${NODE_API_URL}/api/manufacturer/products`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      return res.data.products.map((prod, idx) => ({
+        id: idx + 1,
+        ...prod,
+      }));
+    } catch (error) {
+      handleError(error, "Failed to fetch manufacturers");
+      throw error;
     }
   }, []);
 
@@ -74,6 +99,9 @@ const DashboardProvider = ({ children }) => {
       evaluationResults,
       runNegotiation,
       getEvaluationMetrics,
+      fetchManufacturers,
+      NODE_API_URL,
+      PYTHON_API_URL,
     }),
     [
       currentUser,
@@ -84,6 +112,7 @@ const DashboardProvider = ({ children }) => {
       evaluationResults,
       runNegotiation,
       getEvaluationMetrics,
+      fetchManufacturers,
     ]
   );
 
@@ -99,3 +128,7 @@ DashboardProvider.propTypes = {
 };
 
 export default DashboardProvider;
+
+export const useDashboardContext = () => {
+  return useContext(DashboardContext);
+};
