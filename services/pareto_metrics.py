@@ -1,4 +1,3 @@
-# services/pareto_metrics.py
 import numpy as np
 from scipy.spatial import distance
 from pygmo import hypervolume
