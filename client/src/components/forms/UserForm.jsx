@@ -3,6 +3,9 @@ import axios from "axios";
 import ClipLoader from "react-spinners/ClipLoader";
 import { useDashboardContext } from "../../context/DashboardContext";
 import "../../styles/UserForm.css";
+import { useAuthContext } from "../../context/AuthContext";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function UserForm() {
   const {
@@ -11,7 +14,11 @@ function UserForm() {
     winnerAlgorithm,
     currentRound,
     getEvaluationMetrics,
+    fetchManufacturers,
+    NODE_API_URL,
   } = useDashboardContext();
+
+  const { user, token, refreshToken, logout } = useAuthContext();
 
   const [form, setForm] = useState({
     fabricType: "",
@@ -27,33 +34,78 @@ function UserForm() {
   const [metrics, setMetrics] = useState(null);
   const [showMetrics, setShowMetrics] = useState(false);
   const [history, setHistory] = useState([]);
-
+  const [showLoginModal, setShowLoginModal] = useState(false);
   const [sortKey, setSortKey] = useState("fitness");
   const [sortOrder, setSortOrder] = useState("desc");
   const [filterQuality, setFilterQuality] = useState("");
 
+  const [nodeAxiosInstance] = useState(() =>
+    axios.create({ baseURL: NODE_API_URL })
+  );
+
+  // Axios interceptor for token and refresh handling
+  useEffect(() => {
+    const reqInterceptor = nodeAxiosInstance.interceptors.request.use(
+      (config) => {
+        if (token) config.headers.Authorization = `Bearer ${token}`;
+        return config;
+      },
+      (error) => Promise.reject(error)
+    );
+
+    const resInterceptor = nodeAxiosInstance.interceptors.response.use(
+      (res) => res,
+      async (error) => {
+        const originalRequest = error.config;
+        if (error.response?.status === 401 && !originalRequest._retry) {
+          originalRequest._retry = true;
+          try {
+            const newToken = await refreshToken();
+            originalRequest.headers.Authorization = `Bearer ${newToken}`;
+            return nodeAxiosInstance(originalRequest);
+          } catch (refreshError) {
+            toast.error("Session expired. Please login again.");
+            setShowLoginModal(true);
+            return Promise.reject(refreshError);
+          }
+        }
+        return Promise.reject(error);
+      }
+    );
+
+    return () => {
+      nodeAxiosInstance.interceptors.request.eject(reqInterceptor);
+      nodeAxiosInstance.interceptors.response.eject(resInterceptor);
+    };
+  }, [token, refreshToken, nodeAxiosInstance]);
+
+  // Load optimization history
   useEffect(() => {
     const saved = localStorage.getItem("optimizationHistory");
     if (saved) setHistory(JSON.parse(saved));
   }, []);
 
+  // Fetch manufacturers using context function
   useEffect(() => {
-    const fetchManufacturers = async () => {
+    const fetchData = async () => {
+      if (!token) {
+        setShowLoginModal(true);
+        return;
+      }
       try {
-        const res = await axios.get(
-          "http://localhost:4000/api/manufacturer/products"
-        );
-        const transformed = res.data.products.map((prod, idx) => ({
-          id: idx + 1,
-          ...prod,
-        }));
-        setManufacturers(transformed);
+        const manufacturersData = await fetchManufacturers(token);
+        setManufacturers(manufacturersData);
       } catch (err) {
-        console.error("Failed to fetch manufacturer products:", err);
+        console.error("❌ Failed to fetch manufacturer products:", err);
+        toast.error(
+          `Failed to load manufacturers: ${
+            err.response?.data?.error || err.message
+          }`
+        );
       }
     };
-    fetchManufacturers();
-  }, []);
+    fetchData();
+  }, [token, fetchManufacturers]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -66,25 +118,18 @@ function UserForm() {
   };
 
   const handleSubmit = async () => {
+    if (!token) return setShowLoginModal(true);
     if (!form.fabricType || !form.qualityPreference) {
-      alert("Please complete all form fields.");
-      return;
+      return toast.error("Please complete all form fields.");
     }
-
     if (manufacturers.length === 0) {
-      alert("No manufacturer products loaded. Please try again later.");
-      return;
+      return toast.error("No manufacturer products loaded.");
     }
 
     try {
       setLoading(true);
-
       await runNegotiation(form, manufacturers);
-
-      setNegotiationResult({
-        algorithms,
-        winner: winnerAlgorithm,
-      });
+      setNegotiationResult({ algorithms, winner: winnerAlgorithm });
 
       const metricsData = await getEvaluationMetrics();
       setMetrics(metricsData);
@@ -102,15 +147,17 @@ function UserForm() {
         "optimizationHistory",
         JSON.stringify(updatedHistory)
       );
+
+      toast.success("Optimization completed successfully!");
     } catch (err) {
-      console.error(
-        "❌ Optimization error:",
-        err.response?.data || err.message
-      );
-      alert(
-        "❌ Failed to optimize: " +
-          (err.response?.data?.error || "Server error")
-      );
+      let msg = "Failed to optimize: ";
+      if (err.response?.status === 401) {
+        msg += "Session expired.";
+        setShowLoginModal(true);
+      } else {
+        msg += err.response?.data?.error || err.message;
+      }
+      toast.error(msg);
     } finally {
       setLoading(false);
     }
@@ -196,6 +243,20 @@ function UserForm() {
 
   return (
     <div className="form-container">
+      <ToastContainer position="top-right" autoClose={5000} />
+      {showLoginModal && (
+        <div className="modal-overlay">
+          <div className="modal-content">
+            <h3>Login Required</h3>
+            <p>Your session has expired or you need to authenticate.</p>
+            <div className="modal-actions">
+              <button onClick={() => setShowLoginModal(false)}>Cancel</button>
+              <button onClick={logout}>Login</button>
+            </div>
+          </div>
+        </div>
+      )}
+
       <h1>Fabric Offer Optimization</h1>
 
       {/* Form */}
