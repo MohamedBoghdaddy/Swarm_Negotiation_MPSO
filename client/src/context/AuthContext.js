@@ -8,31 +8,30 @@ import React, {
 } from "react";
 import axios from "axios";
 
-// ✅ Base URL: fallback to localhost if .env not defined
 const API_URL =
   process.env.REACT_APP_API_URL ??
   (window.location.hostname === "localhost"
     ? "http://localhost:4000"
     : window.location.origin);
 
-// ✅ Create context
+// Context
 const AuthContext = createContext();
 
-// ✅ Initial state
+// Initial state
 const initialState = {
   user: null,
   isAuthenticated: false,
   loading: true,
 };
 
-// ✅ Reducer
+// Reducer
 const authReducer = (state, action) => {
   switch (action.type) {
     case "LOGIN_SUCCESS":
     case "USER_LOADED":
       return {
         ...state,
-        user: action.payload,
+        user: action.payload.user,
         isAuthenticated: true,
         loading: false,
       };
@@ -44,9 +43,17 @@ const authReducer = (state, action) => {
   }
 };
 
-// ✅ Provider component
+// Provider
 export const AuthProvider = ({ children }) => {
   const [state, dispatch] = useReducer(authReducer, initialState);
+
+  // Read token from localStorage or cookie
+  const getStoredToken = () =>
+    localStorage.getItem("token") ||
+    document.cookie
+      .split("; ")
+      .find((row) => row.startsWith("token="))
+      ?.split("=")[1];
 
   const setAuthorizationHeader = (token) => {
     axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
@@ -56,32 +63,28 @@ export const AuthProvider = ({ children }) => {
     delete axios.defaults.headers.common["Authorization"];
   };
 
-  // ✅ Load from cookie/localStorage on mount
+  // Auth check on mount
   const checkAuth = useCallback(async () => {
-    if (state.isAuthenticated || !state.loading) return;
+    const token = getStoredToken();
+
+    if (!token) {
+      dispatch({ type: "AUTH_ERROR" });
+      return;
+    }
 
     try {
-      const token =
-        document.cookie
-          .split("; ")
-          .find((row) => row.startsWith("token="))
-          ?.split("=")[1] || localStorage.getItem("token");
-
-      if (!token) {
-        dispatch({ type: "AUTH_ERROR" });
-        return;
-      }
+      setAuthorizationHeader(token);
 
       const res = await axios.get(`${API_URL}/api/users/checkAuth`, {
         withCredentials: true,
       });
 
-      const { user } = res.data;
+      const user = res.data.user;
 
       if (user) {
-        dispatch({ type: "USER_LOADED", payload: user });
-        setAuthorizationHeader(token);
-        localStorage.setItem("user", JSON.stringify({ token, user }));
+        dispatch({ type: "USER_LOADED", payload: { user } });
+        localStorage.setItem("token", token);
+        localStorage.setItem("user", JSON.stringify({ user, token }));
       } else {
         dispatch({ type: "AUTH_ERROR" });
       }
@@ -89,17 +92,16 @@ export const AuthProvider = ({ children }) => {
       console.error("❌ Auth check failed:", err);
       dispatch({ type: "AUTH_ERROR" });
     }
-  }, [state.isAuthenticated, state.loading]);
+  }, []);
 
-  // ✅ Run checkAuth on load
   useEffect(() => {
-    const storedUser = localStorage.getItem("user");
+    const local = localStorage.getItem("user");
 
-    if (storedUser) {
+    if (local) {
       try {
-        const { token, user } = JSON.parse(storedUser);
+        const { token, user } = JSON.parse(local);
         if (user && token) {
-          dispatch({ type: "LOGIN_SUCCESS", payload: user });
+          dispatch({ type: "LOGIN_SUCCESS", payload: { user } });
           setAuthorizationHeader(token);
         } else {
           checkAuth();
@@ -113,44 +115,33 @@ export const AuthProvider = ({ children }) => {
     }
   }, [checkAuth]);
 
-  // ✅ Logout
   const logout = useCallback(() => {
+    localStorage.removeItem("token");
     localStorage.removeItem("user");
     removeAuthorizationHeader();
     dispatch({ type: "LOGOUT_SUCCESS" });
   }, []);
 
-  // ✅ Memoized context
-  const contextValue = useMemo(
-    () => ({
-      state,
-      dispatch,
-      logout,
-      isAuthenticated: state.isAuthenticated,
+  const contextValue = useMemo(() => {
+    const token = getStoredToken();
+
+    return {
       user: state.user,
       role: state.user?.role,
-      token:
-        document.cookie
-          .split("; ")
-          .find((row) => row.startsWith("token="))
-          ?.split("=")[1] || localStorage.getItem("token"),
-    }),
-    [state, logout]
-  );
-
-  // ✅ Optional debug
-  useEffect(() => {
-    if (!state.loading) {
-      console.log("🔁 Auth State:", state);
-    }
-  }, [state]);
+      token,
+      isAuthenticated: state.isAuthenticated,
+      loading: state.loading,
+      logout,
+      dispatch,
+    };
+  }, [state, logout]);
 
   return (
     <AuthContext.Provider value={contextValue}>{children}</AuthContext.Provider>
   );
 };
 
-// ✅ Custom hook
+// Hook
 export const useAuthContext = () => {
   const context = useContext(AuthContext);
   if (!context) {
