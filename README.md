@@ -1,92 +1,98 @@
-```markdown
-# Tuah App 🤝🧠
+# DealHive
 
-*Tuah App* is an AI-powered negotiation platform that leverages *Multi-Swarm Particle Swarm Optimization (MPSO)* to mediate dynamic trade negotiations between users and manufacturers based on *price, quality, and delivery time*.
+DealHive is an AI-powered negotiation platform that leverages Multi-Swarm Particle Swarm Optimization (MPSO) to support dynamic trade negotiations between users and manufacturers.
 
-The platform features dual interfaces—one for users and one for manufacturers—allowing for fair, adaptive, and real-time multi-round negotiation via an intelligent MPSO agent.
+The system evaluates offers based on price, quality, and delivery time, then uses an intelligent optimization engine to recommend balanced and feasible negotiation outcomes. DealHive provides dedicated interfaces for users and manufacturers, enabling structured, adaptive, and multi-round negotiation.
 
-```
+---
 
-## ⚙️ Tech Stack
+## Tech Stack
 
-- *Stack*: MERN + Python
-- *Frontend*: React.js, Axios, Tailwind CSS (optional)
-- *Backend*: Node.js, Express.js
-- *Database*: MongoDB
-- *AI Engine*: Python (Flask) – MPSO algorithm
-- *Authentication*: JWT
-- *Deployment*: Vercel (frontend), Render (backend & Python service)
+- **Stack:** MERN + Python
+- **Frontend:** React.js, Axios, Tailwind CSS
+- **Backend:** Node.js, Express.js
+- **Database:** MongoDB
+- **AI Engine:** Python Flask microservice using MPSO
+- **Authentication:** JWT
+- **Deployment:** Vercel for frontend, Render for backend and Python service
 
-```
+---
 
-## 🚀 Features
+## Features
 
-- *Multi-Agent Negotiation via MPSO* 🤖  
-  Dynamically balances user preferences and manufacturer constraints using swarms of optimization particles.
+### Multi-Agent Negotiation Using MPSO
 
-- *Dual Interfaces* 🧑‍💼🏭  
-  - **User Dashboard*: Submit offers and accept optimized deals  
-  - **Manufacturer Portal**: Set constraints and auto-respond with feasible counter-offers
+DealHive applies Multi-Swarm Particle Swarm Optimization to balance user preferences and manufacturer constraints. The optimization engine evaluates multiple possible offers and recommends the most suitable negotiation outcome.
 
-- *Multi-Round Optimizatio* 🔄  
-  Adaptive negotiation cycles allow re-offers and finalization based on real-time adjustments.
+### Dual Interfaces
 
-- *Fitness-Based Decision Making* 📊  
-  Negotiation decisions are scored based on weighted fitness of price, quality, and delivery.
+The platform includes two main interfaces:
 
-```
+- **User Dashboard:** Allows users to submit negotiation requests, review optimized offers, and accept final deals.
+- **Manufacturer Portal:** Allows manufacturers to define constraints, review negotiation requests, and respond with feasible counter-offers.
 
-## 📊 Negotiation Workflow
+### Multi-Round Optimization
 
-> This outlines the real-time interaction loop between user offers, manufacturer responses, and MPSO optimization:
+DealHive supports adaptive multi-round negotiation. Users and manufacturers can revise offers, allowing the system to continuously refine recommendations based on updated constraints and preferences.
 
-1. *User submits offer* (fabric type, quantity, price range, quality, delivery time).
-2. *Manufacturers input constraints* (minimum price, quality levels, delivery).
-3. *MPSO agent runs optimization* over multiple rounds.
-4. *System recommends best deal* based on calculated fitness.
-5. *User confirms* or requests further negotiation.
+### Fitness-Based Decision Making
 
-```
+Each offer is evaluated using a fitness score based on weighted negotiation factors, including price, quality, and delivery time. This helps the system identify offers that provide the best balance between both parties.
 
-## 🗂 Project Structure
+---
 
-```
-TuahApp/
+## Negotiation Workflow
+
+The negotiation process follows a structured optimization loop:
+
+1. The user submits an offer, including fabric type, quantity, price range, quality preference, and delivery time.
+2. Manufacturers provide their constraints, including minimum price, available quality levels, and delivery capacity.
+3. The MPSO engine runs an optimization process across multiple candidate offers.
+4. The system ranks and recommends the best deal based on calculated fitness scores.
+5. The user can accept the recommended offer or continue negotiation.
+
+---
+
+## Project Structure
+
+```text
+DealHive/
 ├── client/              # React frontend
-├── server/              # Node.js backend (controllers, routes, models)
-├── services/            # Python MPSO microservice (Flask API)
+├── server/              # Node.js backend, including controllers, routes, and models
+├── services/            # Python MPSO microservice using Flask
 ```
 
-```
+---
 
-## 🛠️ Installation
+## Installation
 
-To run Tuah App locally:
+Follow the steps below to run DealHive locally.
 
-#### 1. Clone the Repository
+### 1. Clone the Repository
 
 ```bash
 git clone https://github.com/MohamedBoghdaddy/Swarm_Negotiation.git
 cd Swarm_Negotiation
 ```
 
-### 2. Install Dependencies
+### 2. Install Frontend Dependencies
 
-#### Frontend:
 ```bash
 cd client
 npm install
 npm start
 ```
 
-#### Backend:
+### 3. Install Backend Dependencies
+
 ```bash
 cd ../server
 npm install
 node server.js
 ```
 
-#### Python MPSO Service:
+### 4. Install Python MPSO Service Dependencies
+
 ```bash
 cd ../services
 pip install -r requirements.txt
@@ -95,17 +101,21 @@ python app.py
 
 ---
 
-## 🌐 API Overview
+## API Overview
 
-### POST `/api/negotiation/start` (Node.js Backend)  
-Triggers a negotiation round by collecting user and manufacturer inputs.
+### POST `/api/negotiation/start`
 
-### POST `/optimize` (Python MPSO Microservice)  
-Processes negotiation inputs and returns optimized offers sorted by fitness.
+Triggers a negotiation round by collecting user and manufacturer inputs through the Node.js backend.
+
+### POST `/optimize`
+
+Processes negotiation inputs through the Python MPSO microservice and returns optimized offers sorted by fitness score.
 
 ---
 
-## 📥 Example Input (to `/optimize`)
+## Example Input
+
+Example request body for the `/optimize` endpoint:
 
 ```json
 {
@@ -115,9 +125,8 @@ Processes negotiation inputs and returns optimized offers sorted by fitness.
 }
 ```
 
-```
+---
 
-## 📜 License
+## License
 
 This project is licensed under the MIT License. See the [`LICENSE`](LICENSE) file for details.
-```
