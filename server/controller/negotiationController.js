@@ -1,78 +1,85 @@
-// server/controllers/negotiationController.js
-const axios = require("axios");
-const NegotiationSession = require("../models/NegotiationSession");
+import axios from "axios";
+import Negotiation from "../models/NegotiationModel.js";
 
-exports.startNegotiation = async (req, res) => {
+const PYTHON_API_BASE_URL =
+  process.env.PYTHON_API_BASE_URL || "http://127.0.0.1:8000";
+
+/**
+ * @route   POST /api/negotiation/start
+ * @desc    Run the MPSO/ABC/GA comparison for a user negotiation request
+ *          and persist the result.
+ * @access  Private (user only)
+ */
+export const startNegotiation = async (req, res) => {
   try {
     const {
-      userID,
       fabricType,
       quantity,
       priceRange,
       qualityPreference,
       deliveryTimeline,
       manufacturers,
+      weights,
     } = req.body;
 
-    const userPrefs = {
-      priceRange,
-      qualityPreference,
-      deliveryTime: deliveryTimeline,
-    };
+    if (!Array.isArray(manufacturers) || !manufacturers.length) {
+      return res
+        .status(400)
+        .json({ error: "manufacturers must be a non-empty array" });
+    }
 
-    const pythonPayload = {
-      user: userPrefs,
+    const payload = {
+      user: {
+        fabricType,
+        quantity,
+        priceRange,
+        qualityPreference,
+        deliveryTimeline,
+      },
       manufacturers,
+      weights: weights || { user: 0.5, manufacturer: 0.5 },
     };
 
-    // Call the Python MPSO microservice
     const response = await axios.post(
-      "http://localhost:8000/optimize",
-      pythonPayload
+      `${PYTHON_API_BASE_URL}/compare-algorithms`,
+      payload
     );
 
-    const result = response.data;
+    const results = response.data;
 
-    // Save to MongoDB
-    const session = new NegotiationSession({
-      userID,
-      timestamp: new Date(),
-      status: "finalized",
-      finalManufacturerID: result.recommended.manufacturerID,
-      negotiationRounds: [
-        {
-          roundNumber: 1,
-          userOffer: {
-            price: priceRange[0],
-            quality: qualityPreference,
-            delivery: deliveryTimeline,
-          },
-          manufacturerResponses: manufacturers.map((m) => ({
-            manufacturerID: m.id,
-            price: m.initialOffer.price,
-            quality: m.initialOffer.quality,
-            delivery: m.initialOffer.delivery,
-          })),
-          optimizedOffers: [result.recommended, ...result.rejected],
-        },
-      ],
+    const session = await Negotiation.create({
+      userId: req.user._id,
+      userRequest: payload.user,
+      manufacturers,
+      results: results.map((r) => ({
+        manufacturerId: r.manufacturer_id,
+        algorithms: r.algorithms,
+        winner: r.winner,
+        winningOffer: r.winning_offer,
+        comparisonMetrics: r.comparison_metrics,
+      })),
     });
-
-    await session.save();
 
     res.status(200).json({
       message: "Negotiation completed successfully",
-      result,
+      negotiationId: session._id,
+      results,
     });
   } catch (error) {
-    console.error("Negotiation Error:", error);
+    console.error("Negotiation Error:", error.message);
     res.status(500).json({ error: "Negotiation failed" });
   }
 };
+
+/**
+ * @route   POST /api/negotiation
+ * @desc    Pass-through proxy to the Python comparison endpoint.
+ * @access  Private (user only)
+ */
 export const optimize = async (req, res) => {
   try {
     const response = await axios.post(
-      "http://localhost:8000/optimize",
+      `${PYTHON_API_BASE_URL}/compare-algorithms`,
       req.body
     );
     res.json(response.data);

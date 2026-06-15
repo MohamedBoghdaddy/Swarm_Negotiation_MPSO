@@ -5,6 +5,12 @@ import os
 from datetime import datetime
 
 QUALITY_MAP = {'Economy': 0.3, 'Standard': 0.6, 'Premium': 1.0}
+REVERSE_QUALITY_MAP = {v: k for k, v in QUALITY_MAP.items()}
+
+
+def quality_value_to_label(value):
+    """Map a 0-1 quality value to the nearest DealHive quality label."""
+    return min(QUALITY_MAP, key=lambda label: abs(QUALITY_MAP[label] - value))
 
 
 def log_to_json(filename, data):

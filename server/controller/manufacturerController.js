@@ -14,6 +14,8 @@ export const addProduct = async (req, res) => {
       qualities,
       minPrice,
       minDelivery,
+      maxQualityCost,
+      deliveryCapacity,
       initialOffer,
     } = req.body;
 
@@ -37,12 +39,23 @@ export const addProduct = async (req, res) => {
       qualities,
       minPrice: Number(minPrice),
       minDelivery: Number(minDelivery),
+      // Required by the Python optimizer; fall back to schema defaults if
+      // the client doesn't supply them.
+      maxQualityCost:
+        maxQualityCost != null ? Number(maxQualityCost) : undefined,
+      deliveryCapacity:
+        deliveryCapacity != null ? Number(deliveryCapacity) : undefined,
       initialOffer: {
         price: Number(initialOffer.price),
         delivery: Number(initialOffer.delivery),
         quality: initialOffer.quality,
       },
     };
+
+    // Remove undefined keys so Mongoose applies schema defaults instead.
+    Object.keys(productData).forEach(
+      (key) => productData[key] === undefined && delete productData[key]
+    );
 
     let manufacturer = await Manufacturer.findOne({ userId });
 

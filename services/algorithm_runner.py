@@ -17,10 +17,8 @@ def run_all_algorithms(user, manufacturer, weights):
     # --- Run MPSO (PSO + contribution-based multi-agent)
     start = time.time()
     pso_result = run_mpso_one_manufacturer(user, manufacturer, weights, max_iters=30)
-    results['MPSO'] = {
-        **pso_result,
-        'execution_time': round(time.time() - start, 4)
-    }
+    pso_result.setdefault('metadata', {})['execution_time'] = round(time.time() - start, 4)
+    results['MPSO'] = pso_result
 
     # --- Run ABC-MNG
     start = time.time()
@@ -34,10 +32,8 @@ def run_all_algorithms(user, manufacturer, weights):
         weights=weights
     )
     abc_result = abc.run()
-    results['ABC-MNG'] = {
-        **abc_result,
-        'execution_time': round(time.time() - start, 4)
-    }
+    abc_result.setdefault('metadata', {})['execution_time'] = round(time.time() - start, 4)
+    results['ABC-MNG'] = abc_result
 
     # --- Run GA-Mixed (NSGA-II inspired with HV selection)
     start = time.time()
@@ -51,9 +47,7 @@ def run_all_algorithms(user, manufacturer, weights):
         weights=weights
     )
     ga_result = ga.run()
-    results['GA-HV'] = {
-        **ga_result,
-        'execution_time': round(time.time() - start, 4)
-    }
+    ga_result.setdefault('metadata', {})['execution_time'] = round(time.time() - start, 4)
+    results['GA-HV'] = ga_result
 
     return results

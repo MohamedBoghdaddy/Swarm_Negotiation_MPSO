@@ -196,8 +196,10 @@ def run_mpso(user, manufacturers, weights, max_iters=50):
             'manufacturerID': m['id'],
             'optimizedOffer': best_offer,
             'fitness': round(global_best_fitness, 4),
-            'contributions': contributions,
-            'roundHistory': m_log["iterations"]
+            'metadata': {
+                'contributions': contributions,
+                'roundHistory': m_log["iterations"]
+            }
         })
 
     # Save logs

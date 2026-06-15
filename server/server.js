@@ -23,6 +23,7 @@ import userRoutes from "./routes/userroutes.js";
 import analyticsRoutes from "./routes/analyticRoutes.js";
 import manufacturerRoutes from "./routes/manufacturerRoutes.js";
 import newsletterRoutes from "./routes/newsletterRoutes.js";
+import negotiationRoutes from "./routes/negotiationRoutes.js";
 
 // ✅ Constants & Configs
 const __filename = fileURLToPath(import.meta.url);
@@ -83,6 +84,7 @@ app.use("/api/users", userRoutes);
 app.use("/api/analytics", analyticsRoutes);
 app.use("/api/manufacturer", manufacturerRoutes);
 app.use("/api/newsletter", newsletterRoutes);
+app.use("/api/negotiation", negotiationRoutes);
 
 // ✅ Serve frontend — must come AFTER API routes
 app.use(express.static(path.join(__dirname, "../client/build")));
@@ -98,13 +100,18 @@ cron.schedule("59 23 * * *", async () => {
     const end = new Date(today.setHours(23, 59, 59, 999));
 
     const negotiations = await Negotiation.find({
-      date: { $gte: start, $lte: end },
+      createdAt: { $gte: start, $lte: end },
     });
 
     const count = negotiations.length;
+    const fitnessValues = negotiations.flatMap((n) =>
+      (n.results || [])
+        .map((r) => r?.winningOffer?.fitness)
+        .filter((f) => typeof f === "number")
+    );
     const avgFitness = (
-      negotiations.reduce((sum, n) => sum + n?.recommended?.fitness || 0, 0) /
-      (count || 1)
+      fitnessValues.reduce((sum, f) => sum + f, 0) /
+      (fitnessValues.length || 1)
     ).toFixed(2);
 
     const summary = `

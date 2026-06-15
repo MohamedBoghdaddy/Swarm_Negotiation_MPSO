@@ -2,7 +2,7 @@ import random
 import os
 import json
 from datetime import datetime
-from common_fitness import negotiation_fitness
+from common_fitness import negotiation_fitness, quality_value_to_label
 
 class GA_Negotiation:
     def __init__(self, population_size, generations, mutation_rate, bounds, user, manufacturer, weights):
@@ -34,7 +34,9 @@ class GA_Negotiation:
         return population
 
     def selection(self, population):
-        population.sort(key=lambda x: self.evaluate_fitness(x))
+        # Higher fitness = better offer, so sort descending and keep the
+        # fittest half.
+        population.sort(key=lambda x: self.evaluate_fitness(x), reverse=True)
         return population[:len(population) // 2]  # top 50%
 
     def crossover(self, parent1, parent2):
@@ -77,24 +79,31 @@ class GA_Negotiation:
 
             population = offspring
 
-        best = min(population, key=lambda x: self.evaluate_fitness(x))
+        best = max(population, key=lambda x: self.evaluate_fitness(x))
         fitness_score = self.evaluate_fitness(best)
-        final_result = {
-            "price": best[0],
-            "delivery_time": best[1],
-            "quality_score": best[2] / 100.0,
-            "fitness": fitness_score
+        result = {
+            "manufacturerID": self.manufacturer["id"],
+            "optimizedOffer": {
+                "price": round(best[0], 2),
+                "delivery": int(round(best[1])),
+                "quality": quality_value_to_label(best[2] / 100.0),
+            },
+            "fitness": round(fitness_score, 4),
+            "metadata": {
+                "population_size": self.population_size,
+                "generations": self.generations,
+            },
         }
 
         os.makedirs("results", exist_ok=True)
         with open("results/ga_mixed_issue_results.json", "a") as f:
             json.dump({
                 "timestamp": datetime.utcnow().isoformat(),
-                "result": final_result
+                "result": result
             }, f)
             f.write("\n")
 
-        return final_result
+        return result
 
 
 if __name__ == "__main__":

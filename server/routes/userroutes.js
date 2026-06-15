@@ -7,6 +7,7 @@ import {
   getAllUsers,
   getUserById,
   updateUserProfile,
+  changePassword,
   deleteUser,
   updateLoginMeta,
   upload,
@@ -43,6 +44,9 @@ router.put(
   upload.single("profilePhoto"),
   updateUserProfile
 );
+
+// Separate, password-only endpoint (always bcrypt-hashed, owner-only)
+router.put("/profile/:userId/password", auth, changePassword);
 
 // =====================================================
 // ✅ ADMIN-ONLY ROUTES

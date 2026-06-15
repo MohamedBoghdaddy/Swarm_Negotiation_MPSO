@@ -53,6 +53,16 @@ services/*.keras
 services/*.sqlite3
 services/SCREENSHOTS/
 
+# === Generated algorithm run logs/results (all Python services) ===
+services/outputs/
+services/results/
+abc/services/outputs/
+abc/services/results/
+GA/__pycache__/
+abc/services/__pycache__/
+results/
+client/.env
+
 # === Jupyter Notebooks ===
 .ipynb_checkpoints/
 

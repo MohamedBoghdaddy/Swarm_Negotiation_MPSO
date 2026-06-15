@@ -2,7 +2,7 @@ import random
 import json
 import os
 from datetime import datetime
-from common_fitness import negotiation_fitness
+from common_fitness import negotiation_fitness, quality_value_to_label
 
 class Bee:
     def __init__(self, offer, fitness):
@@ -60,7 +60,7 @@ class ABCNegotiation:
         for i in range(self.num_bees):
             candidate = self.multi_neighbor_mutation(self.bees[i].offer)
             candidate_fitness = self.evaluate_fitness(candidate)
-            if candidate_fitness < self.bees[i].fitness:
+            if candidate_fitness > self.bees[i].fitness:
                 self.bees[i].offer = candidate
                 self.bees[i].fitness = candidate_fitness
                 self.bees[i].trial = 0
@@ -68,14 +68,16 @@ class ABCNegotiation:
                 self.bees[i].trial += 1
 
     def onlooker_bee_phase(self):
-        total_fitness = sum(1 / (bee.fitness + 1e-6) for bee in self.bees)
-        probs = [(1 / (bee.fitness + 1e-6)) / total_fitness for bee in self.bees]
+        # Higher fitness = better offer, so probability is proportional
+        # (not inversely proportional) to fitness.
+        total_fitness = sum(bee.fitness + 1e-6 for bee in self.bees)
+        probs = [(bee.fitness + 1e-6) / total_fitness for bee in self.bees]
 
         for _ in range(self.num_bees):
             i = self.roulette_wheel_selection(probs)
             candidate = self.multi_neighbor_mutation(self.bees[i].offer)
             candidate_fitness = self.evaluate_fitness(candidate)
-            if candidate_fitness < self.bees[i].fitness:
+            if candidate_fitness > self.bees[i].fitness:
                 self.bees[i].offer = candidate
                 self.bees[i].fitness = candidate_fitness
                 self.bees[i].trial = 0
@@ -99,32 +101,39 @@ class ABCNegotiation:
 
     def run(self):
         self.initialize_population()
-        best_solution = min(self.bees, key=lambda b: b.fitness)
+        best_solution = max(self.bees, key=lambda b: b.fitness)
 
         for _ in range(self.max_iter):
             self.employed_bee_phase()
             self.onlooker_bee_phase()
             self.scout_bee_phase()
-            current_best = min(self.bees, key=lambda b: b.fitness)
-            if current_best.fitness < best_solution.fitness:
+            current_best = max(self.bees, key=lambda b: b.fitness)
+            if current_best.fitness > best_solution.fitness:
                 best_solution = current_best
 
-        final_offer = {
-            "price": best_solution.offer[0],
-            "delivery_time": best_solution.offer[1],
-            "quality_score": best_solution.offer[2] / 100.0,
-            "fitness": best_solution.fitness
+        result = {
+            "manufacturerID": self.manufacturer["id"],
+            "optimizedOffer": {
+                "price": round(best_solution.offer[0], 2),
+                "delivery": int(round(best_solution.offer[1])),
+                "quality": quality_value_to_label(best_solution.offer[2] / 100.0),
+            },
+            "fitness": round(best_solution.fitness, 4),
+            "metadata": {
+                "num_bees": self.num_bees,
+                "max_iter": self.max_iter,
+            },
         }
 
         os.makedirs("results", exist_ok=True)
         with open("results/abc_mng_results.json", "a") as f:
             json.dump({
                 "timestamp": datetime.utcnow().isoformat(),
-                "result": final_offer
+                "result": result
             }, f)
             f.write("\n")
 
-        return final_offer
+        return result
 
 
 if __name__ == "__main__":

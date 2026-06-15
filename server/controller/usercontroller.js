@@ -34,15 +34,7 @@ const createToken = (user) =>
 
 // ✅ Register
 export const registerUser = async (req, res) => {
-  const {
-    username,
-    email,
-    password,
-    firstName,
-    lastName,
-    gender,
-    role = "user",
-  } = req.body;
+  const { username, email, password, firstName, lastName, gender } = req.body;
   try {
     const existingUser = await User.findOne({ $or: [{ username }, { email }] });
     if (existingUser) {
@@ -53,6 +45,8 @@ export const registerUser = async (req, res) => {
     }
 
     const hashedPassword = await bcrypt.hash(password, 10);
+    // Role is never accepted from the client — all signups are plain "user"
+    // accounts. Promotions can only happen via the admin-only role routes.
     const user = await User.create({
       username,
       email,
@@ -60,7 +54,7 @@ export const registerUser = async (req, res) => {
       firstName,
       lastName,
       gender,
-      role,
+      role: "user",
     });
 
     const token = createToken(user);
@@ -117,7 +111,7 @@ export const loginUser = async (req, res) => {
     });
   } catch (error) {
     console.error("Login Error:", error);
-    res.status(500).json({ message: "Login failed", error });
+    res.status(500).json({ message: "Login failed" });
   }
 };
 
@@ -173,10 +167,30 @@ export const checkAuth = async (req, res) => {
 };
 
 // ✅ Update profile
+// A user may only edit their own profile (unless they are an admin), and
+// only a fixed allow-list of non-sensitive fields. role/password/blocked/_id/
+// createdAt/emailVerified can never be changed through this endpoint.
+const EDITABLE_PROFILE_FIELDS = [
+  "firstName",
+  "lastName",
+  "gender",
+  "receiveNotifications",
+];
+
 export const updateUserProfile = async (req, res) => {
   try {
     const { userId } = req.params;
-    const updates = { ...req.body };
+
+    if (req.user._id.toString() !== userId && req.user.role !== "admin") {
+      return res
+        .status(403)
+        .json({ message: "You can only update your own profile." });
+    }
+
+    const updates = {};
+    for (const field of EDITABLE_PROFILE_FIELDS) {
+      if (req.body[field] !== undefined) updates[field] = req.body[field];
+    }
     if (req.file) updates.profilePhoto = `/uploads/${req.file.filename}`;
 
     const updatedUser = await User.findByIdAndUpdate(userId, updates, {
@@ -187,6 +201,40 @@ export const updateUserProfile = async (req, res) => {
       return res.status(404).json({ message: "User not found" });
 
     res.status(200).json({ message: "Profile updated", user: updatedUser });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+// ✅ Change own password (separate from profile update, always hashed)
+export const changePassword = async (req, res) => {
+  try {
+    const { userId } = req.params;
+    const { currentPassword, newPassword } = req.body;
+
+    if (req.user._id.toString() !== userId) {
+      return res
+        .status(403)
+        .json({ message: "You can only change your own password." });
+    }
+
+    if (!newPassword || newPassword.length < 6) {
+      return res
+        .status(400)
+        .json({ message: "New password must be at least 6 characters." });
+    }
+
+    const user = await User.findById(userId);
+    if (!user) return res.status(404).json({ message: "User not found" });
+
+    const isMatch = await bcrypt.compare(currentPassword || "", user.password);
+    if (!isMatch)
+      return res.status(401).json({ message: "Current password is incorrect" });
+
+    user.password = await bcrypt.hash(newPassword, 10);
+    await user.save();
+
+    res.status(200).json({ message: "Password changed successfully" });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }

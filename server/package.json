@@ -1,7 +1,7 @@
 {
-  "name": "financial-ai-advisor",
+  "name": "dealhive-server",
   "version": "1.0.0",
-  "description": "A fullstack intelligent financial advisor platform using AI, FastAPI, and MERN.",
+  "description": "DealHive backend for AI-powered negotiation using MERN and Python optimization services.",
   "author": "Your Name <you@example.com>",
   "license": "MIT",
   "type": "module",

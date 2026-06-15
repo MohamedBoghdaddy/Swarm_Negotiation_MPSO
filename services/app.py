@@ -1,10 +1,19 @@
+import sys
+
+# The algorithm engines print emoji/arrow characters for progress logging.
+# On Windows, uvicorn's stdout/stderr default to the legacy "charmap"
+# encoding, which raises UnicodeEncodeError on those characters and turns
+# into a 400 response. Force UTF-8 so those prints can't crash requests.
+if hasattr(sys.stdout, "reconfigure"):
+    sys.stdout.reconfigure(encoding="utf-8", errors="replace")
+    sys.stderr.reconfigure(encoding="utf-8", errors="replace")
+
 from fastapi import FastAPI, HTTPException
 from fastapi.responses import JSONResponse
 from pydantic import BaseModel
 from typing import List, Dict, Any
 from algorithm_runner import run_all_algorithms
 from evaluation_metrics import compute_confusion_metrics
-from pareto_metrics import calculate_pareto_metrics
 
 app = FastAPI()
 
@@ -54,7 +63,7 @@ async def compare_algorithms(request_data: RequestData):
 
             comparison = {
                 'fitness_comparison': {k: v['fitness'] for k, v in algo_results.items()},
-                'time_comparison': {k: v['execution_time'] for k, v in algo_results.items()}
+                'time_comparison': {k: v['metadata']['execution_time'] for k, v in algo_results.items()}
             }
 
             all_results.append({
@@ -71,9 +80,28 @@ async def compare_algorithms(request_data: RequestData):
         raise HTTPException(status_code=400, detail=str(e))
 
 
+@app.get("/health")
+async def health():
+    return {"status": "ok"}
+
+
 @app.post("/full-evaluation")
 async def full_evaluation(algorithm_results: List[AlgorithmComparisonResult]):
     try:
+        # Imported lazily because pygmo (used for hypervolume metrics) is
+        # difficult to install via pip on Windows. /compare-algorithms and
+        # /health do not depend on it.
+        try:
+            from pareto_metrics import calculate_pareto_metrics
+        except ImportError as imp_err:
+            raise HTTPException(
+                status_code=503,
+                detail=(
+                    "Pareto metrics unavailable: 'pygmo' is not installed. "
+                    f"Install it (e.g. via conda) to use /full-evaluation. ({imp_err})"
+                ),
+            )
+
         true_winners = [res.winner for res in algorithm_results]
         predicted_winners = true_winners  # Placeholder
 
@@ -89,7 +117,7 @@ async def full_evaluation(algorithm_results: List[AlgorithmComparisonResult]):
             }
 
         # Calculate reference point based on worst-case (max time, max fitness buffer)
-        all_times = [algo['execution_time'] for res in algorithm_results for algo in res.algorithms.values()]
+        all_times = [algo['metadata']['execution_time'] for res in algorithm_results for algo in res.algorithms.values()]
         reference_point = [1.0, max(all_times) * 1.1]
 
         pareto_metrics = {}
@@ -103,3 +131,9 @@ async def full_evaluation(algorithm_results: List[AlgorithmComparisonResult]):
 
     except Exception as e:
         raise HTTPException(status_code=400, detail=str(e))
+
+
+if __name__ == "__main__":
+    import uvicorn
+
+    uvicorn.run("app:app", host="0.0.0.0", port=8000, reload=True)
