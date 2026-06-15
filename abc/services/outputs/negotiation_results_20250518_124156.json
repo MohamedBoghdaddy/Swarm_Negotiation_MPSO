@@ -1,0 +1,1424 @@
+[
+    {
+        "manufacturerID": 2,
+        "optimizedOffer": {
+            "price": 1097.6,
+            "delivery": 5,
+            "quality": "Premium"
+        },
+        "fitness": 0.7862,
+        "roundHistory": [
+            {
+                "iteration": 1,
+                "particles": [
+                    {
+                        "particle_id": 1,
+                        "updates": {
+                            "price": {
+                                "new_value": 1051.747087388521,
+                                "velocity": 2.527379478269903
+                            },
+                            "delivery": {
+                                "new_value": 5.6630389786210795,
+                                "velocity": 0.6630389786210796
+                            },
+                            "quality": {
+                                "new_value": 0.863162571261313,
+                                "velocity": 0.26316257126131304
+                            }
+                        },
+                        "fitness_eval": {
+                            "offer": {
+                                "price": 1051.747087388521,
+                                "delivery": 5.6630389786210795,
+                                "quality": "Standard"
+                            },
+                            "fitness": 0.6768124172982715,
+                            "is_new_local_best": false,
+                            "is_new_global_best": false
+                        }
+                    },
+                    {
+                        "particle_id": 2,
+                        "updates": {
+                            "price": {
+                                "new_value": 900.547279340376,
+                                "velocity": 2.8471233925567923
+                            },
+                            "delivery": {
+                                "new_value": 4.9542311354574835,
+                                "velocity": -0.04576886454251666
+                            },
+                            "quality": {
+                                "new_value": 1.0862516044526047,
+                                "velocity": 0.08625160445260463
+                            }
+                        },
+                        "fitness_eval": {
+                            "offer": {
+                                "price": 900.547279340376,
+                                "delivery": 4.9542311354574835,
+                                "quality": "Premium"
+                            },
+                            "fitness": 0.7450232976372206,
+                            "is_new_local_best": false,
+                            "is_new_global_best": false
+                        }
+                    },
+                    {
+                        "particle_id": 3,
+                        "updates": {
+                            "price": {
+                                "new_value": 1135.4440943924028,
+                                "velocity": 283.04965338915804
+                            },
+                            "delivery": {
+                                "new_value": 5.61200206123907,
+                                "velocity": -0.38799793876093003
+                            },
+                            "quality": {
+                                "new_value": 0.9520777144015039,
+                                "velocity": -0.047922285598496074
+                            }
+                        },
+                        "fitness_eval": {
+                            "offer": {
+                                "price": 1100,
+                                "delivery": 5.61200206123907,
+                                "quality": "Premium"
+                            },
+                            "fitness": 0.7788695820776488,
+                            "is_new_local_best": true,
+                            "is_new_global_best": true
+                        }
+                    },
+                    {
+                        "particle_id": 4,
+                        "updates": {
+                            "price": {
+                                "new_value": 1083.5927811458491,
+                                "velocity": 1.9193789161399206
+                            },
+                            "delivery": {
+                                "new_value": 5.513365874399751,
+                                "velocity": -0.4866341256002488
+                            },
+                            "quality": {
+                                "new_value": 0.9901236400517447,
+                                "velocity": -0.009876359948255344
+                            }
+                        },
+                        "fitness_eval": {
+                            "offer": {
+                                "price": 1083.5927811458491,
+                                "delivery": 5.513365874399751,
+                                "quality": "Premium"
+                            },
+                            "fitness": 0.7796199691527241,
+                            "is_new_local_best": true,
+                            "is_new_global_best": true
+                        }
+                    },
+                    {
+                        "particle_id": 5,
+                        "updates": {
+                            "price": {
+                                "new_value": 995.0870740966575,
+                                "velocity": 38.93630104467433
+                            },
+                            "delivery": {
+                                "new_value": 5.411548678467532,
+                                "velocity": 1.4115486784675315
+                            },
+                            "quality": {
+                                "new_value": 1.0914421344036118,
+                                "velocity": 0.09144213440361176
+                            }
+                        },
+                        "fitness_eval": {
+                            "offer": {
+                                "price": 995.0870740966575,
+                                "delivery": 5.411548678467532,
+                                "quality": "Premium"
+                            },
+                            "fitness": 0.7766519331032374,
+                            "is_new_local_best": true,
+                            "is_new_global_best": false
+                        }
+                    }
+                ]
+            },
+            {
+                "iteration": 2,
+                "particles": [
+                    {
+                        "particle_id": 1,
+                        "updates": {
+                            "price": {
+                                "new_value": 1061.1871822976436,
+                                "velocity": 9.440094909122646
+                            },
+                            "delivery": {
+                                "new_value": 5.531203005301618,
+                                "velocity": -0.13183597331946123
+                            },
+                            "quality": {
+                                "new_value": 1.0461436487162041,
+                                "velocity": 0.18298107745489103
+                            }
+                        },
+                        "fitness_eval": {
+                            "offer": {
+                                "price": 1061.1871822976436,
+                                "delivery": 5.531203005301618,
+                                "quality": "Premium"
+                            },
+                            "fitness": 0.7787380168150331,
+                            "is_new_local_best": true,
+                            "is_new_global_best": false
+                        }
+                    },
+                    {
+                        "particle_id": 2,
+                        "updates": {
+                            "price": {
+                                "new_value": 915.8660013620165,
+                                "velocity": 15.31872202164055
+                            },
+                            "delivery": {
+                                "new_value": 5.683170150135018,
+                                "velocity": 0.7289390146775343
+                            },
+                            "quality": {
+                                "new_value": 1.0307921553738544,
+                                "velocity": 0.030792155373854296
+                            }
+                        },
+                        "fitness_eval": {
+                            "offer": {
+                                "price": 915.8660013620165,
+                                "delivery": 5.683170150135018,
+                                "quality": "Premium"
+                            },
+                            "fitness": 0.7445196089114947,
+                            "is_new_local_best": false,
+                            "is_new_global_best": false
+                        }
+                    },
+                    {
+                        "particle_id": 3,
+                        "updates": {
+                            "price": {
+                                "new_value": 1239.7245115576934,
+                                "velocity": 139.72451155769335
+                            },
+                            "delivery": {
+                                "new_value": 5.381968743756964,
+                                "velocity": -0.23003331748210631
+                            },
+                            "quality": {
+                                "new_value": 0.9484486918699518,
+                                "velocity": -0.00362902253155201
+                            }
+                        },
+                        "fitness_eval": {
+                            "offer": {
+                                "price": 1100,
+                                "delivery": 5.381968743756964,
+                                "quality": "Standard"
+                            },
+                            "fitness": 0.6817449985461752,
+                            "is_new_local_best": false,
+                            "is_new_global_best": false
+                        }
+                    },
+                    {
+                        "particle_id": 4,
+                        "updates": {
+                            "price": {
+                                "new_value": 1084.5524706039191,
+                                "velocity": 0.9596894580699603
+                            },
+                            "delivery": {
+                                "new_value": 5.270048811599627,
+                                "velocity": -0.2433170628001244
+                            },
+                            "quality": {
+                                "new_value": 0.985185460077617,
+                                "velocity": -0.004938179974127672
+                            }
+                        },
+                        "fitness_eval": {
+                            "offer": {
+                                "price": 1084.5524706039191,
+                                "delivery": 5.270048811599627,
+                                "quality": "Premium"
+                            },
+                            "fitness": 0.7826896585982571,
+                            "is_new_local_best": true,
+                            "is_new_global_best": true
+                        }
+                    },
+                    {
+                        "particle_id": 5,
+                        "updates": {
+                            "price": {
+                                "new_value": 1109.8897781584824,
+                                "velocity": 114.80270406182491
+                            },
+                            "delivery": {
+                                "new_value": 6.083383681734899,
+                                "velocity": 0.6718350032673673
+                            },
+                            "quality": {
+                                "new_value": 1.044786130964971,
+                                "velocity": 0.04478613096497097
+                            }
+                        },
+                        "fitness_eval": {
+                            "offer": {
+                                "price": 1100,
+                                "delivery": 6.083383681734899,
+                                "quality": "Premium"
+                            },
+                            "fitness": 0.7729773118214509,
+                            "is_new_local_best": false,
+                            "is_new_global_best": false
+                        }
+                    }
+                ]
+            },
+            {
+                "iteration": 3,
+                "particles": [
+                    {
+                        "particle_id": 1,
+                        "updates": {
+                            "price": {
+                                "new_value": 1088.4436938008666,
+                                "velocity": 27.256511503222924
+                            },
+                            "delivery": {
+                                "new_value": 5.271764264977513,
+                                "velocity": -0.25943874032410497
+                            },
+                            "quality": {
+                                "new_value": 1.0710643898760601,
+                                "velocity": 0.07106438987606004
+                            }
+                        },
+                        "fitness_eval": {
+                            "offer": {
+                                "price": 1088.4436938008666,
+                                "delivery": 5.271764264977513,
+                                "quality": "Premium"
+                            },
+                            "fitness": 0.7827826631721203,
+                            "is_new_local_best": true,
+                            "is_new_global_best": true
+                        }
+                    },
+                    {
+                        "particle_id": 2,
+                        "updates": {
+                            "price": {
+                                "new_value": 924.5045115544771,
+                                "velocity": 8.638510192460528
+                            },
+                            "delivery": {
+                                "new_value": 5.411304040057913,
+                                "velocity": -0.2718661100771051
+                            },
+                            "quality": {
+                                "new_value": 1.015396077686927,
+                                "velocity": 0.015396077686927148
+                            }
+                        },
+                        "fitness_eval": {
+                            "offer": {
+                                "price": 924.5045115544771,
+                                "delivery": 5.411304040057913,
+                                "quality": "Premium"
+                            },
+                            "fitness": 0.7510515125141355,
+                            "is_new_local_best": true,
+                            "is_new_global_best": false
+                        }
+                    },
+                    {
+                        "particle_id": 3,
+                        "updates": {
+                            "price": {
+                                "new_value": 1169.798236412973,
+                                "velocity": 69.79823641297303
+                            },
+                            "delivery": {
+                                "new_value": 5.2565438551303325,
+                                "velocity": -0.12542488862663143
+                            },
+                            "quality": {
+                                "new_value": 0.9580811566591824,
+                                "velocity": 0.009632464789230515
+                            }
+                        },
+                        "fitness_eval": {
+                            "offer": {
+                                "price": 1100,
+                                "delivery": 5.2565438551303325,
+                                "quality": "Premium"
+                            },
+                            "fitness": 0.7833128096540081,
+                            "is_new_local_best": true,
+                            "is_new_global_best": true
+                        }
+                    },
+                    {
+                        "particle_id": 4,
+                        "updates": {
+                            "price": {
+                                "new_value": 1091.3902426140814,
+                                "velocity": 6.837772010162289
+                            },
+                            "delivery": {
+                                "new_value": 5.136788770635021,
+                                "velocity": -0.1332600409646062
+                            },
+                            "quality": {
+                                "new_value": 0.9734284718281374,
+                                "velocity": -0.011756988249479617
+                            }
+                        },
+                        "fitness_eval": {
+                            "offer": {
+                                "price": 1091.3902426140814,
+                                "delivery": 5.136788770635021,
+                                "quality": "Premium"
+                            },
+                            "fitness": 0.7845565200517901,
+                            "is_new_local_best": true,
+                            "is_new_global_best": true
+                        }
+                    },
+                    {
+                        "particle_id": 5,
+                        "updates": {
+                            "price": {
+                                "new_value": 1036.1547612792037,
+                                "velocity": -63.84523872079623
+                            },
+                            "delivery": {
+                                "new_value": 5.031149815073974,
+                                "velocity": -1.052233866660925
+                            },
+                            "quality": {
+                                "new_value": 1.0063788175916044,
+                                "velocity": 0.00637881759160441
+                            }
+                        },
+                        "fitness_eval": {
+                            "offer": {
+                                "price": 1036.1547612792037,
+                                "delivery": 5.031149815073974,
+                                "quality": "Premium"
+                            },
+                            "fitness": 0.7842524340158656,
+                            "is_new_local_best": true,
+                            "is_new_global_best": false
+                        }
+                    }
+                ]
+            },
+            {
+                "iteration": 4,
+                "particles": [
+                    {
+                        "particle_id": 1,
+                        "updates": {
+                            "price": {
+                                "new_value": 1105.601195598276,
+                                "velocity": 17.157501797409502
+                            },
+                            "delivery": {
+                                "new_value": 5.066765591455487,
+                                "velocity": -0.20499867352202578
+                            },
+                            "quality": {
+                                "new_value": 1.0198380036915597,
+                                "velocity": 0.01983800369155983
+                            }
+                        },
+                        "fitness_eval": {
+                            "offer": {
+                                "price": 1100,
+                                "delivery": 5.066765591455487,
+                                "quality": "Premium"
+                            },
+                            "fitness": 0.7856850379499436,
+                            "is_new_local_best": true,
+                            "is_new_global_best": true
+                        }
+                    },
+                    {
+                        "particle_id": 2,
+                        "updates": {
+                            "price": {
+                                "new_value": 1030.5973842008063,
+                                "velocity": 106.09287264632934
+                            },
+                            "delivery": {
+                                "new_value": 4.89208012187149,
+                                "velocity": -0.5192239181864232
+                            },
+                            "quality": {
+                                "new_value": 1.0076980388434635,
+                                "velocity": 0.007698038843463574
+                            }
+                        },
+                        "fitness_eval": {
+                            "offer": {
+                                "price": 1030.5973842008063,
+                                "delivery": 4.89208012187149,
+                                "quality": "Premium"
+                            },
+                            "fitness": 0.7786326943719843,
+                            "is_new_local_best": true,
+                            "is_new_global_best": false
+                        }
+                    },
+                    {
+                        "particle_id": 3,
+                        "updates": {
+                            "price": {
+                                "new_value": 1134.8991182064865,
+                                "velocity": 34.89911820648651
+                            },
+                            "delivery": {
+                                "new_value": 4.945818014253848,
+                                "velocity": -0.31072584087648425
+                            },
+                            "quality": {
+                                "new_value": 0.9719261442082124,
+                                "velocity": 0.013844987549030113
+                            }
+                        },
+                        "fitness_eval": {
+                            "offer": {
+                                "price": 1100,
+                                "delivery": 4.945818014253848,
+                                "quality": "Premium"
+                            },
+                            "fitness": 0.7835847502818873,
+                            "is_new_local_best": true,
+                            "is_new_global_best": false
+                        }
+                    },
+                    {
+                        "particle_id": 4,
+                        "updates": {
+                            "price": {
+                                "new_value": 1097.6026609845135,
+                                "velocity": 6.212418370432058
+                            },
+                            "delivery": {
+                                "new_value": 5.021856888667541,
+                                "velocity": -0.11493188196747961
+                            },
+                            "quality": {
+                                "new_value": 0.973958661645242,
+                                "velocity": 0.0005301898171045996
+                            }
+                        },
+                        "fitness_eval": {
+                            "offer": {
+                                "price": 1097.6026609845135,
+                                "delivery": 5.021856888667541,
+                                "quality": "Premium"
+                            },
+                            "fitness": 0.7861758867637492,
+                            "is_new_local_best": true,
+                            "is_new_global_best": true
+                        }
+                    },
+                    {
+                        "particle_id": 5,
+                        "updates": {
+                            "price": {
+                                "new_value": 1077.5982080418873,
+                                "velocity": 41.443446762683564
+                            },
+                            "delivery": {
+                                "new_value": 4.498213809654892,
+                                "velocity": -0.5329360054190817
+                            },
+                            "quality": {
+                                "new_value": 0.9984699563799068,
+                                "velocity": -0.0015300436200932736
+                            }
+                        },
+                        "fitness_eval": {
+                            "offer": {
+                                "price": 1077.5982080418873,
+                                "delivery": 4.498213809654892,
+                                "quality": "Premium"
+                            },
+                            "fitness": 0.758680646298715,
+                            "is_new_local_best": false,
+                            "is_new_global_best": false
+                        }
+                    }
+                ]
+            },
+            {
+                "iteration": 5,
+                "particles": [
+                    {
+                        "particle_id": 1,
+                        "updates": {
+                            "price": {
+                                "new_value": 1107.4547617985536,
+                                "velocity": 7.45476179855366
+                            },
+                            "delivery": {
+                                "new_value": 4.901309300750574,
+                                "velocity": -0.1654562907049132
+                            },
+                            "quality": {
+                                "new_value": 0.9778111277625053,
+                                "velocity": -0.022188872237494703
+                            }
+                        },
+                        "fitness_eval": {
+                            "offer": {
+                                "price": 1100,
+                                "delivery": 4.901309300750574,
+                                "quality": "Premium"
+                            },
+                            "fitness": 0.7811738616337933,
+                            "is_new_local_best": false,
+                            "is_new_global_best": false
+                        }
+                    },
+                    {
+                        "particle_id": 2,
+                        "updates": {
+                            "price": {
+                                "new_value": 1172.4800043017747,
+                                "velocity": 141.88262010096824
+                            },
+                            "delivery": {
+                                "new_value": 4.679760101758032,
+                                "velocity": -0.21232002011345785
+                            },
+                            "quality": {
+                                "new_value": 0.9717765038668115,
+                                "velocity": -0.028223496133188506
+                            }
+                        },
+                        "fitness_eval": {
+                            "offer": {
+                                "price": 1100,
+                                "delivery": 4.679760101758032,
+                                "quality": "Premium"
+                            },
+                            "fitness": 0.7691732800216973,
+                            "is_new_local_best": false,
+                            "is_new_global_best": false
+                        }
+                    },
+                    {
+                        "particle_id": 3,
+                        "updates": {
+                            "price": {
+                                "new_value": 1114.6543278983245,
+                                "velocity": 14.654327898324418
+                            },
+                            "delivery": {
+                                "new_value": 4.853452906633657,
+                                "velocity": -0.09236510762019089
+                            },
+                            "quality": {
+                                "new_value": 0.9792783554828721,
+                                "velocity": 0.007352211274659672
+                            }
+                        },
+                        "fitness_eval": {
+                            "offer": {
+                                "price": 1100,
+                                "delivery": 4.853452906633657,
+                                "quality": "Premium"
+                            },
+                            "fitness": 0.7785816402857937,
+                            "is_new_local_best": false,
+                            "is_new_global_best": false
+                        }
+                    },
+                    {
+                        "particle_id": 4,
+                        "updates": {
+                            "price": {
+                                "new_value": 1100.7088701697296,
+                                "velocity": 3.106209185216029
+                            },
+                            "delivery": {
+                                "new_value": 4.9643909476838015,
+                                "velocity": -0.057465940983739805
+                            },
+                            "quality": {
+                                "new_value": 0.9742237565537943,
+                                "velocity": 0.0002650949085522998
+                            }
+                        },
+                        "fitness_eval": {
+                            "offer": {
+                                "price": 1100,
+                                "delivery": 4.9643909476838015,
+                                "quality": "Premium"
+                            },
+                            "fitness": 0.7845907841760098,
+                            "is_new_local_best": false,
+                            "is_new_global_best": false
+                        }
+                    },
+                    {
+                        "particle_id": 5,
+                        "updates": {
+                            "price": {
+                                "new_value": 1079.240408096849,
+                                "velocity": 1.6422000549616333
+                            },
+                            "delivery": {
+                                "new_value": 4.519064225392929,
+                                "velocity": 0.020850415738037496
+                            },
+                            "quality": {
+                                "new_value": 0.9623022626547459,
+                                "velocity": -0.03616769372516087
+                            }
+                        },
+                        "fitness_eval": {
+                            "offer": {
+                                "price": 1079.240408096849,
+                                "delivery": 4.519064225392929,
+                                "quality": "Premium"
+                            },
+                            "fitness": 0.7598583438194753,
+                            "is_new_local_best": false,
+                            "is_new_global_best": false
+                        }
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "manufacturerID": 1,
+        "optimizedOffer": {
+            "price": 1107.26,
+            "delivery": 4,
+            "quality": "Premium"
+        },
+        "fitness": 0.7716,
+        "roundHistory": [
+            {
+                "iteration": 1,
+                "particles": [
+                    {
+                        "particle_id": 1,
+                        "updates": {
+                            "price": {
+                                "new_value": 885.8718800143819,
+                                "velocity": 40.872649627296695
+                            },
+                            "delivery": {
+                                "new_value": 5.687145752870471,
+                                "velocity": -0.3128542471295288
+                            },
+                            "quality": {
+                                "new_value": 1.2857174187322433,
+                                "velocity": 0.9857174187322433
+                            }
+                        },
+                        "fitness_eval": {
+                            "offer": {
+                                "price": 885.8718800143819,
+                                "delivery": 5.687145752870471,
+                                "quality": "Premium"
+                            },
+                            "fitness": 0.7146146105184232,
+                            "is_new_local_best": true,
+                            "is_new_global_best": false
+                        }
+                    },
+                    {
+                        "particle_id": 2,
+                        "updates": {
+                            "price": {
+                                "new_value": 963.7756117793022,
+                                "velocity": 0.9427925704143397
+                            },
+                            "delivery": {
+                                "new_value": 3.930735578367595,
+                                "velocity": -0.06926442163240493
+                            },
+                            "quality": {
+                                "new_value": 1.0389322216760772,
+                                "velocity": 0.03893222167607727
+                            }
+                        },
+                        "fitness_eval": {
+                            "offer": {
+                                "price": 963.7756117793022,
+                                "delivery": 3.930735578367595,
+                                "quality": "Premium"
+                            },
+                            "fitness": 0.6985651066288914,
+                            "is_new_local_best": false,
+                            "is_new_global_best": false
+                        }
+                    },
+                    {
+                        "particle_id": 3,
+                        "updates": {
+                            "price": {
+                                "new_value": 1080.417257561495,
+                                "velocity": 129.41819810528222
+                            },
+                            "delivery": {
+                                "new_value": 5.00856425065075,
+                                "velocity": 1.0085642506507497
+                            },
+                            "quality": {
+                                "new_value": 1.1029276892640532,
+                                "velocity": 0.5029276892640531
+                            }
+                        },
+                        "fitness_eval": {
+                            "offer": {
+                                "price": 1080.417257561495,
+                                "delivery": 5.00856425065075,
+                                "quality": "Premium"
+                            },
+                            "fitness": 0.7708164338702364,
+                            "is_new_local_best": true,
+                            "is_new_global_best": true
+                        }
+                    },
+                    {
+                        "particle_id": 4,
+                        "updates": {
+                            "price": {
+                                "new_value": 995.6042588903102,
+                                "velocity": 153.48853451307124
+                            },
+                            "delivery": {
+                                "new_value": 5.399093949914169,
+                                "velocity": 2.3990939499141692
+                            },
+                            "quality": {
+                                "new_value": 0.9948231047868864,
+                                "velocity": 0.3948231047868864
+                            }
+                        },
+                        "fitness_eval": {
+                            "offer": {
+                                "price": 995.6042588903102,
+                                "delivery": 5.399093949914169,
+                                "quality": "Premium"
+                            },
+                            "fitness": 0.7600316867147675,
+                            "is_new_local_best": true,
+                            "is_new_global_best": false
+                        }
+                    },
+                    {
+                        "particle_id": 5,
+                        "updates": {
+                            "price": {
+                                "new_value": 1062.5667275619774,
+                                "velocity": -61.05731995998863
+                            },
+                            "delivery": {
+                                "new_value": 4.487107419772508,
+                                "velocity": -2.5128925802274917
+                            },
+                            "quality": {
+                                "new_value": 0.904536832390695,
+                                "velocity": -0.09546316760930496
+                            }
+                        },
+                        "fitness_eval": {
+                            "offer": {
+                                "price": 1062.5667275619774,
+                                "delivery": 4.487107419772508,
+                                "quality": "Standard"
+                            },
+                            "fitness": 0.676938442821805,
+                            "is_new_local_best": false,
+                            "is_new_global_best": false
+                        }
+                    }
+                ]
+            },
+            {
+                "iteration": 2,
+                "particles": [
+                    {
+                        "particle_id": 1,
+                        "updates": {
+                            "price": {
+                                "new_value": 1029.5964085729665,
+                                "velocity": 143.72452855858467
+                            },
+                            "delivery": {
+                                "new_value": 4.775343431350425,
+                                "velocity": -0.9118023215200458
+                            },
+                            "quality": {
+                                "new_value": 1.4928587093661216,
+                                "velocity": 0.49285870936612164
+                            }
+                        },
+                        "fitness_eval": {
+                            "offer": {
+                                "price": 1029.5964085729665,
+                                "delivery": 4.775343431350425,
+                                "quality": "Premium"
+                            },
+                            "fitness": 0.7571769171679698,
+                            "is_new_local_best": true,
+                            "is_new_global_best": false
+                        }
+                    },
+                    {
+                        "particle_id": 2,
+                        "updates": {
+                            "price": {
+                                "new_value": 1132.8217275412705,
+                                "velocity": 169.0461157619684
+                            },
+                            "delivery": {
+                                "new_value": 5.36657949135598,
+                                "velocity": 1.435843912988385
+                            },
+                            "quality": {
+                                "new_value": 1.0194661108380387,
+                                "velocity": 0.019466110838038633
+                            }
+                        },
+                        "fitness_eval": {
+                            "offer": {
+                                "price": 1132.8217275412705,
+                                "delivery": 5.36657949135598,
+                                "quality": "Premium"
+                            },
+                            "fitness": 0.7676960239607977,
+                            "is_new_local_best": true,
+                            "is_new_global_best": false
+                        }
+                    },
+                    {
+                        "particle_id": 3,
+                        "updates": {
+                            "price": {
+                                "new_value": 1145.126356614136,
+                                "velocity": 64.70909905264111
+                            },
+                            "delivery": {
+                                "new_value": 5.512846375976125,
+                                "velocity": 0.5042821253253749
+                            },
+                            "quality": {
+                                "new_value": 1.2514638446320265,
+                                "velocity": 0.25146384463202653
+                            }
+                        },
+                        "fitness_eval": {
+                            "offer": {
+                                "price": 1145.126356614136,
+                                "delivery": 5.512846375976125,
+                                "quality": "Premium"
+                            },
+                            "fitness": 0.7660418000296464,
+                            "is_new_local_best": false,
+                            "is_new_global_best": false
+                        }
+                    },
+                    {
+                        "particle_id": 4,
+                        "updates": {
+                            "price": {
+                                "new_value": 1183.3933936380517,
+                                "velocity": 187.78913474774163
+                            },
+                            "delivery": {
+                                "new_value": 6.264519803052613,
+                                "velocity": 0.8654258531384431
+                            },
+                            "quality": {
+                                "new_value": 1.198228135160407,
+                                "velocity": 0.20340503037352056
+                            }
+                        },
+                        "fitness_eval": {
+                            "offer": {
+                                "price": 1183.3933936380517,
+                                "delivery": 6.264519803052613,
+                                "quality": "Premium"
+                            },
+                            "fitness": 0.7565003572822875,
+                            "is_new_local_best": false,
+                            "is_new_global_best": false
+                        }
+                    },
+                    {
+                        "particle_id": 5,
+                        "updates": {
+                            "price": {
+                                "new_value": 1040.0459039620525,
+                                "velocity": -22.520823599924718
+                            },
+                            "delivery": {
+                                "new_value": 5.249532978155021,
+                                "velocity": 0.7624255583825127
+                            },
+                            "quality": {
+                                "new_value": 1.0451251790850584,
+                                "velocity": 0.14058834669436335
+                            }
+                        },
+                        "fitness_eval": {
+                            "offer": {
+                                "price": 1040.0459039620525,
+                                "delivery": 5.249532978155021,
+                                "quality": "Premium"
+                            },
+                            "fitness": 0.7655643870627888,
+                            "is_new_local_best": true,
+                            "is_new_global_best": false
+                        }
+                    }
+                ]
+            },
+            {
+                "iteration": 3,
+                "particles": [
+                    {
+                        "particle_id": 1,
+                        "updates": {
+                            "price": {
+                                "new_value": 1103.0912432717455,
+                                "velocity": 73.49483469877893
+                            },
+                            "delivery": {
+                                "new_value": 4.658926072885029,
+                                "velocity": -0.11641735846539653
+                            },
+                            "quality": {
+                                "new_value": 1.2464293546830607,
+                                "velocity": 0.24642935468306082
+                            }
+                        },
+                        "fitness_eval": {
+                            "offer": {
+                                "price": 1103.0912432717455,
+                                "delivery": 4.658926072885029,
+                                "quality": "Premium"
+                            },
+                            "fitness": 0.7542027463229539,
+                            "is_new_local_best": false,
+                            "is_new_global_best": false
+                        }
+                    },
+                    {
+                        "particle_id": 2,
+                        "updates": {
+                            "price": {
+                                "new_value": 1168.6090950008345,
+                                "velocity": 35.78736745956404
+                            },
+                            "delivery": {
+                                "new_value": 5.870119456882259,
+                                "velocity": 0.5035399655262792
+                            },
+                            "quality": {
+                                "new_value": 1.0097330554190194,
+                                "velocity": 0.009733055419019317
+                            }
+                        },
+                        "fitness_eval": {
+                            "offer": {
+                                "price": 1168.6090950008345,
+                                "delivery": 5.870119456882259,
+                                "quality": "Premium"
+                            },
+                            "fitness": 0.7617273129304827,
+                            "is_new_local_best": false,
+                            "is_new_global_best": false
+                        }
+                    },
+                    {
+                        "particle_id": 3,
+                        "updates": {
+                            "price": {
+                                "new_value": 1121.9463081928316,
+                                "velocity": -23.18004842130447
+                            },
+                            "delivery": {
+                                "new_value": 5.338439271484657,
+                                "velocity": -0.17440710449146785
+                            },
+                            "quality": {
+                                "new_value": 1.1257319223160134,
+                                "velocity": 0.12573192231601327
+                            }
+                        },
+                        "fitness_eval": {
+                            "offer": {
+                                "price": 1121.9463081928316,
+                                "delivery": 5.338439271484657,
+                                "quality": "Premium"
+                            },
+                            "fitness": 0.7676597736341879,
+                            "is_new_local_best": false,
+                            "is_new_global_best": false
+                        }
+                    },
+                    {
+                        "particle_id": 4,
+                        "updates": {
+                            "price": {
+                                "new_value": 1088.7299056703748,
+                                "velocity": -94.66348796767684
+                            },
+                            "delivery": {
+                                "new_value": 5.014275371038899,
+                                "velocity": -1.2502444320137138
+                            },
+                            "quality": {
+                                "new_value": 1.0998901942362567,
+                                "velocity": 0.09989019423625656
+                            }
+                        },
+                        "fitness_eval": {
+                            "offer": {
+                                "price": 1088.7299056703748,
+                                "delivery": 5.014275371038899,
+                                "quality": "Premium"
+                            },
+                            "fitness": 0.7710781850171708,
+                            "is_new_local_best": true,
+                            "is_new_global_best": true
+                        }
+                    },
+                    {
+                        "particle_id": 5,
+                        "updates": {
+                            "price": {
+                                "new_value": 1083.7126874629978,
+                                "velocity": 43.666783500945314
+                            },
+                            "delivery": {
+                                "new_value": 5.335473966421867,
+                                "velocity": 0.08594098826684632
+                            },
+                            "quality": {
+                                "new_value": 1.0702941733471816,
+                                "velocity": 0.07029417334718167
+                            }
+                        },
+                        "fitness_eval": {
+                            "offer": {
+                                "price": 1083.7126874629978,
+                                "delivery": 5.335473966421867,
+                                "quality": "Premium"
+                            },
+                            "fitness": 0.7661106365491528,
+                            "is_new_local_best": true,
+                            "is_new_global_best": false
+                        }
+                    }
+                ]
+            },
+            {
+                "iteration": 4,
+                "particles": [
+                    {
+                        "particle_id": 1,
+                        "updates": {
+                            "price": {
+                                "new_value": 1013.0445179969904,
+                                "velocity": -90.04672527475515
+                            },
+                            "delivery": {
+                                "new_value": 5.180249571302541,
+                                "velocity": 0.5213234984175128
+                            },
+                            "quality": {
+                                "new_value": 1.1232146773415304,
+                                "velocity": 0.12321467734153041
+                            }
+                        },
+                        "fitness_eval": {
+                            "offer": {
+                                "price": 1013.0445179969904,
+                                "delivery": 5.180249571302541,
+                                "quality": "Premium"
+                            },
+                            "fitness": 0.7654657501565036,
+                            "is_new_local_best": true,
+                            "is_new_global_best": false
+                        }
+                    },
+                    {
+                        "particle_id": 2,
+                        "updates": {
+                            "price": {
+                                "new_value": 1099.752924292606,
+                                "velocity": -68.85617070822852
+                            },
+                            "delivery": {
+                                "new_value": 4.941562481703075,
+                                "velocity": -0.9285569751791843
+                            },
+                            "quality": {
+                                "new_value": 1.0048665277095097,
+                                "velocity": 0.004866527709509658
+                            }
+                        },
+                        "fitness_eval": {
+                            "offer": {
+                                "price": 1099.752924292606,
+                                "delivery": 4.941562481703075,
+                                "quality": "Premium"
+                            },
+                            "fitness": 0.7687188708967958,
+                            "is_new_local_best": true,
+                            "is_new_global_best": false
+                        }
+                    },
+                    {
+                        "particle_id": 3,
+                        "updates": {
+                            "price": {
+                                "new_value": 1035.468870271709,
+                                "velocity": -86.47743792112253
+                            },
+                            "delivery": {
+                                "new_value": 4.641995580196241,
+                                "velocity": -0.6964436912884167
+                            },
+                            "quality": {
+                                "new_value": 1.0628659611580067,
+                                "velocity": 0.06286596115800663
+                            }
+                        },
+                        "fitness_eval": {
+                            "offer": {
+                                "price": 1035.468870271709,
+                                "delivery": 4.641995580196241,
+                                "quality": "Premium"
+                            },
+                            "fitness": 0.7505072700492744,
+                            "is_new_local_best": false,
+                            "is_new_global_best": false
+                        }
+                    },
+                    {
+                        "particle_id": 4,
+                        "updates": {
+                            "price": {
+                                "new_value": 1041.3981616865365,
+                                "velocity": -47.33174398383842
+                            },
+                            "delivery": {
+                                "new_value": 4.389153155032042,
+                                "velocity": -0.6251222160068569
+                            },
+                            "quality": {
+                                "new_value": 1.0499450971181283,
+                                "velocity": 0.04994509711812828
+                            }
+                        },
+                        "fitness_eval": {
+                            "offer": {
+                                "price": 1041.3981616865365,
+                                "delivery": 4.389153155032042,
+                                "quality": "Premium"
+                            },
+                            "fitness": 0.7376439758867486,
+                            "is_new_local_best": false,
+                            "is_new_global_best": false
+                        }
+                    },
+                    {
+                        "particle_id": 5,
+                        "updates": {
+                            "price": {
+                                "new_value": 1107.2616388831152,
+                                "velocity": 23.548951420117454
+                            },
+                            "delivery": {
+                                "new_value": 4.990692690433484,
+                                "velocity": -0.3447812759883838
+                            },
+                            "quality": {
+                                "new_value": 1.0351470866735908,
+                                "velocity": 0.03514708667359084
+                            }
+                        },
+                        "fitness_eval": {
+                            "offer": {
+                                "price": 1107.2616388831152,
+                                "delivery": 4.990692690433484,
+                                "quality": "Premium"
+                            },
+                            "fitness": 0.7715792263092733,
+                            "is_new_local_best": true,
+                            "is_new_global_best": true
+                        }
+                    }
+                ]
+            },
+            {
+                "iteration": 5,
+                "particles": [
+                    {
+                        "particle_id": 1,
+                        "updates": {
+                            "price": {
+                                "new_value": 996.4743838526865,
+                                "velocity": -16.570134144303864
+                            },
+                            "delivery": {
+                                "new_value": 5.216216594164802,
+                                "velocity": 0.03596702286226103
+                            },
+                            "quality": {
+                                "new_value": 1.0616073386707652,
+                                "velocity": 0.061607338670765205
+                            }
+                        },
+                        "fitness_eval": {
+                            "offer": {
+                                "price": 996.4743838526865,
+                                "delivery": 5.216216594164802,
+                                "quality": "Premium"
+                            },
+                            "fitness": 0.7630672777349086,
+                            "is_new_local_best": false,
+                            "is_new_global_best": false
+                        }
+                    },
+                    {
+                        "particle_id": 2,
+                        "updates": {
+                            "price": {
+                                "new_value": 1065.8117334164504,
+                                "velocity": -33.94119087615556
+                            },
+                            "delivery": {
+                                "new_value": 4.520407078515837,
+                                "velocity": -0.4211554031872381
+                            },
+                            "quality": {
+                                "new_value": 1.0024332638547548,
+                                "velocity": 0.002433263854754829
+                            }
+                        },
+                        "fitness_eval": {
+                            "offer": {
+                                "price": 1065.8117334164504,
+                                "delivery": 4.520407078515837,
+                                "quality": "Premium"
+                            },
+                            "fitness": 0.7454669670376177,
+                            "is_new_local_best": false,
+                            "is_new_global_best": false
+                        }
+                    },
+                    {
+                        "particle_id": 3,
+                        "updates": {
+                            "price": {
+                                "new_value": 1065.5429098336065,
+                                "velocity": 30.074039561897596
+                            },
+                            "delivery": {
+                                "new_value": 4.856720743064553,
+                                "velocity": 0.21472516286831206
+                            },
+                            "quality": {
+                                "new_value": 1.0314329805790032,
+                                "velocity": 0.03143298057900332
+                            }
+                        },
+                        "fitness_eval": {
+                            "offer": {
+                                "price": 1065.5429098336065,
+                                "delivery": 4.856720743064553,
+                                "quality": "Premium"
+                            },
+                            "fitness": 0.7628942523649327,
+                            "is_new_local_best": false,
+                            "is_new_global_best": false
+                        }
+                    },
+                    {
+                        "particle_id": 4,
+                        "updates": {
+                            "price": {
+                                "new_value": 1130.2049895335297,
+                                "velocity": 88.80682784699316
+                            },
+                            "delivery": {
+                                "new_value": 5.453149644701057,
+                                "velocity": 1.0639964896690148
+                            },
+                            "quality": {
+                                "new_value": 1.0249725485590642,
+                                "velocity": 0.02497254855906414
+                            }
+                        },
+                        "fitness_eval": {
+                            "offer": {
+                                "price": 1130.2049895335297,
+                                "delivery": 5.453149644701057,
+                                "quality": "Premium"
+                            },
+                            "fitness": 0.7663044724201777,
+                            "is_new_local_best": false,
+                            "is_new_global_best": false
+                        }
+                    },
+                    {
+                        "particle_id": 5,
+                        "updates": {
+                            "price": {
+                                "new_value": 1119.036114593174,
+                                "velocity": 11.774475710058727
+                            },
+                            "delivery": {
+                                "new_value": 4.818302052439292,
+                                "velocity": -0.1723906379941919
+                            },
+                            "quality": {
+                                "new_value": 1.0175735433367954,
+                                "velocity": 0.01757354333679542
+                            }
+                        },
+                        "fitness_eval": {
+                            "offer": {
+                                "price": 1119.036114593174,
+                                "delivery": 4.818302052439292,
+                                "quality": "Premium"
+                            },
+                            "fitness": 0.7631310556419382,
+                            "is_new_local_best": false,
+                            "is_new_global_best": false
+                        }
+                    }
+                ]
+            }
+        ]
+    }
+]

@@ -1,0 +1,1567 @@
+[
+    {
+        "stage": "init",
+        "manufacturer_id": 1,
+        "num_particles": 5,
+        "price_range": [
+            800,
+            1200
+        ],
+        "delivery_range": [
+            3,
+            10
+        ],
+        "quality_options": [
+            "Economy",
+            "Standard",
+            "Premium"
+        ]
+    },
+    {
+        "stage": "init_particle",
+        "manufacturer_id": 1,
+        "particle_id": 1,
+        "particle": {
+            "price": 996.4743838526865,
+            "delivery": 5.216216594164802,
+            "quality": 1.0
+        },
+        "velocity": {
+            "price": -16.570134144303864,
+            "delivery": 0.03596702286226103,
+            "quality": 0.061607338670765205
+        },
+        "fitness": 0.5279858225062681
+    },
+    {
+        "stage": "init_particle",
+        "manufacturer_id": 1,
+        "particle_id": 2,
+        "particle": {
+            "price": 1065.8117334164504,
+            "delivery": 4.520407078515837,
+            "quality": 1.0
+        },
+        "velocity": {
+            "price": -33.94119087615556,
+            "delivery": -0.4211554031872381,
+            "quality": 0.002433263854754829
+        },
+        "fitness": 0.7018030479440737
+    },
+    {
+        "stage": "init_particle",
+        "manufacturer_id": 1,
+        "particle_id": 3,
+        "particle": {
+            "price": 1065.5429098336065,
+            "delivery": 4.856720743064553,
+            "quality": 1.0
+        },
+        "velocity": {
+            "price": 30.074039561897596,
+            "delivery": 0.21472516286831206,
+            "quality": 0.03143298057900332
+        },
+        "fitness": 0.6306987213701538
+    },
+    {
+        "stage": "init_particle",
+        "manufacturer_id": 1,
+        "particle_id": 4,
+        "particle": {
+            "price": 1130.2049895335297,
+            "delivery": 5.453149644701057,
+            "quality": 1.0
+        },
+        "velocity": {
+            "price": 88.80682784699316,
+            "delivery": 1.0639964896690148,
+            "quality": 0.02497254855906414
+        },
+        "fitness": 0.5380156188636869
+    },
+    {
+        "stage": "init_particle",
+        "manufacturer_id": 1,
+        "particle_id": 5,
+        "particle": {
+            "price": 1119.036114593174,
+            "delivery": 4.818302052439292,
+            "quality": 1.0
+        },
+        "velocity": {
+            "price": 11.774475710058727,
+            "delivery": -0.1723906379941919,
+            "quality": 0.01757354333679542
+        },
+        "fitness": 0.7431139649430448
+    },
+    {
+        "stage": "velocity_update",
+        "manufacturer_id": 1,
+        "iteration": 1,
+        "particle_id": 1,
+        "dimension": "price",
+        "new_value": 885.8718800143819,
+        "velocity": 40.872649627296695
+    },
+    {
+        "stage": "velocity_update",
+        "manufacturer_id": 1,
+        "iteration": 1,
+        "particle_id": 1,
+        "dimension": "delivery",
+        "new_value": 5.687145752870471,
+        "velocity": -0.3128542471295288
+    },
+    {
+        "stage": "velocity_update",
+        "manufacturer_id": 1,
+        "iteration": 1,
+        "particle_id": 1,
+        "dimension": "quality",
+        "new_value": 1.2857174187322433,
+        "velocity": 0.9857174187322433
+    },
+    {
+        "stage": "velocity_update",
+        "manufacturer_id": 1,
+        "iteration": 1,
+        "particle_id": 2,
+        "dimension": "price",
+        "new_value": 963.7756117793022,
+        "velocity": 0.9427925704143397
+    },
+    {
+        "stage": "velocity_update",
+        "manufacturer_id": 1,
+        "iteration": 1,
+        "particle_id": 2,
+        "dimension": "delivery",
+        "new_value": 3.930735578367595,
+        "velocity": -0.06926442163240493
+    },
+    {
+        "stage": "velocity_update",
+        "manufacturer_id": 1,
+        "iteration": 1,
+        "particle_id": 2,
+        "dimension": "quality",
+        "new_value": 1.0389322216760772,
+        "velocity": 0.03893222167607727
+    },
+    {
+        "stage": "velocity_update",
+        "manufacturer_id": 1,
+        "iteration": 1,
+        "particle_id": 3,
+        "dimension": "price",
+        "new_value": 1080.417257561495,
+        "velocity": 129.41819810528222
+    },
+    {
+        "stage": "velocity_update",
+        "manufacturer_id": 1,
+        "iteration": 1,
+        "particle_id": 3,
+        "dimension": "delivery",
+        "new_value": 5.00856425065075,
+        "velocity": 1.0085642506507497
+    },
+    {
+        "stage": "velocity_update",
+        "manufacturer_id": 1,
+        "iteration": 1,
+        "particle_id": 3,
+        "dimension": "quality",
+        "new_value": 1.1029276892640532,
+        "velocity": 0.5029276892640531
+    },
+    {
+        "stage": "velocity_update",
+        "manufacturer_id": 1,
+        "iteration": 1,
+        "particle_id": 4,
+        "dimension": "price",
+        "new_value": 995.6042588903102,
+        "velocity": 153.48853451307124
+    },
+    {
+        "stage": "velocity_update",
+        "manufacturer_id": 1,
+        "iteration": 1,
+        "particle_id": 4,
+        "dimension": "delivery",
+        "new_value": 5.399093949914169,
+        "velocity": 2.3990939499141692
+    },
+    {
+        "stage": "velocity_update",
+        "manufacturer_id": 1,
+        "iteration": 1,
+        "particle_id": 4,
+        "dimension": "quality",
+        "new_value": 0.9948231047868864,
+        "velocity": 0.3948231047868864
+    },
+    {
+        "stage": "velocity_update",
+        "manufacturer_id": 1,
+        "iteration": 1,
+        "particle_id": 5,
+        "dimension": "price",
+        "new_value": 1062.5667275619774,
+        "velocity": -61.05731995998863
+    },
+    {
+        "stage": "velocity_update",
+        "manufacturer_id": 1,
+        "iteration": 1,
+        "particle_id": 5,
+        "dimension": "delivery",
+        "new_value": 4.487107419772508,
+        "velocity": -2.5128925802274917
+    },
+    {
+        "stage": "velocity_update",
+        "manufacturer_id": 1,
+        "iteration": 1,
+        "particle_id": 5,
+        "dimension": "quality",
+        "new_value": 0.904536832390695,
+        "velocity": -0.09546316760930496
+    },
+    {
+        "stage": "velocity_update",
+        "manufacturer_id": 1,
+        "iteration": 2,
+        "particle_id": 1,
+        "dimension": "price",
+        "new_value": 1029.5964085729665,
+        "velocity": 143.72452855858467
+    },
+    {
+        "stage": "velocity_update",
+        "manufacturer_id": 1,
+        "iteration": 2,
+        "particle_id": 1,
+        "dimension": "delivery",
+        "new_value": 4.775343431350425,
+        "velocity": -0.9118023215200458
+    },
+    {
+        "stage": "velocity_update",
+        "manufacturer_id": 1,
+        "iteration": 2,
+        "particle_id": 1,
+        "dimension": "quality",
+        "new_value": 1.4928587093661216,
+        "velocity": 0.49285870936612164
+    },
+    {
+        "stage": "velocity_update",
+        "manufacturer_id": 1,
+        "iteration": 2,
+        "particle_id": 2,
+        "dimension": "price",
+        "new_value": 1132.8217275412705,
+        "velocity": 169.0461157619684
+    },
+    {
+        "stage": "velocity_update",
+        "manufacturer_id": 1,
+        "iteration": 2,
+        "particle_id": 2,
+        "dimension": "delivery",
+        "new_value": 5.36657949135598,
+        "velocity": 1.435843912988385
+    },
+    {
+        "stage": "velocity_update",
+        "manufacturer_id": 1,
+        "iteration": 2,
+        "particle_id": 2,
+        "dimension": "quality",
+        "new_value": 1.0194661108380387,
+        "velocity": 0.019466110838038633
+    },
+    {
+        "stage": "velocity_update",
+        "manufacturer_id": 1,
+        "iteration": 2,
+        "particle_id": 3,
+        "dimension": "price",
+        "new_value": 1145.126356614136,
+        "velocity": 64.70909905264111
+    },
+    {
+        "stage": "velocity_update",
+        "manufacturer_id": 1,
+        "iteration": 2,
+        "particle_id": 3,
+        "dimension": "delivery",
+        "new_value": 5.512846375976125,
+        "velocity": 0.5042821253253749
+    },
+    {
+        "stage": "velocity_update",
+        "manufacturer_id": 1,
+        "iteration": 2,
+        "particle_id": 3,
+        "dimension": "quality",
+        "new_value": 1.2514638446320265,
+        "velocity": 0.25146384463202653
+    },
+    {
+        "stage": "velocity_update",
+        "manufacturer_id": 1,
+        "iteration": 2,
+        "particle_id": 4,
+        "dimension": "price",
+        "new_value": 1183.3933936380517,
+        "velocity": 187.78913474774163
+    },
+    {
+        "stage": "velocity_update",
+        "manufacturer_id": 1,
+        "iteration": 2,
+        "particle_id": 4,
+        "dimension": "delivery",
+        "new_value": 6.264519803052613,
+        "velocity": 0.8654258531384431
+    },
+    {
+        "stage": "velocity_update",
+        "manufacturer_id": 1,
+        "iteration": 2,
+        "particle_id": 4,
+        "dimension": "quality",
+        "new_value": 1.198228135160407,
+        "velocity": 0.20340503037352056
+    },
+    {
+        "stage": "velocity_update",
+        "manufacturer_id": 1,
+        "iteration": 2,
+        "particle_id": 5,
+        "dimension": "price",
+        "new_value": 1040.0459039620525,
+        "velocity": -22.520823599924718
+    },
+    {
+        "stage": "velocity_update",
+        "manufacturer_id": 1,
+        "iteration": 2,
+        "particle_id": 5,
+        "dimension": "delivery",
+        "new_value": 5.249532978155021,
+        "velocity": 0.7624255583825127
+    },
+    {
+        "stage": "velocity_update",
+        "manufacturer_id": 1,
+        "iteration": 2,
+        "particle_id": 5,
+        "dimension": "quality",
+        "new_value": 1.0451251790850584,
+        "velocity": 0.14058834669436335
+    },
+    {
+        "stage": "velocity_update",
+        "manufacturer_id": 1,
+        "iteration": 3,
+        "particle_id": 1,
+        "dimension": "price",
+        "new_value": 1103.0912432717455,
+        "velocity": 73.49483469877893
+    },
+    {
+        "stage": "velocity_update",
+        "manufacturer_id": 1,
+        "iteration": 3,
+        "particle_id": 1,
+        "dimension": "delivery",
+        "new_value": 4.658926072885029,
+        "velocity": -0.11641735846539653
+    },
+    {
+        "stage": "velocity_update",
+        "manufacturer_id": 1,
+        "iteration": 3,
+        "particle_id": 1,
+        "dimension": "quality",
+        "new_value": 1.2464293546830607,
+        "velocity": 0.24642935468306082
+    },
+    {
+        "stage": "velocity_update",
+        "manufacturer_id": 1,
+        "iteration": 3,
+        "particle_id": 2,
+        "dimension": "price",
+        "new_value": 1168.6090950008345,
+        "velocity": 35.78736745956404
+    },
+    {
+        "stage": "velocity_update",
+        "manufacturer_id": 1,
+        "iteration": 3,
+        "particle_id": 2,
+        "dimension": "delivery",
+        "new_value": 5.870119456882259,
+        "velocity": 0.5035399655262792
+    },
+    {
+        "stage": "velocity_update",
+        "manufacturer_id": 1,
+        "iteration": 3,
+        "particle_id": 2,
+        "dimension": "quality",
+        "new_value": 1.0097330554190194,
+        "velocity": 0.009733055419019317
+    },
+    {
+        "stage": "velocity_update",
+        "manufacturer_id": 1,
+        "iteration": 3,
+        "particle_id": 3,
+        "dimension": "price",
+        "new_value": 1121.9463081928316,
+        "velocity": -23.18004842130447
+    },
+    {
+        "stage": "velocity_update",
+        "manufacturer_id": 1,
+        "iteration": 3,
+        "particle_id": 3,
+        "dimension": "delivery",
+        "new_value": 5.338439271484657,
+        "velocity": -0.17440710449146785
+    },
+    {
+        "stage": "velocity_update",
+        "manufacturer_id": 1,
+        "iteration": 3,
+        "particle_id": 3,
+        "dimension": "quality",
+        "new_value": 1.1257319223160134,
+        "velocity": 0.12573192231601327
+    },
+    {
+        "stage": "velocity_update",
+        "manufacturer_id": 1,
+        "iteration": 3,
+        "particle_id": 4,
+        "dimension": "price",
+        "new_value": 1088.7299056703748,
+        "velocity": -94.66348796767684
+    },
+    {
+        "stage": "velocity_update",
+        "manufacturer_id": 1,
+        "iteration": 3,
+        "particle_id": 4,
+        "dimension": "delivery",
+        "new_value": 5.014275371038899,
+        "velocity": -1.2502444320137138
+    },
+    {
+        "stage": "velocity_update",
+        "manufacturer_id": 1,
+        "iteration": 3,
+        "particle_id": 4,
+        "dimension": "quality",
+        "new_value": 1.0998901942362567,
+        "velocity": 0.09989019423625656
+    },
+    {
+        "stage": "velocity_update",
+        "manufacturer_id": 1,
+        "iteration": 3,
+        "particle_id": 5,
+        "dimension": "price",
+        "new_value": 1083.7126874629978,
+        "velocity": 43.666783500945314
+    },
+    {
+        "stage": "velocity_update",
+        "manufacturer_id": 1,
+        "iteration": 3,
+        "particle_id": 5,
+        "dimension": "delivery",
+        "new_value": 5.335473966421867,
+        "velocity": 0.08594098826684632
+    },
+    {
+        "stage": "velocity_update",
+        "manufacturer_id": 1,
+        "iteration": 3,
+        "particle_id": 5,
+        "dimension": "quality",
+        "new_value": 1.0702941733471816,
+        "velocity": 0.07029417334718167
+    },
+    {
+        "stage": "velocity_update",
+        "manufacturer_id": 1,
+        "iteration": 4,
+        "particle_id": 1,
+        "dimension": "price",
+        "new_value": 1013.0445179969904,
+        "velocity": -90.04672527475515
+    },
+    {
+        "stage": "velocity_update",
+        "manufacturer_id": 1,
+        "iteration": 4,
+        "particle_id": 1,
+        "dimension": "delivery",
+        "new_value": 5.180249571302541,
+        "velocity": 0.5213234984175128
+    },
+    {
+        "stage": "velocity_update",
+        "manufacturer_id": 1,
+        "iteration": 4,
+        "particle_id": 1,
+        "dimension": "quality",
+        "new_value": 1.1232146773415304,
+        "velocity": 0.12321467734153041
+    },
+    {
+        "stage": "velocity_update",
+        "manufacturer_id": 1,
+        "iteration": 4,
+        "particle_id": 2,
+        "dimension": "price",
+        "new_value": 1099.752924292606,
+        "velocity": -68.85617070822852
+    },
+    {
+        "stage": "velocity_update",
+        "manufacturer_id": 1,
+        "iteration": 4,
+        "particle_id": 2,
+        "dimension": "delivery",
+        "new_value": 4.941562481703075,
+        "velocity": -0.9285569751791843
+    },
+    {
+        "stage": "velocity_update",
+        "manufacturer_id": 1,
+        "iteration": 4,
+        "particle_id": 2,
+        "dimension": "quality",
+        "new_value": 1.0048665277095097,
+        "velocity": 0.004866527709509658
+    },
+    {
+        "stage": "velocity_update",
+        "manufacturer_id": 1,
+        "iteration": 4,
+        "particle_id": 3,
+        "dimension": "price",
+        "new_value": 1035.468870271709,
+        "velocity": -86.47743792112253
+    },
+    {
+        "stage": "velocity_update",
+        "manufacturer_id": 1,
+        "iteration": 4,
+        "particle_id": 3,
+        "dimension": "delivery",
+        "new_value": 4.641995580196241,
+        "velocity": -0.6964436912884167
+    },
+    {
+        "stage": "velocity_update",
+        "manufacturer_id": 1,
+        "iteration": 4,
+        "particle_id": 3,
+        "dimension": "quality",
+        "new_value": 1.0628659611580067,
+        "velocity": 0.06286596115800663
+    },
+    {
+        "stage": "velocity_update",
+        "manufacturer_id": 1,
+        "iteration": 4,
+        "particle_id": 4,
+        "dimension": "price",
+        "new_value": 1041.3981616865365,
+        "velocity": -47.33174398383842
+    },
+    {
+        "stage": "velocity_update",
+        "manufacturer_id": 1,
+        "iteration": 4,
+        "particle_id": 4,
+        "dimension": "delivery",
+        "new_value": 4.389153155032042,
+        "velocity": -0.6251222160068569
+    },
+    {
+        "stage": "velocity_update",
+        "manufacturer_id": 1,
+        "iteration": 4,
+        "particle_id": 4,
+        "dimension": "quality",
+        "new_value": 1.0499450971181283,
+        "velocity": 0.04994509711812828
+    },
+    {
+        "stage": "velocity_update",
+        "manufacturer_id": 1,
+        "iteration": 4,
+        "particle_id": 5,
+        "dimension": "price",
+        "new_value": 1107.2616388831152,
+        "velocity": 23.548951420117454
+    },
+    {
+        "stage": "velocity_update",
+        "manufacturer_id": 1,
+        "iteration": 4,
+        "particle_id": 5,
+        "dimension": "delivery",
+        "new_value": 4.990692690433484,
+        "velocity": -0.3447812759883838
+    },
+    {
+        "stage": "velocity_update",
+        "manufacturer_id": 1,
+        "iteration": 4,
+        "particle_id": 5,
+        "dimension": "quality",
+        "new_value": 1.0351470866735908,
+        "velocity": 0.03514708667359084
+    },
+    {
+        "stage": "velocity_update",
+        "manufacturer_id": 1,
+        "iteration": 5,
+        "particle_id": 1,
+        "dimension": "price",
+        "new_value": 996.4743838526865,
+        "velocity": -16.570134144303864
+    },
+    {
+        "stage": "velocity_update",
+        "manufacturer_id": 1,
+        "iteration": 5,
+        "particle_id": 1,
+        "dimension": "delivery",
+        "new_value": 5.216216594164802,
+        "velocity": 0.03596702286226103
+    },
+    {
+        "stage": "velocity_update",
+        "manufacturer_id": 1,
+        "iteration": 5,
+        "particle_id": 1,
+        "dimension": "quality",
+        "new_value": 1.0616073386707652,
+        "velocity": 0.061607338670765205
+    },
+    {
+        "stage": "velocity_update",
+        "manufacturer_id": 1,
+        "iteration": 5,
+        "particle_id": 2,
+        "dimension": "price",
+        "new_value": 1065.8117334164504,
+        "velocity": -33.94119087615556
+    },
+    {
+        "stage": "velocity_update",
+        "manufacturer_id": 1,
+        "iteration": 5,
+        "particle_id": 2,
+        "dimension": "delivery",
+        "new_value": 4.520407078515837,
+        "velocity": -0.4211554031872381
+    },
+    {
+        "stage": "velocity_update",
+        "manufacturer_id": 1,
+        "iteration": 5,
+        "particle_id": 2,
+        "dimension": "quality",
+        "new_value": 1.0024332638547548,
+        "velocity": 0.002433263854754829
+    },
+    {
+        "stage": "velocity_update",
+        "manufacturer_id": 1,
+        "iteration": 5,
+        "particle_id": 3,
+        "dimension": "price",
+        "new_value": 1065.5429098336065,
+        "velocity": 30.074039561897596
+    },
+    {
+        "stage": "velocity_update",
+        "manufacturer_id": 1,
+        "iteration": 5,
+        "particle_id": 3,
+        "dimension": "delivery",
+        "new_value": 4.856720743064553,
+        "velocity": 0.21472516286831206
+    },
+    {
+        "stage": "velocity_update",
+        "manufacturer_id": 1,
+        "iteration": 5,
+        "particle_id": 3,
+        "dimension": "quality",
+        "new_value": 1.0314329805790032,
+        "velocity": 0.03143298057900332
+    },
+    {
+        "stage": "velocity_update",
+        "manufacturer_id": 1,
+        "iteration": 5,
+        "particle_id": 4,
+        "dimension": "price",
+        "new_value": 1130.2049895335297,
+        "velocity": 88.80682784699316
+    },
+    {
+        "stage": "velocity_update",
+        "manufacturer_id": 1,
+        "iteration": 5,
+        "particle_id": 4,
+        "dimension": "delivery",
+        "new_value": 5.453149644701057,
+        "velocity": 1.0639964896690148
+    },
+    {
+        "stage": "velocity_update",
+        "manufacturer_id": 1,
+        "iteration": 5,
+        "particle_id": 4,
+        "dimension": "quality",
+        "new_value": 1.0249725485590642,
+        "velocity": 0.02497254855906414
+    },
+    {
+        "stage": "velocity_update",
+        "manufacturer_id": 1,
+        "iteration": 5,
+        "particle_id": 5,
+        "dimension": "price",
+        "new_value": 1119.036114593174,
+        "velocity": 11.774475710058727
+    },
+    {
+        "stage": "velocity_update",
+        "manufacturer_id": 1,
+        "iteration": 5,
+        "particle_id": 5,
+        "dimension": "delivery",
+        "new_value": 4.818302052439292,
+        "velocity": -0.1723906379941919
+    },
+    {
+        "stage": "velocity_update",
+        "manufacturer_id": 1,
+        "iteration": 5,
+        "particle_id": 5,
+        "dimension": "quality",
+        "new_value": 1.0175735433367954,
+        "velocity": 0.01757354333679542
+    },
+    {
+        "stage": "result",
+        "manufacturer_id": 1,
+        "best_offer": {
+            "price": 1107.2616388831152,
+            "delivery": 4.990692690433484,
+            "quality": 1.0
+        },
+        "fitness": 0.7715792263092733
+    },
+    {
+        "stage": "init",
+        "manufacturer_id": 2,
+        "num_particles": 5,
+        "price_range": [
+            850,
+            1100
+        ],
+        "delivery_range": [
+            4,
+            7
+        ],
+        "quality_options": [
+            "Standard",
+            "Premium"
+        ]
+    },
+    {
+        "stage": "init_particle",
+        "manufacturer_id": 2,
+        "particle_id": 1,
+        "particle": {
+            "price": 1100,
+            "delivery": 4.901309300750574,
+            "quality": 0.9778111277625053
+        },
+        "velocity": {
+            "price": 7.45476179855366,
+            "delivery": -0.1654562907049132,
+            "quality": -0.022188872237494703
+        },
+        "fitness": 0.6850260698404975
+    },
+    {
+        "stage": "init_particle",
+        "manufacturer_id": 2,
+        "particle_id": 2,
+        "particle": {
+            "price": 1100,
+            "delivery": 4.679760101758032,
+            "quality": 0.9717765038668115
+        },
+        "velocity": {
+            "price": 141.88262010096824,
+            "delivery": -0.21232002011345785,
+            "quality": -0.028223496133188506
+        },
+        "fitness": 0.7464696644124443
+    },
+    {
+        "stage": "init_particle",
+        "manufacturer_id": 2,
+        "particle_id": 3,
+        "particle": {
+            "price": 1100,
+            "delivery": 4.853452906633657,
+            "quality": 0.9792783554828721
+        },
+        "velocity": {
+            "price": 14.654327898324418,
+            "delivery": -0.09236510762019089,
+            "quality": 0.007352211274659672
+        },
+        "fitness": 0.7175352384031378
+    },
+    {
+        "stage": "init_particle",
+        "manufacturer_id": 2,
+        "particle_id": 4,
+        "particle": {
+            "price": 1100,
+            "delivery": 4.9643909476838015,
+            "quality": 0.9742237565537943
+        },
+        "velocity": {
+            "price": 3.106209185216029,
+            "delivery": -0.057465940983739805,
+            "quality": 0.0002650949085522998
+        },
+        "fitness": 0.7734805902616582
+    },
+    {
+        "stage": "init_particle",
+        "manufacturer_id": 2,
+        "particle_id": 5,
+        "particle": {
+            "price": 1079.240408096849,
+            "delivery": 4.519064225392929,
+            "quality": 0.9623022626547459
+        },
+        "velocity": {
+            "price": 1.6422000549616333,
+            "delivery": 0.020850415738037496,
+            "quality": -0.03616769372516087
+        },
+        "fitness": 0.7135056725776802
+    },
+    {
+        "stage": "velocity_update",
+        "manufacturer_id": 2,
+        "iteration": 1,
+        "particle_id": 1,
+        "dimension": "price",
+        "new_value": 1051.747087388521,
+        "velocity": 2.527379478269903
+    },
+    {
+        "stage": "velocity_update",
+        "manufacturer_id": 2,
+        "iteration": 1,
+        "particle_id": 1,
+        "dimension": "delivery",
+        "new_value": 5.6630389786210795,
+        "velocity": 0.6630389786210796
+    },
+    {
+        "stage": "velocity_update",
+        "manufacturer_id": 2,
+        "iteration": 1,
+        "particle_id": 1,
+        "dimension": "quality",
+        "new_value": 0.863162571261313,
+        "velocity": 0.26316257126131304
+    },
+    {
+        "stage": "velocity_update",
+        "manufacturer_id": 2,
+        "iteration": 1,
+        "particle_id": 2,
+        "dimension": "price",
+        "new_value": 900.547279340376,
+        "velocity": 2.8471233925567923
+    },
+    {
+        "stage": "velocity_update",
+        "manufacturer_id": 2,
+        "iteration": 1,
+        "particle_id": 2,
+        "dimension": "delivery",
+        "new_value": 4.9542311354574835,
+        "velocity": -0.04576886454251666
+    },
+    {
+        "stage": "velocity_update",
+        "manufacturer_id": 2,
+        "iteration": 1,
+        "particle_id": 2,
+        "dimension": "quality",
+        "new_value": 1.0862516044526047,
+        "velocity": 0.08625160445260463
+    },
+    {
+        "stage": "velocity_update",
+        "manufacturer_id": 2,
+        "iteration": 1,
+        "particle_id": 3,
+        "dimension": "price",
+        "new_value": 1135.4440943924028,
+        "velocity": 283.04965338915804
+    },
+    {
+        "stage": "velocity_update",
+        "manufacturer_id": 2,
+        "iteration": 1,
+        "particle_id": 3,
+        "dimension": "delivery",
+        "new_value": 5.61200206123907,
+        "velocity": -0.38799793876093003
+    },
+    {
+        "stage": "velocity_update",
+        "manufacturer_id": 2,
+        "iteration": 1,
+        "particle_id": 3,
+        "dimension": "quality",
+        "new_value": 0.9520777144015039,
+        "velocity": -0.047922285598496074
+    },
+    {
+        "stage": "velocity_update",
+        "manufacturer_id": 2,
+        "iteration": 1,
+        "particle_id": 4,
+        "dimension": "price",
+        "new_value": 1083.5927811458491,
+        "velocity": 1.9193789161399206
+    },
+    {
+        "stage": "velocity_update",
+        "manufacturer_id": 2,
+        "iteration": 1,
+        "particle_id": 4,
+        "dimension": "delivery",
+        "new_value": 5.513365874399751,
+        "velocity": -0.4866341256002488
+    },
+    {
+        "stage": "velocity_update",
+        "manufacturer_id": 2,
+        "iteration": 1,
+        "particle_id": 4,
+        "dimension": "quality",
+        "new_value": 0.9901236400517447,
+        "velocity": -0.009876359948255344
+    },
+    {
+        "stage": "velocity_update",
+        "manufacturer_id": 2,
+        "iteration": 1,
+        "particle_id": 5,
+        "dimension": "price",
+        "new_value": 995.0870740966575,
+        "velocity": 38.93630104467433
+    },
+    {
+        "stage": "velocity_update",
+        "manufacturer_id": 2,
+        "iteration": 1,
+        "particle_id": 5,
+        "dimension": "delivery",
+        "new_value": 5.411548678467532,
+        "velocity": 1.4115486784675315
+    },
+    {
+        "stage": "velocity_update",
+        "manufacturer_id": 2,
+        "iteration": 1,
+        "particle_id": 5,
+        "dimension": "quality",
+        "new_value": 1.0914421344036118,
+        "velocity": 0.09144213440361176
+    },
+    {
+        "stage": "velocity_update",
+        "manufacturer_id": 2,
+        "iteration": 2,
+        "particle_id": 1,
+        "dimension": "price",
+        "new_value": 1061.1871822976436,
+        "velocity": 9.440094909122646
+    },
+    {
+        "stage": "velocity_update",
+        "manufacturer_id": 2,
+        "iteration": 2,
+        "particle_id": 1,
+        "dimension": "delivery",
+        "new_value": 5.531203005301618,
+        "velocity": -0.13183597331946123
+    },
+    {
+        "stage": "velocity_update",
+        "manufacturer_id": 2,
+        "iteration": 2,
+        "particle_id": 1,
+        "dimension": "quality",
+        "new_value": 1.0461436487162041,
+        "velocity": 0.18298107745489103
+    },
+    {
+        "stage": "velocity_update",
+        "manufacturer_id": 2,
+        "iteration": 2,
+        "particle_id": 2,
+        "dimension": "price",
+        "new_value": 915.8660013620165,
+        "velocity": 15.31872202164055
+    },
+    {
+        "stage": "velocity_update",
+        "manufacturer_id": 2,
+        "iteration": 2,
+        "particle_id": 2,
+        "dimension": "delivery",
+        "new_value": 5.683170150135018,
+        "velocity": 0.7289390146775343
+    },
+    {
+        "stage": "velocity_update",
+        "manufacturer_id": 2,
+        "iteration": 2,
+        "particle_id": 2,
+        "dimension": "quality",
+        "new_value": 1.0307921553738544,
+        "velocity": 0.030792155373854296
+    },
+    {
+        "stage": "velocity_update",
+        "manufacturer_id": 2,
+        "iteration": 2,
+        "particle_id": 3,
+        "dimension": "price",
+        "new_value": 1239.7245115576934,
+        "velocity": 139.72451155769335
+    },
+    {
+        "stage": "velocity_update",
+        "manufacturer_id": 2,
+        "iteration": 2,
+        "particle_id": 3,
+        "dimension": "delivery",
+        "new_value": 5.381968743756964,
+        "velocity": -0.23003331748210631
+    },
+    {
+        "stage": "velocity_update",
+        "manufacturer_id": 2,
+        "iteration": 2,
+        "particle_id": 3,
+        "dimension": "quality",
+        "new_value": 0.9484486918699518,
+        "velocity": -0.00362902253155201
+    },
+    {
+        "stage": "velocity_update",
+        "manufacturer_id": 2,
+        "iteration": 2,
+        "particle_id": 4,
+        "dimension": "price",
+        "new_value": 1084.5524706039191,
+        "velocity": 0.9596894580699603
+    },
+    {
+        "stage": "velocity_update",
+        "manufacturer_id": 2,
+        "iteration": 2,
+        "particle_id": 4,
+        "dimension": "delivery",
+        "new_value": 5.270048811599627,
+        "velocity": -0.2433170628001244
+    },
+    {
+        "stage": "velocity_update",
+        "manufacturer_id": 2,
+        "iteration": 2,
+        "particle_id": 4,
+        "dimension": "quality",
+        "new_value": 0.985185460077617,
+        "velocity": -0.004938179974127672
+    },
+    {
+        "stage": "velocity_update",
+        "manufacturer_id": 2,
+        "iteration": 2,
+        "particle_id": 5,
+        "dimension": "price",
+        "new_value": 1109.8897781584824,
+        "velocity": 114.80270406182491
+    },
+    {
+        "stage": "velocity_update",
+        "manufacturer_id": 2,
+        "iteration": 2,
+        "particle_id": 5,
+        "dimension": "delivery",
+        "new_value": 6.083383681734899,
+        "velocity": 0.6718350032673673
+    },
+    {
+        "stage": "velocity_update",
+        "manufacturer_id": 2,
+        "iteration": 2,
+        "particle_id": 5,
+        "dimension": "quality",
+        "new_value": 1.044786130964971,
+        "velocity": 0.04478613096497097
+    },
+    {
+        "stage": "velocity_update",
+        "manufacturer_id": 2,
+        "iteration": 3,
+        "particle_id": 1,
+        "dimension": "price",
+        "new_value": 1088.4436938008666,
+        "velocity": 27.256511503222924
+    },
+    {
+        "stage": "velocity_update",
+        "manufacturer_id": 2,
+        "iteration": 3,
+        "particle_id": 1,
+        "dimension": "delivery",
+        "new_value": 5.271764264977513,
+        "velocity": -0.25943874032410497
+    },
+    {
+        "stage": "velocity_update",
+        "manufacturer_id": 2,
+        "iteration": 3,
+        "particle_id": 1,
+        "dimension": "quality",
+        "new_value": 1.0710643898760601,
+        "velocity": 0.07106438987606004
+    },
+    {
+        "stage": "velocity_update",
+        "manufacturer_id": 2,
+        "iteration": 3,
+        "particle_id": 2,
+        "dimension": "price",
+        "new_value": 924.5045115544771,
+        "velocity": 8.638510192460528
+    },
+    {
+        "stage": "velocity_update",
+        "manufacturer_id": 2,
+        "iteration": 3,
+        "particle_id": 2,
+        "dimension": "delivery",
+        "new_value": 5.411304040057913,
+        "velocity": -0.2718661100771051
+    },
+    {
+        "stage": "velocity_update",
+        "manufacturer_id": 2,
+        "iteration": 3,
+        "particle_id": 2,
+        "dimension": "quality",
+        "new_value": 1.015396077686927,
+        "velocity": 0.015396077686927148
+    },
+    {
+        "stage": "velocity_update",
+        "manufacturer_id": 2,
+        "iteration": 3,
+        "particle_id": 3,
+        "dimension": "price",
+        "new_value": 1169.798236412973,
+        "velocity": 69.79823641297303
+    },
+    {
+        "stage": "velocity_update",
+        "manufacturer_id": 2,
+        "iteration": 3,
+        "particle_id": 3,
+        "dimension": "delivery",
+        "new_value": 5.2565438551303325,
+        "velocity": -0.12542488862663143
+    },
+    {
+        "stage": "velocity_update",
+        "manufacturer_id": 2,
+        "iteration": 3,
+        "particle_id": 3,
+        "dimension": "quality",
+        "new_value": 0.9580811566591824,
+        "velocity": 0.009632464789230515
+    },
+    {
+        "stage": "velocity_update",
+        "manufacturer_id": 2,
+        "iteration": 3,
+        "particle_id": 4,
+        "dimension": "price",
+        "new_value": 1091.3902426140814,
+        "velocity": 6.837772010162289
+    },
+    {
+        "stage": "velocity_update",
+        "manufacturer_id": 2,
+        "iteration": 3,
+        "particle_id": 4,
+        "dimension": "delivery",
+        "new_value": 5.136788770635021,
+        "velocity": -0.1332600409646062
+    },
+    {
+        "stage": "velocity_update",
+        "manufacturer_id": 2,
+        "iteration": 3,
+        "particle_id": 4,
+        "dimension": "quality",
+        "new_value": 0.9734284718281374,
+        "velocity": -0.011756988249479617
+    },
+    {
+        "stage": "velocity_update",
+        "manufacturer_id": 2,
+        "iteration": 3,
+        "particle_id": 5,
+        "dimension": "price",
+        "new_value": 1036.1547612792037,
+        "velocity": -63.84523872079623
+    },
+    {
+        "stage": "velocity_update",
+        "manufacturer_id": 2,
+        "iteration": 3,
+        "particle_id": 5,
+        "dimension": "delivery",
+        "new_value": 5.031149815073974,
+        "velocity": -1.052233866660925
+    },
+    {
+        "stage": "velocity_update",
+        "manufacturer_id": 2,
+        "iteration": 3,
+        "particle_id": 5,
+        "dimension": "quality",
+        "new_value": 1.0063788175916044,
+        "velocity": 0.00637881759160441
+    },
+    {
+        "stage": "velocity_update",
+        "manufacturer_id": 2,
+        "iteration": 4,
+        "particle_id": 1,
+        "dimension": "price",
+        "new_value": 1105.601195598276,
+        "velocity": 17.157501797409502
+    },
+    {
+        "stage": "velocity_update",
+        "manufacturer_id": 2,
+        "iteration": 4,
+        "particle_id": 1,
+        "dimension": "delivery",
+        "new_value": 5.066765591455487,
+        "velocity": -0.20499867352202578
+    },
+    {
+        "stage": "velocity_update",
+        "manufacturer_id": 2,
+        "iteration": 4,
+        "particle_id": 1,
+        "dimension": "quality",
+        "new_value": 1.0198380036915597,
+        "velocity": 0.01983800369155983
+    },
+    {
+        "stage": "velocity_update",
+        "manufacturer_id": 2,
+        "iteration": 4,
+        "particle_id": 2,
+        "dimension": "price",
+        "new_value": 1030.5973842008063,
+        "velocity": 106.09287264632934
+    },
+    {
+        "stage": "velocity_update",
+        "manufacturer_id": 2,
+        "iteration": 4,
+        "particle_id": 2,
+        "dimension": "delivery",
+        "new_value": 4.89208012187149,
+        "velocity": -0.5192239181864232
+    },
+    {
+        "stage": "velocity_update",
+        "manufacturer_id": 2,
+        "iteration": 4,
+        "particle_id": 2,
+        "dimension": "quality",
+        "new_value": 1.0076980388434635,
+        "velocity": 0.007698038843463574
+    },
+    {
+        "stage": "velocity_update",
+        "manufacturer_id": 2,
+        "iteration": 4,
+        "particle_id": 3,
+        "dimension": "price",
+        "new_value": 1134.8991182064865,
+        "velocity": 34.89911820648651
+    },
+    {
+        "stage": "velocity_update",
+        "manufacturer_id": 2,
+        "iteration": 4,
+        "particle_id": 3,
+        "dimension": "delivery",
+        "new_value": 4.945818014253848,
+        "velocity": -0.31072584087648425
+    },
+    {
+        "stage": "velocity_update",
+        "manufacturer_id": 2,
+        "iteration": 4,
+        "particle_id": 3,
+        "dimension": "quality",
+        "new_value": 0.9719261442082124,
+        "velocity": 0.013844987549030113
+    },
+    {
+        "stage": "velocity_update",
+        "manufacturer_id": 2,
+        "iteration": 4,
+        "particle_id": 4,
+        "dimension": "price",
+        "new_value": 1097.6026609845135,
+        "velocity": 6.212418370432058
+    },
+    {
+        "stage": "velocity_update",
+        "manufacturer_id": 2,
+        "iteration": 4,
+        "particle_id": 4,
+        "dimension": "delivery",
+        "new_value": 5.021856888667541,
+        "velocity": -0.11493188196747961
+    },
+    {
+        "stage": "velocity_update",
+        "manufacturer_id": 2,
+        "iteration": 4,
+        "particle_id": 4,
+        "dimension": "quality",
+        "new_value": 0.973958661645242,
+        "velocity": 0.0005301898171045996
+    },
+    {
+        "stage": "velocity_update",
+        "manufacturer_id": 2,
+        "iteration": 4,
+        "particle_id": 5,
+        "dimension": "price",
+        "new_value": 1077.5982080418873,
+        "velocity": 41.443446762683564
+    },
+    {
+        "stage": "velocity_update",
+        "manufacturer_id": 2,
+        "iteration": 4,
+        "particle_id": 5,
+        "dimension": "delivery",
+        "new_value": 4.498213809654892,
+        "velocity": -0.5329360054190817
+    },
+    {
+        "stage": "velocity_update",
+        "manufacturer_id": 2,
+        "iteration": 4,
+        "particle_id": 5,
+        "dimension": "quality",
+        "new_value": 0.9984699563799068,
+        "velocity": -0.0015300436200932736
+    },
+    {
+        "stage": "velocity_update",
+        "manufacturer_id": 2,
+        "iteration": 5,
+        "particle_id": 1,
+        "dimension": "price",
+        "new_value": 1107.4547617985536,
+        "velocity": 7.45476179855366
+    },
+    {
+        "stage": "velocity_update",
+        "manufacturer_id": 2,
+        "iteration": 5,
+        "particle_id": 1,
+        "dimension": "delivery",
+        "new_value": 4.901309300750574,
+        "velocity": -0.1654562907049132
+    },
+    {
+        "stage": "velocity_update",
+        "manufacturer_id": 2,
+        "iteration": 5,
+        "particle_id": 1,
+        "dimension": "quality",
+        "new_value": 0.9778111277625053,
+        "velocity": -0.022188872237494703
+    },
+    {
+        "stage": "velocity_update",
+        "manufacturer_id": 2,
+        "iteration": 5,
+        "particle_id": 2,
+        "dimension": "price",
+        "new_value": 1172.4800043017747,
+        "velocity": 141.88262010096824
+    },
+    {
+        "stage": "velocity_update",
+        "manufacturer_id": 2,
+        "iteration": 5,
+        "particle_id": 2,
+        "dimension": "delivery",
+        "new_value": 4.679760101758032,
+        "velocity": -0.21232002011345785
+    },
+    {
+        "stage": "velocity_update",
+        "manufacturer_id": 2,
+        "iteration": 5,
+        "particle_id": 2,
+        "dimension": "quality",
+        "new_value": 0.9717765038668115,
+        "velocity": -0.028223496133188506
+    },
+    {
+        "stage": "velocity_update",
+        "manufacturer_id": 2,
+        "iteration": 5,
+        "particle_id": 3,
+        "dimension": "price",
+        "new_value": 1114.6543278983245,
+        "velocity": 14.654327898324418
+    },
+    {
+        "stage": "velocity_update",
+        "manufacturer_id": 2,
+        "iteration": 5,
+        "particle_id": 3,
+        "dimension": "delivery",
+        "new_value": 4.853452906633657,
+        "velocity": -0.09236510762019089
+    },
+    {
+        "stage": "velocity_update",
+        "manufacturer_id": 2,
+        "iteration": 5,
+        "particle_id": 3,
+        "dimension": "quality",
+        "new_value": 0.9792783554828721,
+        "velocity": 0.007352211274659672
+    },
+    {
+        "stage": "velocity_update",
+        "manufacturer_id": 2,
+        "iteration": 5,
+        "particle_id": 4,
+        "dimension": "price",
+        "new_value": 1100.7088701697296,
+        "velocity": 3.106209185216029
+    },
+    {
+        "stage": "velocity_update",
+        "manufacturer_id": 2,
+        "iteration": 5,
+        "particle_id": 4,
+        "dimension": "delivery",
+        "new_value": 4.9643909476838015,
+        "velocity": -0.057465940983739805
+    },
+    {
+        "stage": "velocity_update",
+        "manufacturer_id": 2,
+        "iteration": 5,
+        "particle_id": 4,
+        "dimension": "quality",
+        "new_value": 0.9742237565537943,
+        "velocity": 0.0002650949085522998
+    },
+    {
+        "stage": "velocity_update",
+        "manufacturer_id": 2,
+        "iteration": 5,
+        "particle_id": 5,
+        "dimension": "price",
+        "new_value": 1079.240408096849,
+        "velocity": 1.6422000549616333
+    },
+    {
+        "stage": "velocity_update",
+        "manufacturer_id": 2,
+        "iteration": 5,
+        "particle_id": 5,
+        "dimension": "delivery",
+        "new_value": 4.519064225392929,
+        "velocity": 0.020850415738037496
+    },
+    {
+        "stage": "velocity_update",
+        "manufacturer_id": 2,
+        "iteration": 5,
+        "particle_id": 5,
+        "dimension": "quality",
+        "new_value": 0.9623022626547459,
+        "velocity": -0.03616769372516087
+    },
+    {
+        "stage": "result",
+        "manufacturer_id": 2,
+        "best_offer": {
+            "price": 1097.6026609845135,
+            "delivery": 5.021856888667541,
+            "quality": 0.973958661645242
+        },
+        "fitness": 0.7861758867637492
+    }
+]
